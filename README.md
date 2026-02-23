@@ -234,7 +234,7 @@
     }
 
     /* Main Dashboard (hidden initially) */
-    #mainDashboard, #profilePage {
+    #mainDashboard, #profilePage, #levelPage {
       display: none;
       flex-direction: column;
       height: 100%;
@@ -1042,7 +1042,7 @@
         </div>
       </div>
 
-      <!-- Bottom navigation - FIXED AT BOTTOM -->
+      <!-- Bottom navigation -->
       <div class="bottom-nav">
         <div class="nav-item active" onclick="showHomePage()">
           <i class="fas fa-home"></i>
@@ -1052,7 +1052,7 @@
           <i class="fas fa-tasks"></i>
           <span>Task</span>
         </div>
-        <div class="nav-item" onclick="alert('Level page coming soon')">
+        <div class="nav-item" onclick="showLevelPage()">
           <i class="fas fa-chart-simple"></i>
           <span>Level</span>
         </div>
@@ -1153,7 +1153,7 @@
         </div>
       </div>
 
-      <!-- Bottom navigation - FIXED AT BOTTOM -->
+      <!-- Bottom navigation -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showHomePage()">
           <i class="fas fa-home"></i>
@@ -1163,7 +1163,7 @@
           <i class="fas fa-tasks"></i>
           <span>Task</span>
         </div>
-        <div class="nav-item" onclick="alert('Level page coming soon')">
+        <div class="nav-item" onclick="showLevelPage()">
           <i class="fas fa-chart-simple"></i>
           <span>Level</span>
         </div>
@@ -1172,6 +1172,48 @@
           <span>Income</span>
         </div>
         <div class="nav-item active" onclick="showProfilePage()">
+          <i class="fas fa-user"></i>
+          <span>Me</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEVEL PAGE (NEW) -->
+    <div id="levelPage">
+      <!-- Scrollable content area -->
+      <div class="scroll-content">
+        <!-- Level header in RED CAPITAL LETTERS -->
+        <div style="text-align: center; margin: 40px 0; padding: 20px;">
+          <h1 style="color: #ff0000; font-size: 2.2rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; line-height: 1.3;">
+            LEVEL PRICE<br>AND INCOME
+          </h1>
+        </div>
+        
+        <!-- You can add more level content here later -->
+        <div style="text-align: center; color: #666; margin-top: 50px;">
+          <p>Level details coming soon...</p>
+        </div>
+      </div>
+
+      <!-- Bottom navigation -->
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="showHomePage()">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="alert('Task page coming soon')">
+          <i class="fas fa-tasks"></i>
+          <span>Task</span>
+        </div>
+        <div class="nav-item active" onclick="showLevelPage()">
+          <i class="fas fa-chart-simple"></i>
+          <span>Level</span>
+        </div>
+        <div class="nav-item" onclick="alert('Income page coming soon')">
+          <i class="fas fa-coins"></i>
+          <span>Income</span>
+        </div>
+        <div class="nav-item" onclick="showProfilePage()">
           <i class="fas fa-user"></i>
           <span>Me</span>
         </div>
@@ -1436,22 +1478,53 @@
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('mainDashboard').style.display = 'flex';
       document.getElementById('profilePage').style.display = 'none';
+      document.getElementById('levelPage').style.display = 'none';
       
       // Update time
       updateTime();
+      updateActiveNav('home');
     }
 
     // Show profile page
     function showProfilePage() {
       document.getElementById('mainDashboard').style.display = 'none';
+      document.getElementById('levelPage').style.display = 'none';
       document.getElementById('profilePage').style.display = 'flex';
       updateTime();
+      updateActiveNav('me');
     }
 
     // Show home page
     function showHomePage() {
       document.getElementById('profilePage').style.display = 'none';
+      document.getElementById('levelPage').style.display = 'none';
       document.getElementById('mainDashboard').style.display = 'flex';
+      updateActiveNav('home');
+    }
+
+    // NEW: Show level page
+    function showLevelPage() {
+      document.getElementById('mainDashboard').style.display = 'none';
+      document.getElementById('profilePage').style.display = 'none';
+      document.getElementById('levelPage').style.display = 'flex';
+      updateActiveNav('level');
+    }
+
+    // Update active navigation item
+    function updateActiveNav(active) {
+      // Get all bottom nav containers
+      const navs = document.querySelectorAll('.bottom-nav');
+      
+      navs.forEach(nav => {
+        const items = nav.querySelectorAll('.nav-item');
+        items.forEach(item => item.classList.remove('active'));
+        
+        if (active === 'home') items[0].classList.add('active');
+        else if (active === 'task') items[1].classList.add('active');
+        else if (active === 'level') items[2].classList.add('active');
+        else if (active === 'income') items[3].classList.add('active');
+        else if (active === 'me') items[4].classList.add('active');
+      });
     }
 
     // Update current time
@@ -1471,6 +1544,7 @@
       document.getElementById('authContainer').style.display = 'block';
       document.getElementById('mainDashboard').style.display = 'none';
       document.getElementById('profilePage').style.display = 'none';
+      document.getElementById('levelPage').style.display = 'none';
       switchAuthTab('login');
       
       // Clear all fields
