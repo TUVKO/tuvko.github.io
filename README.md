@@ -554,17 +554,14 @@
     }
 
     .level-card {
-      background: #ffffff;
       border-radius: 20px;
       padding: 20px;
       margin-bottom: 20px;
-      border: 2px solid #006a7a;
     }
 
     .level-name {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #006a7a;
       margin-bottom: 10px;
     }
 
@@ -575,15 +572,10 @@
     }
 
     .click-to-join {
-      color: #006a7a;
       font-weight: 600;
       margin-top: 10px;
       cursor: pointer;
       text-decoration: underline;
-    }
-
-    .click-to-join:hover {
-      color: #ff0000;
     }
 
     .level-separator {
@@ -593,16 +585,29 @@
       margin: 20px 0;
     }
 
-    /* Main Wallet Display */
+    /* Wallet Displays */
     .main-wallet-display {
-      background: #f0f8ff;
+      background: #e6f3ff;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0066cc;
+      border: 2px solid #0099ff;
+    }
+
+    .commission-wallet-display {
+      background: #fff3cd;
       border-radius: 15px;
       padding: 15px;
       margin-bottom: 20px;
       text-align: center;
       font-size: 1.2rem;
       font-weight: 700;
-      color: #006a7a;
+      color: #856404;
+      border: 2px solid #ffc107;
     }
 
     /* Task Record Page Styles */
@@ -1150,103 +1155,107 @@
       </div>
     </div>
 
-    <!-- LEVEL PAGE - UPDATED WITH EXACT FORMAT -->
+    <!-- LEVEL PAGE - UPDATED WITH COLORS AND CORRECT PURCHASE LOGIC -->
     <div id="levelPage">
       <div class="scroll-content">
         <div class="level-page-title">LEVELS PRICE AND SALARIES</div>
 
-        <!-- Main Wallet Display -->
+        <!-- Wallet Displays -->
         <div class="main-wallet-display" id="levelMainWallet">
           Main Wallet: 0 UGX
         </div>
 
-        <!-- D1 -->
-        <div class="level-card">
-          <div class="level-name">D1</div>
+        <div class="commission-wallet-display" id="levelCommissionWallet">
+          Commission Wallet: 0 UGX
+        </div>
+
+        <!-- D1 - Light Blue -->
+        <div class="level-card" style="background: #e6f3ff; border: 2px solid #0099ff;">
+          <div class="level-name" style="color: #0066cc;">D1</div>
           <div class="level-detail">UGX 63000. 2 tasks</div>
           <div class="level-detail">UGX 1125 per task</div>
           <div class="level-detail">UGX 2250 daily</div>
-          <div class="click-to-join" onclick="purchaseLevel(1, 63000)">Click to join</div>
+          <div class="click-to-join" style="color: #0066cc;" onclick="purchaseLevel(1, 63000)">Click to join</div>
         </div>
         <div class="level-separator"></div>
 
-        <!-- D2 -->
-        <div class="level-card">
-          <div class="level-name">D2</div>
+        <!-- D2 - Light Green -->
+        <div class="level-card" style="background: #e6ffe6; border: 2px solid #00cc00;">
+          <div class="level-name" style="color: #008000;">D2</div>
           <div class="level-detail">UGX 200000. 4 tasks</div>
           <div class="level-detail">UGX 1775 per task</div>
           <div class="level-detail">UGX 7100 daily</div>
-          <div class="click-to-join" onclick="purchaseLevel(2, 200000)">Click to join</div>
+          <div class="click-to-join" style="color: #008000;" onclick="purchaseLevel(2, 200000)">Click to join</div>
         </div>
         <div class="level-separator"></div>
 
-        <!-- D3 -->
-        <div class="level-card">
-          <div class="level-name">D3</div>
+        <!-- D3 - Light Yellow -->
+        <div class="level-card" style="background: #ffffe6; border: 2px solid #cccc00;">
+          <div class="level-name" style="color: #999900;">D3</div>
           <div class="level-detail">UGX 532000. 12 tasks</div>
           <div class="level-detail">UGX 1584 per task</div>
           <div class="level-detail">UGX 19008 daily</div>
-          <div class="click-to-join" onclick="purchaseLevel(3, 532000)">Click to join</div>
+          <div class="click-to-join" style="color: #999900;" onclick="purchaseLevel(3, 532000)">Click to join</div>
         </div>
         <div class="level-separator"></div>
 
-        <!-- D4 -->
-        <div class="level-card">
-          <div class="level-name">D4</div>
+        <!-- D4 - Light Orange -->
+        <div class="level-card" style="background: #fff0e6; border: 2px solid #ff9933;">
+          <div class="level-name" style="color: #cc6600;">D4</div>
           <div class="level-detail">UGX 1450000 16 tasks</div>
           <div class="level-detail">UGX 3238 per task</div>
           <div class="level-detail">UGX 51808 per day</div>
-          <div class="click-to-join" onclick="purchaseLevel(4, 1450000)">Click to join</div>
+          <div class="click-to-join" style="color: #cc6600;" onclick="purchaseLevel(4, 1450000)">Click to join</div>
         </div>
         <div class="level-separator"></div>
 
-        <!-- D5 -->
-        <div class="level-card">
-          <div class="level-name">D5</div>
+        <!-- D5 - Light Pink -->
+        <div class="level-card" style="background: #ffe6f0; border: 2px solid #ff66b2;">
+          <div class="level-name" style="color: #cc3399;">D5</div>
           <div class="level-detail">UGX 3920000 24 tasks</div>
           <div class="level-detail">UGX 6050 per task</div>
           <div class="level-detail">UGX 145200 per day</div>
-          <div class="click-to-join" onclick="purchaseLevel(5, 3920000)">Click to join</div>
+          <div class="click-to-join" style="color: #cc3399;" onclick="purchaseLevel(5, 3920000)">Click to join</div>
         </div>
         <div class="level-separator"></div>
 
-        <!-- D6 -->
-        <div class="level-card">
-          <div class="level-name">D6</div>
+        <!-- D6 - Light Purple -->
+        <div class="level-card" style="background: #f0e6ff; border: 2px solid #9966ff;">
+          <div class="level-name" style="color: #6633cc;">D6</div>
           <div class="level-detail">UGX 10640000 24 tasks</div>
           <div class="level-detail">UGX 11875 per task</div>
           <div class="level-detail">UGX 38000 per day</div>
-          <div class="click-to-join" onclick="purchaseLevel(6, 10640000)">Click to join</div>
+          <div class="click-to-join" style="color: #6633cc;" onclick="purchaseLevel(6, 10640000)">Click to join</div>
         </div>
         <div class="level-separator"></div>
 
-        <!-- D7 -->
-        <div class="level-card">
-          <div class="level-name">D7</div>
+        <!-- D7 - Light Cyan -->
+        <div class="level-card" style="background: #e6ffff; border: 2px solid #00cccc;">
+          <div class="level-name" style="color: #009999;">D7</div>
           <div class="level-detail">UGX 40040000 52 tasks</div>
           <div class="level-detail">UGX 27500 per task</div>
           <div class="level-detail">UGX 1430000 per day</div>
-          <div class="click-to-join" onclick="purchaseLevel(7, 40040000)">Click to join</div>
+          <div class="click-to-join" style="color: #009999;" onclick="purchaseLevel(7, 40040000)">Click to join</div>
         </div>
         <div class="level-separator"></div>
 
-        <!-- D8 -->
-        <div class="level-card">
-          <div class="level-name">D8</div>
+        <!-- D8 - Light Coral -->
+        <div class="level-card" style="background: #ffe6e6; border: 2px solid #ff6666;">
+          <div class="level-name" style="color: #cc3333;">D8</div>
           <div class="level-detail">UGX 57120000 64 tasks</div>
           <div class="level-detail">UGX 31875 per task</div>
           <div class="level-detail">UGX 2040000 per day</div>
-          <div class="click-to-join" onclick="purchaseLevel(8, 57120000)">Click to join</div>
+          <div class="click-to-join" style="color: #cc3333;" onclick="purchaseLevel(8, 57120000)">Click to join</div>
         </div>
         <div class="level-separator"></div>
 
-        <!-- D9 -->
-        <div class="level-card">
-          <div class="level-name">D9</div>
+        <!-- D9 - Light Lavender -->
+        <div class="level-card" style="background: #f2e6ff; border: 2px solid #b366ff;">
+          <div class="level-name" style="color: #7733cc;">D9</div>
           <div class="level-detail">UGX 84000000 74 tasks</div>
           <div class="level-detail">UGX 40000 per task</div>
           <div class="level-detail">UGX 3000000 per day</div>
-          <div class="click-to-join" onclick="purchaseLevel(9, 84000000)">Click to join</div>
+          <div class="click-to-join" style="color: #7733cc;" onclick="purchaseLevel(9, 84000000)">Click to join</div>
         </div>
       </div>
 
@@ -1465,7 +1474,7 @@
       showPage('teamReport');
     }
 
-    // ========== LEVEL PURCHASE ==========
+    // ========== LEVEL PURCHASE - UPDATED WITH CORRECT LOGIC ==========
     function purchaseLevel(level, cost) {
       const user = users[currentUser];
       if (!user) {
@@ -1473,49 +1482,87 @@
         return;
       }
 
+      // Check if already at this level or higher
       if (user.memberLevel >= level) {
         alert(`You are already at ${levels[level].name} or higher!`);
         return;
       }
 
-      if (user.mainWallet < cost) {
-        alert(`Insufficient balance! Need ${cost.toLocaleString()} UGX in Main Wallet`);
-        return;
+      // INTERN MEMBER (level 0) - Main Wallet only
+      if (user.memberLevel === 0) {
+        if (user.mainWallet < cost) {
+          alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX in Main Wallet`);
+          return;
+        }
+        
+        // Deduct from main wallet only
+        if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
+          user.mainWallet -= cost;
+          upgradeUser(user, level, cost);
+        }
+      } 
+      // EXISTING MEMBER (level 1-8) - Can use both wallets
+      else {
+        const totalBalance = (user.mainWallet || 0) + (user.commissionWallet || 0);
+        
+        if (totalBalance < cost) {
+          alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX total in both wallets`);
+          return;
+        }
+
+        if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX? This will use funds from your wallets.`)) {
+          // Deduct from main wallet first, then commission if needed
+          let remaining = cost;
+          
+          // Take from main wallet first
+          if (user.mainWallet > 0) {
+            const fromMain = Math.min(user.mainWallet, remaining);
+            user.mainWallet -= fromMain;
+            remaining -= fromMain;
+          }
+          
+          // Take from commission wallet if still needed
+          if (remaining > 0 && user.commissionWallet > 0) {
+            const fromCommission = Math.min(user.commissionWallet, remaining);
+            user.commissionWallet -= fromCommission;
+            remaining -= fromCommission;
+          }
+          
+          upgradeUser(user, level, cost);
+        }
       }
+    }
 
-      if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
-        // Deduct from main wallet
-        user.mainWallet -= cost;
-        
-        // Upgrade member level
-        user.memberLevel = level;
-        
-        // Set expiry to 365 days from now
-        const expiry = new Date();
-        expiry.setDate(expiry.getDate() + 365);
-        user.memberExpiry = expiry.toISOString();
+    function upgradeUser(user, level, cost) {
+      // Upgrade member level
+      user.memberLevel = level;
+      
+      // Set expiry to 365 days from now
+      const expiry = new Date();
+      expiry.setDate(expiry.getDate() + 365);
+      user.memberExpiry = expiry.toISOString();
 
-        // Add transaction record
-        if (!user.transactions) user.transactions = [];
-        user.transactions.unshift({
-          type: 'level_upgrade',
-          level: level,
-          amount: cost,
-          date: new Date().toLocaleString()
-        });
+      // Add transaction record
+      if (!user.transactions) user.transactions = [];
+      user.transactions.unshift({
+        type: 'level_upgrade',
+        level: level,
+        amount: cost,
+        date: new Date().toLocaleString()
+      });
 
-        localStorage.setItem('cueUsers', JSON.stringify(users));
-        
-        alert(`✅ Congratulations! You are now ${levels[level].name} member!`);
-        loadUserData();
-        updateLevelWalletDisplay();
-      }
+      localStorage.setItem('cueUsers', JSON.stringify(users));
+      
+      alert(`✅ Congratulations! You are now ${levels[level].name} member!`);
+      loadUserData();
+      updateLevelWalletDisplay();
     }
 
     function updateLevelWalletDisplay() {
       const user = users[currentUser];
       if (user) {
         document.getElementById('levelMainWallet').innerHTML = `Main Wallet: ${(user.mainWallet || 0).toLocaleString()} UGX`;
+        document.getElementById('levelCommissionWallet').innerHTML = `Commission Wallet: ${(user.commissionWallet || 0).toLocaleString()} UGX`;
       }
     }
 
@@ -1994,7 +2041,7 @@
           memberLevel: 9,
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
           mainWallet: 1000000,
-          commissionWallet: 0,
+          commissionWallet: 500000,
           booksReadToday: 0,
           lastReadDate: new Date().toDateString(),
           totalEarned: 0,
@@ -2003,7 +2050,7 @@
           referrals: []
         };
         
-        // Demo user with referrals
+        // Demo intern user
         users['0777123456'] = {
           fullName: 'Intern User',
           phone: '0777123456',
@@ -2011,7 +2058,7 @@
           password: '123456',
           memberLevel: 0,
           memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
-          mainWallet: 50000,
+          mainWallet: 100000,
           commissionWallet: 1500,
           booksReadToday: 1,
           lastReadDate: new Date().toDateString(),
@@ -2025,60 +2072,24 @@
           referrals: []
         };
 
-        // Add some demo referrals
+        // Demo D1 member
         users['0788123456'] = {
-          fullName: 'Joanna',
+          fullName: 'John D1',
           phone: '0788123456',
-          country: 'Uganda',
-          password: '123456',
-          memberLevel: 2,
-          memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
-          mainWallet: 50000,
-          commissionWallet: 3000,
-          booksReadToday: 2,
-          lastReadDate: new Date().toDateString(),
-          totalEarned: 3000,
-          taskHistory: [
-            { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1500 },
-            { date: '2/22/2026', book: 'Think and Grow Rich', status: 'complete', reward: 1500 }
-          ],
-          referredBy: '0777123456',
-          referrals: []
-        };
-
-        users['0799123456'] = {
-          fullName: 'Tom',
-          phone: '0799123456',
           country: 'Uganda',
           password: '123456',
           memberLevel: 1,
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
-          mainWallet: 25000,
-          commissionWallet: 1500,
-          booksReadToday: 1,
+          mainWallet: 150000,
+          commissionWallet: 30000,
+          booksReadToday: 2,
           lastReadDate: new Date().toDateString(),
-          totalEarned: 1500,
+          totalEarned: 3000,
           taskHistory: [
-            { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1500 }
+            { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1125 },
+            { date: '2/23/2026', book: 'Think and Grow Rich', status: 'complete', reward: 1125 }
           ],
-          referredBy: '0788123456',
-          referrals: []
-        };
-
-        users['0700123456'] = {
-          fullName: 'Ahmed',
-          phone: '0700123456',
-          country: 'Uganda',
-          password: '123456',
-          memberLevel: 0,
-          memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
-          mainWallet: 0,
-          commissionWallet: 0,
-          booksReadToday: 0,
-          lastReadDate: new Date().toDateString(),
-          totalEarned: 0,
-          taskHistory: [],
-          referredBy: '0799123456',
+          referredBy: null,
           referrals: []
         };
 
