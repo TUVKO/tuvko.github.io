@@ -543,41 +543,66 @@
       cursor: pointer;
     }
 
-    /* Level Page */
-    .level-header {
-      text-align: center;
-      margin: 40px 0;
-    }
-
-    .level-header h1 {
+    /* Level Page - NEW STYLES */
+    .level-page-title {
+      font-size: 1.8rem;
+      font-weight: 700;
       color: #ff0000;
-      font-size: 2rem;
-      font-weight: 800;
+      text-align: center;
+      margin: 20px 0;
       text-transform: uppercase;
     }
 
-    .level-table {
-      background: #f9f9f9;
+    .level-card {
+      background: #ffffff;
       border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 2px solid #006a7a;
+    }
+
+    .level-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #006a7a;
+      margin-bottom: 10px;
+    }
+
+    .level-detail {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .click-to-join {
+      color: #006a7a;
+      font-weight: 600;
+      margin-top: 10px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .click-to-join:hover {
+      color: #ff0000;
+    }
+
+    .level-separator {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #006a7a, transparent);
+      margin: 20px 0;
+    }
+
+    /* Main Wallet Display */
+    .main-wallet-display {
+      background: #f0f8ff;
+      border-radius: 15px;
       padding: 15px;
       margin-bottom: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th {
-      background: #006a7a;
-      color: white;
-      padding: 10px;
-    }
-
-    td {
-      padding: 8px;
       text-align: center;
-      border-bottom: 1px solid #ddd;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #006a7a;
     }
 
     /* Task Record Page Styles */
@@ -1076,7 +1101,7 @@
       </div>
     </div>
 
-    <!-- TEAM REPORT PAGE (UPDATED) -->
+    <!-- TEAM REPORT PAGE -->
     <div id="teamReportPage">
       <div class="scroll-content">
         <!-- Back Button -->
@@ -1125,29 +1150,107 @@
       </div>
     </div>
 
-    <!-- LEVEL PAGE -->
+    <!-- LEVEL PAGE - UPDATED WITH EXACT FORMAT -->
     <div id="levelPage">
       <div class="scroll-content">
-        <div class="level-header">
-          <h1>LEVELS PRICE AND SALARIES</h1>
+        <div class="level-page-title">LEVELS PRICE AND SALARIES</div>
+
+        <!-- Main Wallet Display -->
+        <div class="main-wallet-display" id="levelMainWallet">
+          Main Wallet: 0 UGX
         </div>
-        
-        <div class="level-table">
-          <table>
-            <tr><th>Level</th><th>Deposit</th><th>Books/Day</th><th>Per Book</th></tr>
-            <tr><td>1</td><td>25,000</td><td>2</td><td>1,125</td></tr>
-            <tr><td>2</td><td>50,000</td><td>3</td><td>1,500</td></tr>
-            <tr><td>3</td><td>100,000</td><td>4</td><td>2,000</td></tr>
-            <tr><td>4</td><td>200,000</td><td>5</td><td>2,500</td></tr>
-            <tr><td>5</td><td>350,000</td><td>6</td><td>3,000</td></tr>
-            <tr><td>6</td><td>500,000</td><td>7</td><td>3,500</td></tr>
-            <tr><td>7</td><td>750,000</td><td>8</td><td>4,000</td></tr>
-            <tr><td>8</td><td>1,000,000</td><td>9</td><td>4,500</td></tr>
-            <tr><td>9</td><td>1,500,000</td><td>10</td><td>5,000</td></tr>
-          </table>
+
+        <!-- D1 -->
+        <div class="level-card">
+          <div class="level-name">D1</div>
+          <div class="level-detail">UGX 63000. 2 tasks</div>
+          <div class="level-detail">UGX 1125 per task</div>
+          <div class="level-detail">UGX 2250 daily</div>
+          <div class="click-to-join" onclick="purchaseLevel(1, 63000)">Click to join</div>
         </div>
-        <button class="upgrade-btn" onclick="openDepositModal()">UPGRADE NOW</button>
+        <div class="level-separator"></div>
+
+        <!-- D2 -->
+        <div class="level-card">
+          <div class="level-name">D2</div>
+          <div class="level-detail">UGX 200000. 4 tasks</div>
+          <div class="level-detail">UGX 1775 per task</div>
+          <div class="level-detail">UGX 7100 daily</div>
+          <div class="click-to-join" onclick="purchaseLevel(2, 200000)">Click to join</div>
+        </div>
+        <div class="level-separator"></div>
+
+        <!-- D3 -->
+        <div class="level-card">
+          <div class="level-name">D3</div>
+          <div class="level-detail">UGX 532000. 12 tasks</div>
+          <div class="level-detail">UGX 1584 per task</div>
+          <div class="level-detail">UGX 19008 daily</div>
+          <div class="click-to-join" onclick="purchaseLevel(3, 532000)">Click to join</div>
+        </div>
+        <div class="level-separator"></div>
+
+        <!-- D4 -->
+        <div class="level-card">
+          <div class="level-name">D4</div>
+          <div class="level-detail">UGX 1450000 16 tasks</div>
+          <div class="level-detail">UGX 3238 per task</div>
+          <div class="level-detail">UGX 51808 per day</div>
+          <div class="click-to-join" onclick="purchaseLevel(4, 1450000)">Click to join</div>
+        </div>
+        <div class="level-separator"></div>
+
+        <!-- D5 -->
+        <div class="level-card">
+          <div class="level-name">D5</div>
+          <div class="level-detail">UGX 3920000 24 tasks</div>
+          <div class="level-detail">UGX 6050 per task</div>
+          <div class="level-detail">UGX 145200 per day</div>
+          <div class="click-to-join" onclick="purchaseLevel(5, 3920000)">Click to join</div>
+        </div>
+        <div class="level-separator"></div>
+
+        <!-- D6 -->
+        <div class="level-card">
+          <div class="level-name">D6</div>
+          <div class="level-detail">UGX 10640000 24 tasks</div>
+          <div class="level-detail">UGX 11875 per task</div>
+          <div class="level-detail">UGX 38000 per day</div>
+          <div class="click-to-join" onclick="purchaseLevel(6, 10640000)">Click to join</div>
+        </div>
+        <div class="level-separator"></div>
+
+        <!-- D7 -->
+        <div class="level-card">
+          <div class="level-name">D7</div>
+          <div class="level-detail">UGX 40040000 52 tasks</div>
+          <div class="level-detail">UGX 27500 per task</div>
+          <div class="level-detail">UGX 1430000 per day</div>
+          <div class="click-to-join" onclick="purchaseLevel(7, 40040000)">Click to join</div>
+        </div>
+        <div class="level-separator"></div>
+
+        <!-- D8 -->
+        <div class="level-card">
+          <div class="level-name">D8</div>
+          <div class="level-detail">UGX 57120000 64 tasks</div>
+          <div class="level-detail">UGX 31875 per task</div>
+          <div class="level-detail">UGX 2040000 per day</div>
+          <div class="click-to-join" onclick="purchaseLevel(8, 57120000)">Click to join</div>
+        </div>
+        <div class="level-separator"></div>
+
+        <!-- D9 -->
+        <div class="level-card">
+          <div class="level-name">D9</div>
+          <div class="level-detail">UGX 84000000 74 tasks</div>
+          <div class="level-detail">UGX 40000 per task</div>
+          <div class="level-detail">UGX 3000000 per day</div>
+          <div class="click-to-join" onclick="purchaseLevel(9, 84000000)">Click to join</div>
+        </div>
       </div>
+
+      <!-- Bottom Nav -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
         <div class="nav-item" onclick="showPage('task')"><i class="fas fa-tasks"></i><span>Task</span></div>
@@ -1242,18 +1345,18 @@
       { id: 3, title: "Rich Dad Poor Dad", desc: "Robert Kiyosaki's bestseller" }
     ];
 
-    // Level definitions
+    // Level definitions with exact numbers from image
     const levels = {
       0: { name: "Intern", dailyBooks: 1, reward: 1500, duration: 4, canWithdraw: false, hasReferral: false },
-      1: { name: "Level 1", dailyBooks: 2, reward: 1125, duration: 365, canWithdraw: true, hasReferral: true },
-      2: { name: "Level 2", dailyBooks: 3, reward: 1500, duration: 365, canWithdraw: true, hasReferral: true },
-      3: { name: "Level 3", dailyBooks: 4, reward: 2000, duration: 365, canWithdraw: true, hasReferral: true },
-      4: { name: "Level 4", dailyBooks: 5, reward: 2500, duration: 365, canWithdraw: true, hasReferral: true },
-      5: { name: "Level 5", dailyBooks: 6, reward: 3000, duration: 365, canWithdraw: true, hasReferral: true },
-      6: { name: "Level 6", dailyBooks: 7, reward: 3500, duration: 365, canWithdraw: true, hasReferral: true },
-      7: { name: "Level 7", dailyBooks: 8, reward: 4000, duration: 365, canWithdraw: true, hasReferral: true },
-      8: { name: "Level 8", dailyBooks: 9, reward: 4500, duration: 365, canWithdraw: true, hasReferral: true },
-      9: { name: "Level 9", dailyBooks: 10, reward: 5000, duration: 365, canWithdraw: true, hasReferral: true }
+      1: { name: "D1", dailyBooks: 2, reward: 1125, deposit: 63000, duration: 365, canWithdraw: true, hasReferral: true },
+      2: { name: "D2", dailyBooks: 4, reward: 1775, deposit: 200000, duration: 365, canWithdraw: true, hasReferral: true },
+      3: { name: "D3", dailyBooks: 12, reward: 1584, deposit: 532000, duration: 365, canWithdraw: true, hasReferral: true },
+      4: { name: "D4", dailyBooks: 16, reward: 3238, deposit: 1450000, duration: 365, canWithdraw: true, hasReferral: true },
+      5: { name: "D5", dailyBooks: 24, reward: 6050, deposit: 3920000, duration: 365, canWithdraw: true, hasReferral: true },
+      6: { name: "D6", dailyBooks: 24, reward: 11875, deposit: 10640000, duration: 365, canWithdraw: true, hasReferral: true },
+      7: { name: "D7", dailyBooks: 52, reward: 27500, deposit: 40040000, duration: 365, canWithdraw: true, hasReferral: true },
+      8: { name: "D8", dailyBooks: 64, reward: 31875, deposit: 57120000, duration: 365, canWithdraw: true, hasReferral: true },
+      9: { name: "D9", dailyBooks: 74, reward: 40000, deposit: 84000000, duration: 365, canWithdraw: true, hasReferral: true }
     };
 
     // ========== AUTH ==========
@@ -1351,6 +1454,7 @@
       if (page === 'home') loadHomeBooks();
       if (page === 'taskRecord') loadTaskRecord();
       if (page === 'teamReport') loadTeamReport();
+      if (page === 'level') updateLevelWalletDisplay();
     }
 
     function showTaskRecord() {
@@ -1359,6 +1463,60 @@
 
     function showTeamReport() {
       showPage('teamReport');
+    }
+
+    // ========== LEVEL PURCHASE ==========
+    function purchaseLevel(level, cost) {
+      const user = users[currentUser];
+      if (!user) {
+        alert('Please login first');
+        return;
+      }
+
+      if (user.memberLevel >= level) {
+        alert(`You are already at ${levels[level].name} or higher!`);
+        return;
+      }
+
+      if (user.mainWallet < cost) {
+        alert(`Insufficient balance! Need ${cost.toLocaleString()} UGX in Main Wallet`);
+        return;
+      }
+
+      if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
+        // Deduct from main wallet
+        user.mainWallet -= cost;
+        
+        // Upgrade member level
+        user.memberLevel = level;
+        
+        // Set expiry to 365 days from now
+        const expiry = new Date();
+        expiry.setDate(expiry.getDate() + 365);
+        user.memberExpiry = expiry.toISOString();
+
+        // Add transaction record
+        if (!user.transactions) user.transactions = [];
+        user.transactions.unshift({
+          type: 'level_upgrade',
+          level: level,
+          amount: cost,
+          date: new Date().toLocaleString()
+        });
+
+        localStorage.setItem('cueUsers', JSON.stringify(users));
+        
+        alert(`✅ Congratulations! You are now ${levels[level].name} member!`);
+        loadUserData();
+        updateLevelWalletDisplay();
+      }
+    }
+
+    function updateLevelWalletDisplay() {
+      const user = users[currentUser];
+      if (user) {
+        document.getElementById('levelMainWallet').innerHTML = `Main Wallet: ${(user.mainWallet || 0).toLocaleString()} UGX`;
+      }
     }
 
     // ========== LOAD USER DATA ==========
@@ -1408,6 +1566,9 @@
       document.getElementById('withdrawMainBalance').innerHTML = (user.mainWallet || 0).toLocaleString() + ' UGX';
       document.getElementById('withdrawCommissionBalance').innerHTML = (user.commissionWallet || 0).toLocaleString() + ' UGX';
 
+      // Update level page wallet
+      updateLevelWalletDisplay();
+
       updateTime();
     }
 
@@ -1452,7 +1613,6 @@
           const deposit = member.mainWallet || 0;
           aTotalDeposit += deposit;
           
-          // Only count tasks for active members (level > 0)
           if (member.memberLevel > 0) {
             const tasks = countCompletedTasks(member);
             aTotalTasks += tasks;
@@ -1851,7 +2011,7 @@
           password: '123456',
           memberLevel: 0,
           memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
-          mainWallet: 0,
+          mainWallet: 50000,
           commissionWallet: 1500,
           booksReadToday: 1,
           lastReadDate: new Date().toDateString(),
