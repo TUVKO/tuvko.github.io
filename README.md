@@ -24,7 +24,7 @@
       padding: 16px;
     }
 
-    /* phone frame */
+    /* phone frame - FIXED HEIGHT */
     .phone {
       max-width: 390px;
       width: 100%;
@@ -32,12 +32,17 @@
       border-radius: 40px;
       box-shadow: 0 25px 60px rgba(0, 20, 30, 0.15);
       overflow: hidden;
-      padding: 30px 20px 0px 20px;  /* Changed bottom padding to 0 */
+      padding: 30px 20px 0px 20px;
+      display: flex;
+      flex-direction: column;
+      height: 700px; /* Fixed height for the phone frame */
     }
 
     /* Auth Pages */
     .auth-container {
       padding: 10px 0;
+      height: 100%;
+      overflow-y: auto;
     }
 
     .logo-area {
@@ -231,6 +236,15 @@
     /* Main Dashboard (hidden initially) */
     #mainDashboard, #profilePage {
       display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* Scrollable content area */
+    .scroll-content {
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 10px;
     }
 
     /* Welcome Section */
@@ -388,7 +402,7 @@
       font-size: 1rem;
     }
 
-    /* Bottom Navigation - FIXED POSITION (UPDATED) */
+    /* Bottom Navigation - FIXED AT BOTTOM */
     .bottom-nav {
       display: flex;
       align-items: center;
@@ -396,11 +410,10 @@
       background: #ffffff;
       padding: 15px 0 10px 0;
       border-top: 1px solid #f0f0f0;
-      position: sticky;
-      bottom: 0;
-      z-index: 100;
       width: 100%;
       background-color: white;
+      flex-shrink: 0;
+      margin-top: auto;
     }
 
     .nav-item {
@@ -856,7 +869,7 @@
         <div class="auth-tab" onclick="switchAuthTab('register')" id="registerTab">Register</div>
       </div>
 
-      <!-- LOGIN FORM - Empty placeholders -->
+      <!-- LOGIN FORM -->
       <div id="loginForm" class="auth-form active">
         <form onsubmit="handleLogin(event)">
           <div class="form-group">
@@ -885,7 +898,7 @@
         </form>
       </div>
 
-      <!-- REGISTRATION FORM - Empty placeholders -->
+      <!-- REGISTRATION FORM -->
       <div id="registerForm" class="auth-form">
         <form id="registrationForm" onsubmit="handleRegisterWithEmail(event)">
           <div class="form-group">
@@ -953,80 +966,83 @@
 
     <!-- MAIN DASHBOARD (Home Page) -->
     <div id="mainDashboard">
-      <!-- Welcome header -->
-      <div class="welcome-section">
-        <div class="welcome-title">WELCOME</div>
-        <div class="welcome-subtitle">NEW OPPORTUNITIES AND CHALLENGES WORK TOGETHER TO CREATE A BETTER FUTURE</div>
-        <div class="divider-line"></div>
-      </div>
+      <!-- Scrollable content area -->
+      <div class="scroll-content">
+        <!-- Welcome header -->
+        <div class="welcome-section">
+          <div class="welcome-title">WELCOME</div>
+          <div class="welcome-subtitle">NEW OPPORTUNITIES AND CHALLENGES WORK TOGETHER TO CREATE A BETTER FUTURE</div>
+          <div class="divider-line"></div>
+        </div>
 
-      <!-- Balance Display -->
-      <div class="balance-container">
-        <div class="balance-label">
-          <i class="fas fa-wallet"></i>
-          <div class="balance-info">
-            <h4>Available Balance</h4>
-            <div class="amount" id="balanceAmount">12,500 <small>UGX</small></div>
+        <!-- Balance Display -->
+        <div class="balance-container">
+          <div class="balance-label">
+            <i class="fas fa-wallet"></i>
+            <div class="balance-info">
+              <h4>Available Balance</h4>
+              <div class="amount" id="balanceAmount">12,500 <small>UGX</small></div>
+            </div>
+          </div>
+          <button class="history-btn" onclick="showHistory()"><i class="fas fa-history"></i> History</button>
+        </div>
+
+        <!-- Collaboration text -->
+        <div class="collab-title">
+          <i class="fas fa-handshake"></i> Collaboration. We Believe That Every Employee Can:
+        </div>
+
+        <!-- Task Hall section -->
+        <div class="task-header">
+          <h3>Task Hall</h3>
+          <span class="teaser-badge">TEASER</span>
+        </div>
+
+        <!-- Cards -->
+        <div class="card-grid">
+          <div class="reward-card">
+            <div class="card-left">
+              <span class="card-title">TEASER</span>
+            </div>
+            <div class="card-value">+1200.00 <small>UGX</small></div>
+          </div>
+          
+          <div class="reward-card">
+            <div class="card-left">
+              <span class="card-title">VAF</span>
+            </div>
+            <div class="card-value">+1200.00 <small>UGX</small></div>
+          </div>
+          
+          <div class="reward-card">
+            <div class="card-left">
+              <span class="card-title">Out of Ideas</span>
+            </div>
+            <div class="card-value">+1200.00 <small>UGX</small></div>
           </div>
         </div>
-        <button class="history-btn" onclick="showHistory()"><i class="fas fa-history"></i> History</button>
-      </div>
 
-      <!-- Collaboration text -->
-      <div class="collab-title">
-        <i class="fas fa-handshake"></i> Collaboration. We Believe That Every Employee Can:
-      </div>
-
-      <!-- Task Hall section -->
-      <div class="task-header">
-        <h3>Task Hall</h3>
-        <span class="teaser-badge">TEASER</span>
-      </div>
-
-      <!-- Cards -->
-      <div class="card-grid">
-        <div class="reward-card">
-          <div class="card-left">
-            <span class="card-title">TEASER</span>
+        <!-- Action row -->
+        <div class="action-row">
+          <div class="action-item" onclick="openDepositModal()">
+            <span>• Recharge</span>
           </div>
-          <div class="card-value">+1200.00 <small>UGX</small></div>
-        </div>
-        
-        <div class="reward-card">
-          <div class="card-left">
-            <span class="card-title">VAF</span>
+          <div class="action-item" onclick="alert('Withdraw feature coming soon!')">
+            <span>• Withdraw</span>
           </div>
-          <div class="card-value">+1200.00 <small>UGX</small></div>
-        </div>
-        
-        <div class="reward-card">
-          <div class="card-left">
-            <span class="card-title">Out of Ideas</span>
+          <div class="action-item" onclick="alert('Company profile')">
+            <span>• Company Profile</span>
           </div>
-          <div class="card-value">+1200.00 <small>UGX</small></div>
+        </div>
+
+        <!-- Company Profile line -->
+        <div class="company-line">
+          <span>Company Profile</span>
+          <i class="fas fa-chevron-right"></i>
         </div>
       </div>
 
-      <!-- Action row -->
-      <div class="action-row">
-        <div class="action-item" onclick="openDepositModal()">
-          <span>• Recharge</span>
-        </div>
-        <div class="action-item" onclick="alert('Withdraw feature coming soon!')">
-          <span>• Withdraw</span>
-        </div>
-        <div class="action-item" onclick="alert('Company profile')">
-          <span>• Company Profile</span>
-        </div>
-      </div>
-
-      <!-- Company Profile line -->
-      <div class="company-line">
-        <span>Company Profile</span>
-        <i class="fas fa-chevron-right"></i>
-      </div>
-
-      <!-- Bottom navigation - FIXED -->
+      <!-- Bottom navigation - FIXED AT BOTTOM -->
       <div class="bottom-nav">
         <div class="nav-item active" onclick="showHomePage()">
           <i class="fas fa-home"></i>
@@ -1053,88 +1069,91 @@
 
     <!-- PROFILE PAGE (Me Page) -->
     <div id="profilePage">
-      <!-- Header with time -->
-      <div class="profile-header">
-        <span class="time" id="currentTime">9:24 PM</span>
-        <span class="profile-title"><i class="fas fa-user"></i> <span id="profileDisplayName">User</span></span>
-      </div>
-
-      <!-- Employee info -->
-      <div class="employee-info">
-        <div class="employee-name" id="profileName">Regular Employee</div>
-        <div class="employee-role">Regular Employee</div>
-      </div>
-
-      <!-- Wallet cards -->
-      <div class="wallet-grid">
-        <div class="wallet-card">
-          <div class="wallet-label">Main wallet</div>
-          <div class="wallet-amount" id="mainWallet">0.00 <small>UGX</small></div>
+      <!-- Scrollable content area -->
+      <div class="scroll-content">
+        <!-- Header with time -->
+        <div class="profile-header">
+          <span class="time" id="currentTime">9:24 PM</span>
+          <span class="profile-title"><i class="fas fa-user"></i> <span id="profileDisplayName">User</span></span>
         </div>
-        <div class="wallet-card">
-          <div class="wallet-label">Commission wallet</div>
-          <div class="wallet-amount" id="commissionWallet">387,566.50 <small>UGX</small></div>
+
+        <!-- Employee info -->
+        <div class="employee-info">
+          <div class="employee-name" id="profileName">Regular Employee</div>
+          <div class="employee-role">Regular Employee</div>
+        </div>
+
+        <!-- Wallet cards -->
+        <div class="wallet-grid">
+          <div class="wallet-card">
+            <div class="wallet-label">Main wallet</div>
+            <div class="wallet-amount" id="mainWallet">0.00 <small>UGX</small></div>
+          </div>
+          <div class="wallet-card">
+            <div class="wallet-label">Commission wallet</div>
+            <div class="wallet-amount" id="commissionWallet">387,566.50 <small>UGX</small></div>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="wallet-actions">
+          <button class="wallet-action-btn" onclick="openDepositModal()">
+            <i class="fas fa-lock"></i> Recharge
+          </button>
+          <button class="wallet-action-btn" onclick="alert('Withdraw feature coming soon')">
+            <i class="fas fa-folder"></i> Withdraw
+          </button>
+        </div>
+
+        <!-- Income grid -->
+        <div class="income-grid">
+          <div class="income-item">
+            <div class="income-label">yesterday's income</div>
+            <div class="income-value" id="yesterdayIncome">565.00 <small>UGX</small></div>
+          </div>
+          <div class="income-item">
+            <div class="income-label">today's income</div>
+            <div class="income-value" id="todayIncome">72,340.00 <small>UGX</small></div>
+          </div>
+          <div class="income-item">
+            <div class="income-label">total income</div>
+            <div class="income-value" id="totalIncome">713,066.50 <small>UGX</small></div>
+          </div>
+          <div class="income-item">
+            <div class="income-label">this week's income</div>
+            <div class="income-value" id="weekIncome">72,340.00 <small>UGX</small></div>
+          </div>
+          <div class="income-item">
+            <div class="income-label">this month's income</div>
+            <div class="income-value" id="monthIncome">387,461.50 <small>UGX</small></div>
+          </div>
+        </div>
+
+        <!-- Commission from subordinates -->
+        <div class="commission-row">
+          <span class="commission-label">Commission from subordinate tasks</span>
+          <span class="commission-value" id="subordinateCommission">1,096.50 <small>UGX</small></span>
+        </div>
+
+        <!-- Menu grid -->
+        <div class="menu-grid">
+          <div class="menu-item"><i class="fas fa-clipboard-list"></i> task record</div>
+          <div class="menu-item"><i class="fas fa-users"></i> team report</div>
+          <div class="menu-item"><i class="fas fa-calendar-alt"></i> daily report</div>
+          <div class="menu-item"><i class="fas fa-file-invoice"></i> bill record</div>
+          <div class="menu-item"><i class="fas fa-chart-line"></i> Position Salary</div>
+          <div class="menu-item"><i class="fas fa-download"></i> APP download</div>
+        </div>
+
+        <!-- Logout button -->
+        <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+          <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
         </div>
       </div>
 
-      <!-- Action buttons -->
-      <div class="wallet-actions">
-        <button class="wallet-action-btn" onclick="openDepositModal()">
-          <i class="fas fa-lock"></i> Recharge
-        </button>
-        <button class="wallet-action-btn" onclick="alert('Withdraw feature coming soon')">
-          <i class="fas fa-folder"></i> Withdraw
-        </button>
-      </div>
-
-      <!-- Income grid -->
-      <div class="income-grid">
-        <div class="income-item">
-          <div class="income-label">yesterday's income</div>
-          <div class="income-value" id="yesterdayIncome">565.00 <small>UGX</small></div>
-        </div>
-        <div class="income-item">
-          <div class="income-label">today's income</div>
-          <div class="income-value" id="todayIncome">72,340.00 <small>UGX</small></div>
-        </div>
-        <div class="income-item">
-          <div class="income-label">total income</div>
-          <div class="income-value" id="totalIncome">713,066.50 <small>UGX</small></div>
-        </div>
-        <div class="income-item">
-          <div class="income-label">this week's income</div>
-          <div class="income-value" id="weekIncome">72,340.00 <small>UGX</small></div>
-        </div>
-        <div class="income-item">
-          <div class="income-label">this month's income</div>
-          <div class="income-value" id="monthIncome">387,461.50 <small>UGX</small></div>
-        </div>
-      </div>
-
-      <!-- Commission from subordinates -->
-      <div class="commission-row">
-        <span class="commission-label">Commission from subordinate tasks</span>
-        <span class="commission-value" id="subordinateCommission">1,096.50 <small>UGX</small></span>
-      </div>
-
-      <!-- Menu grid -->
-      <div class="menu-grid">
-        <div class="menu-item"><i class="fas fa-clipboard-list"></i> task record</div>
-        <div class="menu-item"><i class="fas fa-users"></i> team report</div>
-        <div class="menu-item"><i class="fas fa-calendar-alt"></i> daily report</div>
-        <div class="menu-item"><i class="fas fa-file-invoice"></i> bill record</div>
-        <div class="menu-item"><i class="fas fa-chart-line"></i> Position Salary</div>
-        <div class="menu-item"><i class="fas fa-download"></i> APP download</div>
-      </div>
-
-      <!-- Logout button -->
-      <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
-        <button class="logout-btn" onclick="logout()">
-          <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-      </div>
-
-      <!-- Bottom navigation - FIXED -->
+      <!-- Bottom navigation - FIXED AT BOTTOM -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showHomePage()">
           <i class="fas fa-home"></i>
@@ -1415,7 +1434,7 @@
       window.currentUser = user;
       
       document.getElementById('authContainer').style.display = 'none';
-      document.getElementById('mainDashboard').style.display = 'block';
+      document.getElementById('mainDashboard').style.display = 'flex';
       document.getElementById('profilePage').style.display = 'none';
       
       // Update time
@@ -1425,14 +1444,14 @@
     // Show profile page
     function showProfilePage() {
       document.getElementById('mainDashboard').style.display = 'none';
-      document.getElementById('profilePage').style.display = 'block';
+      document.getElementById('profilePage').style.display = 'flex';
       updateTime();
     }
 
     // Show home page
     function showHomePage() {
       document.getElementById('profilePage').style.display = 'none';
-      document.getElementById('mainDashboard').style.display = 'block';
+      document.getElementById('mainDashboard').style.display = 'flex';
     }
 
     // Update current time
