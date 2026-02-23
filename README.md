@@ -32,7 +32,7 @@
       border-radius: 40px;
       box-shadow: 0 25px 60px rgba(0, 20, 30, 0.15);
       overflow: hidden;
-      padding: 30px 20px 20px 20px;
+      padding: 30px 20px 0px 20px;  /* Changed bottom padding to 0 */
     }
 
     /* Auth Pages */
@@ -388,7 +388,7 @@
       font-size: 1rem;
     }
 
-    /* Bottom Navigation */
+    /* Bottom Navigation - FIXED POSITION (UPDATED) */
     .bottom-nav {
       display: flex;
       align-items: center;
@@ -396,7 +396,11 @@
       background: #ffffff;
       padding: 15px 0 10px 0;
       border-top: 1px solid #f0f0f0;
-      margin-top: 10px;
+      position: sticky;
+      bottom: 0;
+      z-index: 100;
+      width: 100%;
+      background-color: white;
     }
 
     .nav-item {
@@ -1022,7 +1026,7 @@
         <i class="fas fa-chevron-right"></i>
       </div>
 
-      <!-- Bottom navigation -->
+      <!-- Bottom navigation - FIXED -->
       <div class="bottom-nav">
         <div class="nav-item active" onclick="showHomePage()">
           <i class="fas fa-home"></i>
@@ -1124,13 +1128,13 @@
       </div>
 
       <!-- Logout button -->
-      <div style="text-align: center; margin-top: 20px;">
+      <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
         <button class="logout-btn" onclick="logout()">
           <i class="fas fa-sign-out-alt"></i> Logout
         </button>
       </div>
 
-      <!-- Bottom navigation -->
+      <!-- Bottom navigation - FIXED -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showHomePage()">
           <i class="fas fa-home"></i>
@@ -1164,7 +1168,7 @@
         <button class="close-btn" onclick="closeDepositModal()">&times;</button>
       </div>
       
-      <!-- Recipient info (only appears after login when user clicks Recharge) -->
+      <!-- Recipient info -->
       <div class="recipient-card">
         <div class="number">0756 673 144</div>
         <div class="name">NAMUHANGA VERONIC</div>
@@ -1581,7 +1585,7 @@
         }
       }
       
-      // Create demo account if none exists (for testing only - this won't show in forms)
+      // Create demo account if none exists
       const users = JSON.parse(localStorage.getItem('cueUsers') || '{}');
       if (Object.keys(users).length === 0) {
         users['0756673144'] = {
