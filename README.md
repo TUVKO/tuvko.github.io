@@ -543,7 +543,7 @@
       cursor: pointer;
     }
 
-    /* Level Page - ULTRA COMPACT WITH COLORS */
+    /* Level Page - ULTRA COMPACT WITH COLORS (Line height 0.9) */
     .level-page-title {
       font-size: 1.6rem;
       font-weight: 700;
@@ -554,10 +554,10 @@
     }
 
     .level-card-ultra {
-      padding: 6px 10px;
-      border-radius: 8px;
-      margin-bottom: 6px;
-      line-height: 1.1;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      line-height: 0.9;
     }
 
     .level-name-ultra {
@@ -567,7 +567,7 @@
     }
 
     .level-detail-ultra {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       margin-bottom: 1px;
       color: #333;
     }
@@ -577,7 +577,7 @@
       margin-top: 2px;
       cursor: pointer;
       text-decoration: underline;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
 
     .click-to-join-ultra:hover {
@@ -588,7 +588,7 @@
       width: 100%;
       height: 1px;
       background: #ddd;
-      margin: 4px 0 8px 0;
+      margin: 3px 0 5px 0;
     }
 
     /* Wallet Displays */
@@ -1161,7 +1161,7 @@
       </div>
     </div>
 
-    <!-- LEVEL PAGE - ULTRA COMPACT WITH COLORS -->
+    <!-- LEVEL PAGE - ULTRA COMPACT WITH COLORS (Line height 0.9) -->
     <div id="levelPage">
       <div class="scroll-content">
         <div class="level-page-title">LEVELS PRICE AND SALARIES</div>
@@ -1225,12 +1225,12 @@
         </div>
         <div class="level-separator-ultra"></div>
 
-        <!-- D6 - Light Purple -->
+        <!-- D6 - Light Purple (CORRECTED) -->
         <div class="level-card-ultra" style="background-color: #f0e6ff;">
           <div class="level-name-ultra" style="color: #6633cc;">D6</div>
-          <div class="level-detail-ultra">UGX 10640000 24 tasks</div>
-          <div class="level-detail-ultra">UGX 11875 per task</div>
-          <div class="level-detail-ultra">UGX 38000 per day</div>
+          <div class="level-detail-ultra">UGX 10640000 40 tasks</div>
+          <div class="level-detail-ultra">UGX 9500 per task</div>
+          <div class="level-detail-ultra">UGX 380000 daily</div>
           <div class="click-to-join-ultra" style="color: #6633cc;" onclick="purchaseLevel(6, 10640000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
@@ -1360,7 +1360,7 @@
       { id: 3, title: "Rich Dad Poor Dad", desc: "Robert Kiyosaki's bestseller" }
     ];
 
-    // Level definitions with exact numbers from image
+    // Level definitions with exact numbers from image (D6 corrected)
     const levels = {
       0: { name: "Intern", dailyBooks: 1, reward: 1500, duration: 4, canWithdraw: false, hasReferral: false },
       1: { name: "D1", dailyBooks: 2, reward: 1125, deposit: 63000, duration: 365, canWithdraw: true, hasReferral: true },
@@ -1368,7 +1368,7 @@
       3: { name: "D3", dailyBooks: 12, reward: 1584, deposit: 532000, duration: 365, canWithdraw: true, hasReferral: true },
       4: { name: "D4", dailyBooks: 16, reward: 3238, deposit: 1450000, duration: 365, canWithdraw: true, hasReferral: true },
       5: { name: "D5", dailyBooks: 24, reward: 6050, deposit: 3920000, duration: 365, canWithdraw: true, hasReferral: true },
-      6: { name: "D6", dailyBooks: 24, reward: 11875, deposit: 10640000, duration: 365, canWithdraw: true, hasReferral: true },
+      6: { name: "D6", dailyBooks: 40, reward: 9500, deposit: 10640000, duration: 365, canWithdraw: true, hasReferral: true },
       7: { name: "D7", dailyBooks: 52, reward: 27500, deposit: 40040000, duration: 365, canWithdraw: true, hasReferral: true },
       8: { name: "D8", dailyBooks: 64, reward: 31875, deposit: 57120000, duration: 365, canWithdraw: true, hasReferral: true },
       9: { name: "D9", dailyBooks: 74, reward: 40000, deposit: 84000000, duration: 365, canWithdraw: true, hasReferral: true }
