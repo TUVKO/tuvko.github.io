@@ -839,6 +839,24 @@
     .email-notice i {
       margin-right: 5px;
     }
+
+    /* Level Page Styles - UPDATED */
+    .level-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+
+    .level-title {
+      color: #ff0000;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      white-space: nowrap; /* Keeps text in one line */
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -1178,15 +1196,13 @@
       </div>
     </div>
 
-    <!-- LEVEL PAGE (NEW) -->
+    <!-- LEVEL PAGE (UPDATED - One line text) -->
     <div id="levelPage">
       <!-- Scrollable content area -->
       <div class="scroll-content">
-        <!-- Level header in RED CAPITAL LETTERS -->
-        <div style="text-align: center; margin: 40px 0; padding: 20px;">
-          <h1 style="color: #ff0000; font-size: 2.2rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; line-height: 1.3;">
-            LEVEL PRICE<br>AND INCOME
-          </h1>
+        <!-- Level header in RED CAPITAL LETTERS - ONE LINE -->
+        <div class="level-header">
+          <h1 class="level-title">LEVEL PRICE AND INCOME</h1>
         </div>
         
         <!-- You can add more level content here later -->
@@ -1502,7 +1518,7 @@
       updateActiveNav('home');
     }
 
-    // NEW: Show level page
+    // Show level page
     function showLevelPage() {
       document.getElementById('mainDashboard').style.display = 'none';
       document.getElementById('profilePage').style.display = 'none';
