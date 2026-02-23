@@ -224,7 +224,7 @@
     }
 
     /* Main Dashboard Pages */
-    #mainDashboard, #profilePage, #levelPage, #taskPage, #incomePage, #taskRecordPage {
+    #mainDashboard, #profilePage, #levelPage, #taskPage, #incomePage, #taskRecordPage, #teamReportPage {
       display: none;
       flex-direction: column;
       height: 100%;
@@ -661,6 +661,54 @@
       margin-bottom: 15px;
     }
 
+    /* Team Report Page Styles */
+    .team-section {
+      margin-bottom: 25px;
+    }
+
+    .team-letter {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #006a7a;
+      margin-bottom: 10px;
+    }
+
+    .team-member {
+      padding: 8px 0 8px 20px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 1rem;
+    }
+
+    .team-member span {
+      font-weight: 600;
+    }
+
+    .member-level {
+      color: #666;
+      font-size: 0.9rem;
+      margin-left: 10px;
+    }
+
+    .empty-section {
+      padding: 8px 0 8px 20px;
+      color: #999;
+      font-style: italic;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .team-stats {
+      background: #f0f8ff;
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .team-stats div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
     /* Modals */
     .modal-overlay {
       display: none;
@@ -929,7 +977,7 @@
         <!-- Menu Grid - Clickable -->
         <div class="menu-grid">
           <div class="menu-item" onclick="showTaskRecord()"><i class="fas fa-clipboard-list"></i> task record</div>
-          <div class="menu-item" onclick="alert('team report coming soon')"><i class="fas fa-users"></i> team report</div>
+          <div class="menu-item" onclick="showTeamReport()"><i class="fas fa-users"></i> team report</div>
           <div class="menu-item" onclick="alert('daily report coming soon')"><i class="fas fa-calendar-alt"></i> daily report</div>
           <div class="menu-item" onclick="alert('bill record coming soon')"><i class="fas fa-file-invoice"></i> bill record</div>
           <div class="menu-item" onclick="alert('Position Salary coming soon')"><i class="fas fa-chart-line"></i> Position Salary</div>
@@ -950,7 +998,7 @@
       </div>
     </div>
 
-    <!-- TASK RECORD PAGE (NEW) -->
+    <!-- TASK RECORD PAGE -->
     <div id="taskRecordPage">
       <div class="scroll-content">
         <!-- Back Button -->
@@ -991,7 +1039,56 @@
         </table>
       </div>
 
-      <!-- Bottom Nav (same as others) -->
+      <!-- Bottom Nav -->
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showPage('task')"><i class="fas fa-tasks"></i><span>Task</span></div>
+        <div class="nav-item" onclick="showPage('level')"><i class="fas fa-chart-simple"></i><span>Level</span></div>
+        <div class="nav-item" onclick="showPage('income')"><i class="fas fa-coins"></i><span>Income</span></div>
+        <div class="nav-item" onclick="showPage('profile')"><i class="fas fa-user"></i><span>Me</span></div>
+      </div>
+    </div>
+
+    <!-- TEAM REPORT PAGE (NEW) -->
+    <div id="teamReportPage">
+      <div class="scroll-content">
+        <!-- Back Button -->
+        <button class="back-btn" onclick="showPage('profile')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
+
+        <h3 style="margin-bottom:20px;">👥 Team Report</h3>
+
+        <!-- A Section -->
+        <div class="team-section">
+          <div class="team-letter">A</div>
+          <div id="teamASection">
+            <!-- Filled by JavaScript -->
+          </div>
+        </div>
+
+        <!-- B Section -->
+        <div class="team-section">
+          <div class="team-letter">B</div>
+          <div id="teamBSection">
+            <!-- Filled by JavaScript -->
+          </div>
+        </div>
+
+        <!-- C Section -->
+        <div class="team-section">
+          <div class="team-letter">C</div>
+          <div id="teamCSection">
+            <!-- Filled by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Team Stats -->
+        <div class="team-stats">
+          <div><span>Total Team Members:</span> <span id="totalTeamMembers">0</span></div>
+          <div><span>Active Today:</span> <span id="activeTeamMembers">0</span></div>
+        </div>
+      </div>
+
+      <!-- Bottom Nav -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
         <div class="nav-item" onclick="showPage('task')"><i class="fas fa-tasks"></i><span>Task</span></div>
@@ -1172,6 +1269,8 @@
         lastReadDate: now.toDateString(),
         totalEarned: 0,
         taskHistory: [],
+        referredBy: null, // Who referred this user
+        referrals: [], // People this user referred
         registeredDate: now.toISOString()
       };
 
@@ -1208,6 +1307,7 @@
       document.getElementById('taskPage').style.display = page === 'task' ? 'flex' : 'none';
       document.getElementById('incomePage').style.display = page === 'income' ? 'flex' : 'none';
       document.getElementById('taskRecordPage').style.display = page === 'taskRecord' ? 'flex' : 'none';
+      document.getElementById('teamReportPage').style.display = page === 'teamReport' ? 'flex' : 'none';
 
       // Update active nav
       document.querySelectorAll('.bottom-nav').forEach(nav => {
@@ -1223,10 +1323,15 @@
       if (page === 'task') loadTaskBooks();
       if (page === 'home') loadHomeBooks();
       if (page === 'taskRecord') loadTaskRecord();
+      if (page === 'teamReport') loadTeamReport();
     }
 
     function showTaskRecord() {
       showPage('taskRecord');
+    }
+
+    function showTeamReport() {
+      showPage('teamReport');
     }
 
     // ========== LOAD USER DATA ==========
@@ -1277,6 +1382,71 @@
       document.getElementById('withdrawCommissionBalance').innerHTML = (user.commissionWallet || 0).toLocaleString() + ' UGX';
 
       updateTime();
+    }
+
+    // ========== TEAM REPORT ==========
+    function loadTeamReport() {
+      const user = users[currentUser];
+      if (!user) return;
+
+      // Find A members (direct referrals)
+      const aMembers = Object.values(users).filter(u => u.referredBy === currentUser);
+      
+      // Find B members (referrals of A members)
+      const aPhones = aMembers.map(m => m.phone);
+      const bMembers = Object.values(users).filter(u => aPhones.includes(u.referredBy));
+      
+      // Find C members (referrals of B members)
+      const bPhones = bMembers.map(m => m.phone);
+      const cMembers = Object.values(users).filter(u => bPhones.includes(u.referredBy));
+
+      // Display A section
+      const aSection = document.getElementById('teamASection');
+      if (aMembers.length === 0) {
+        aSection.innerHTML = '<div class="empty-section">(empty)</div>';
+      } else {
+        let html = '';
+        aMembers.forEach(member => {
+          const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
+          html += `<div class="team-member"><span>${member.fullName}</span> <span class="member-level">${levelText}</span></div>`;
+        });
+        aSection.innerHTML = html;
+      }
+
+      // Display B section
+      const bSection = document.getElementById('teamBSection');
+      if (bMembers.length === 0) {
+        bSection.innerHTML = '<div class="empty-section">(empty)</div>';
+      } else {
+        let html = '';
+        bMembers.forEach(member => {
+          const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
+          html += `<div class="team-member"><span>${member.fullName}</span> <span class="member-level">${levelText}</span></div>`;
+        });
+        bSection.innerHTML = html;
+      }
+
+      // Display C section
+      const cSection = document.getElementById('teamCSection');
+      if (cMembers.length === 0) {
+        cSection.innerHTML = '<div class="empty-section">(empty)</div>';
+      } else {
+        let html = '';
+        cMembers.forEach(member => {
+          const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
+          html += `<div class="team-member"><span>${member.fullName}</span> <span class="member-level">${levelText}</span></div>`;
+        });
+        cSection.innerHTML = html;
+      }
+
+      // Update stats
+      const total = aMembers.length + bMembers.length + cMembers.length;
+      document.getElementById('totalTeamMembers').textContent = total;
+
+      // Count active today
+      const today = new Date().toDateString();
+      const activeCount = [aMembers, bMembers, cMembers].flat().filter(m => m.lastReadDate === today).length;
+      document.getElementById('activeTeamMembers').textContent = activeCount;
     }
 
     // ========== TASK RECORD ==========
@@ -1566,6 +1736,7 @@
       document.getElementById('taskPage').style.display = 'none';
       document.getElementById('incomePage').style.display = 'none';
       document.getElementById('taskRecordPage').style.display = 'none';
+      document.getElementById('teamReportPage').style.display = 'none';
     }
 
     // ========== INIT ==========
@@ -1584,8 +1755,12 @@
           booksReadToday: 0,
           lastReadDate: new Date().toDateString(),
           totalEarned: 0,
-          taskHistory: []
+          taskHistory: [],
+          referredBy: null,
+          referrals: []
         };
+        
+        // Demo user with referrals
         users['0777123456'] = {
           fullName: 'Intern User',
           phone: '0777123456',
@@ -1602,8 +1777,63 @@
             { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1500 },
             { date: '2/23/2026', book: 'Think and Grow Rich', status: 'pending', reward: 0 },
             { date: '2/22/2026', book: 'Rich Dad Poor Dad', status: 'complete', reward: 1500 }
-          ]
+          ],
+          referredBy: null,
+          referrals: []
         };
+
+        // Add some demo referrals
+        users['0788123456'] = {
+          fullName: 'Joanna',
+          phone: '0788123456',
+          country: 'Uganda',
+          password: '123456',
+          memberLevel: 2,
+          memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
+          mainWallet: 50000,
+          commissionWallet: 3000,
+          booksReadToday: 2,
+          lastReadDate: new Date().toDateString(),
+          totalEarned: 3000,
+          taskHistory: [],
+          referredBy: '0777123456',
+          referrals: []
+        };
+
+        users['0799123456'] = {
+          fullName: 'Tom',
+          phone: '0799123456',
+          country: 'Uganda',
+          password: '123456',
+          memberLevel: 1,
+          memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
+          mainWallet: 25000,
+          commissionWallet: 1500,
+          booksReadToday: 1,
+          lastReadDate: new Date().toDateString(),
+          totalEarned: 1500,
+          taskHistory: [],
+          referredBy: '0788123456',
+          referrals: []
+        };
+
+        users['0700123456'] = {
+          fullName: 'Ahmed',
+          phone: '0700123456',
+          country: 'Uganda',
+          password: '123456',
+          memberLevel: 0,
+          memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
+          mainWallet: 0,
+          commissionWallet: 0,
+          booksReadToday: 0,
+          lastReadDate: new Date().toDateString(),
+          totalEarned: 0,
+          taskHistory: [],
+          referredBy: '0799123456',
+          referrals: []
+        };
+
         localStorage.setItem('cueUsers', JSON.stringify(users));
       }
 
