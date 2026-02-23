@@ -304,7 +304,7 @@
       font-weight: 700;
       font-size: 1.1rem;
       color: #000;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     .book-desc {
@@ -543,56 +543,63 @@
       cursor: pointer;
     }
 
-    /* Level Page - NEW STYLES */
+    /* Level Page - COMPACT STYLES */
     .level-page-title {
       font-size: 1.8rem;
       font-weight: 700;
       color: #ff0000;
       text-align: center;
-      margin: 20px 0;
+      margin: 15px 0;
       text-transform: uppercase;
     }
 
-    .level-card {
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .level-name {
-      font-size: 1.5rem;
-      font-weight: 700;
+    .level-card-compact {
       margin-bottom: 10px;
+      line-height: 1.2;
     }
 
-    .level-detail {
-      font-size: 1rem;
-      margin-bottom: 5px;
+    .level-name-compact {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #006a7a;
+      margin-bottom: 3px;
+    }
+
+    .level-detail-compact {
+      font-size: 0.95rem;
+      margin-bottom: 2px;
       color: #333;
     }
 
-    .click-to-join {
+    .click-to-join-compact {
+      color: #006a7a;
       font-weight: 600;
-      margin-top: 10px;
+      margin-top: 3px;
+      margin-bottom: 5px;
       cursor: pointer;
       text-decoration: underline;
+      font-size: 0.95rem;
     }
 
-    .level-separator {
+    .click-to-join-compact:hover {
+      color: #ff0000;
+    }
+
+    .level-separator-compact {
       width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #006a7a, transparent);
-      margin: 20px 0;
+      height: 1px;
+      background: #ddd;
+      margin: 8px 0 12px 0;
     }
 
     /* Wallet Displays */
     .main-wallet-display {
       background: #e6f3ff;
       border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 10px;
+      padding: 12px;
+      margin-bottom: 8px;
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #0066cc;
       border: 2px solid #0099ff;
@@ -601,10 +608,10 @@
     .commission-wallet-display {
       background: #fff3cd;
       border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 20px;
+      padding: 12px;
+      margin-bottom: 15px;
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #856404;
       border: 2px solid #ffc107;
@@ -1155,7 +1162,7 @@
       </div>
     </div>
 
-    <!-- LEVEL PAGE - UPDATED WITH COLORS AND CORRECT PURCHASE LOGIC -->
+    <!-- LEVEL PAGE - COMPACT VERSION -->
     <div id="levelPage">
       <div class="scroll-content">
         <div class="level-page-title">LEVELS PRICE AND SALARIES</div>
@@ -1169,93 +1176,93 @@
           Commission Wallet: 0 UGX
         </div>
 
-        <!-- D1 - Light Blue -->
-        <div class="level-card" style="background: #e6f3ff; border: 2px solid #0099ff;">
-          <div class="level-name" style="color: #0066cc;">D1</div>
-          <div class="level-detail">UGX 63000. 2 tasks</div>
-          <div class="level-detail">UGX 1125 per task</div>
-          <div class="level-detail">UGX 2250 daily</div>
-          <div class="click-to-join" style="color: #0066cc;" onclick="purchaseLevel(1, 63000)">Click to join</div>
+        <!-- D1 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D1</div>
+          <div class="level-detail-compact">UGX 63000. 2 tasks</div>
+          <div class="level-detail-compact">UGX 1125 per task</div>
+          <div class="level-detail-compact">UGX 2250 daily</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(1, 63000)">Click to join</div>
         </div>
-        <div class="level-separator"></div>
+        <div class="level-separator-compact"></div>
 
-        <!-- D2 - Light Green -->
-        <div class="level-card" style="background: #e6ffe6; border: 2px solid #00cc00;">
-          <div class="level-name" style="color: #008000;">D2</div>
-          <div class="level-detail">UGX 200000. 4 tasks</div>
-          <div class="level-detail">UGX 1775 per task</div>
-          <div class="level-detail">UGX 7100 daily</div>
-          <div class="click-to-join" style="color: #008000;" onclick="purchaseLevel(2, 200000)">Click to join</div>
+        <!-- D2 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D2</div>
+          <div class="level-detail-compact">UGX 200000. 4 tasks</div>
+          <div class="level-detail-compact">UGX 1775 per task</div>
+          <div class="level-detail-compact">UGX 7100 daily</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(2, 200000)">Click to join</div>
         </div>
-        <div class="level-separator"></div>
+        <div class="level-separator-compact"></div>
 
-        <!-- D3 - Light Yellow -->
-        <div class="level-card" style="background: #ffffe6; border: 2px solid #cccc00;">
-          <div class="level-name" style="color: #999900;">D3</div>
-          <div class="level-detail">UGX 532000. 12 tasks</div>
-          <div class="level-detail">UGX 1584 per task</div>
-          <div class="level-detail">UGX 19008 daily</div>
-          <div class="click-to-join" style="color: #999900;" onclick="purchaseLevel(3, 532000)">Click to join</div>
+        <!-- D3 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D3</div>
+          <div class="level-detail-compact">UGX 532000. 12 tasks</div>
+          <div class="level-detail-compact">UGX 1584 per task</div>
+          <div class="level-detail-compact">UGX 19008 daily</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(3, 532000)">Click to join</div>
         </div>
-        <div class="level-separator"></div>
+        <div class="level-separator-compact"></div>
 
-        <!-- D4 - Light Orange -->
-        <div class="level-card" style="background: #fff0e6; border: 2px solid #ff9933;">
-          <div class="level-name" style="color: #cc6600;">D4</div>
-          <div class="level-detail">UGX 1450000 16 tasks</div>
-          <div class="level-detail">UGX 3238 per task</div>
-          <div class="level-detail">UGX 51808 per day</div>
-          <div class="click-to-join" style="color: #cc6600;" onclick="purchaseLevel(4, 1450000)">Click to join</div>
+        <!-- D4 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D4</div>
+          <div class="level-detail-compact">UGX 1450000 16 tasks</div>
+          <div class="level-detail-compact">UGX 3238 per task</div>
+          <div class="level-detail-compact">UGX 51808 per day</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(4, 1450000)">Click to join</div>
         </div>
-        <div class="level-separator"></div>
+        <div class="level-separator-compact"></div>
 
-        <!-- D5 - Light Pink -->
-        <div class="level-card" style="background: #ffe6f0; border: 2px solid #ff66b2;">
-          <div class="level-name" style="color: #cc3399;">D5</div>
-          <div class="level-detail">UGX 3920000 24 tasks</div>
-          <div class="level-detail">UGX 6050 per task</div>
-          <div class="level-detail">UGX 145200 per day</div>
-          <div class="click-to-join" style="color: #cc3399;" onclick="purchaseLevel(5, 3920000)">Click to join</div>
+        <!-- D5 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D5</div>
+          <div class="level-detail-compact">UGX 3920000 24 tasks</div>
+          <div class="level-detail-compact">UGX 6050 per task</div>
+          <div class="level-detail-compact">UGX 145200 per day</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(5, 3920000)">Click to join</div>
         </div>
-        <div class="level-separator"></div>
+        <div class="level-separator-compact"></div>
 
-        <!-- D6 - Light Purple -->
-        <div class="level-card" style="background: #f0e6ff; border: 2px solid #9966ff;">
-          <div class="level-name" style="color: #6633cc;">D6</div>
-          <div class="level-detail">UGX 10640000 24 tasks</div>
-          <div class="level-detail">UGX 11875 per task</div>
-          <div class="level-detail">UGX 38000 per day</div>
-          <div class="click-to-join" style="color: #6633cc;" onclick="purchaseLevel(6, 10640000)">Click to join</div>
+        <!-- D6 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D6</div>
+          <div class="level-detail-compact">UGX 10640000 24 tasks</div>
+          <div class="level-detail-compact">UGX 11875 per task</div>
+          <div class="level-detail-compact">UGX 38000 per day</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(6, 10640000)">Click to join</div>
         </div>
-        <div class="level-separator"></div>
+        <div class="level-separator-compact"></div>
 
-        <!-- D7 - Light Cyan -->
-        <div class="level-card" style="background: #e6ffff; border: 2px solid #00cccc;">
-          <div class="level-name" style="color: #009999;">D7</div>
-          <div class="level-detail">UGX 40040000 52 tasks</div>
-          <div class="level-detail">UGX 27500 per task</div>
-          <div class="level-detail">UGX 1430000 per day</div>
-          <div class="click-to-join" style="color: #009999;" onclick="purchaseLevel(7, 40040000)">Click to join</div>
+        <!-- D7 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D7</div>
+          <div class="level-detail-compact">UGX 40040000 52 tasks</div>
+          <div class="level-detail-compact">UGX 27500 per task</div>
+          <div class="level-detail-compact">UGX 1430000 per day</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(7, 40040000)">Click to join</div>
         </div>
-        <div class="level-separator"></div>
+        <div class="level-separator-compact"></div>
 
-        <!-- D8 - Light Coral -->
-        <div class="level-card" style="background: #ffe6e6; border: 2px solid #ff6666;">
-          <div class="level-name" style="color: #cc3333;">D8</div>
-          <div class="level-detail">UGX 57120000 64 tasks</div>
-          <div class="level-detail">UGX 31875 per task</div>
-          <div class="level-detail">UGX 2040000 per day</div>
-          <div class="click-to-join" style="color: #cc3333;" onclick="purchaseLevel(8, 57120000)">Click to join</div>
+        <!-- D8 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D8</div>
+          <div class="level-detail-compact">UGX 57120000 64 tasks</div>
+          <div class="level-detail-compact">UGX 31875 per task</div>
+          <div class="level-detail-compact">UGX 2040000 per day</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(8, 57120000)">Click to join</div>
         </div>
-        <div class="level-separator"></div>
+        <div class="level-separator-compact"></div>
 
-        <!-- D9 - Light Lavender -->
-        <div class="level-card" style="background: #f2e6ff; border: 2px solid #b366ff;">
-          <div class="level-name" style="color: #7733cc;">D9</div>
-          <div class="level-detail">UGX 84000000 74 tasks</div>
-          <div class="level-detail">UGX 40000 per task</div>
-          <div class="level-detail">UGX 3000000 per day</div>
-          <div class="click-to-join" style="color: #7733cc;" onclick="purchaseLevel(9, 84000000)">Click to join</div>
+        <!-- D9 - COMPACT -->
+        <div class="level-card-compact">
+          <div class="level-name-compact">D9</div>
+          <div class="level-detail-compact">UGX 84000000 74 tasks</div>
+          <div class="level-detail-compact">UGX 40000 per task</div>
+          <div class="level-detail-compact">UGX 3000000 per day</div>
+          <div class="click-to-join-compact" onclick="purchaseLevel(9, 84000000)">Click to join</div>
         </div>
       </div>
 
@@ -1474,7 +1481,7 @@
       showPage('teamReport');
     }
 
-    // ========== LEVEL PURCHASE - UPDATED WITH CORRECT LOGIC ==========
+    // ========== LEVEL PURCHASE ==========
     function purchaseLevel(level, cost) {
       const user = users[currentUser];
       if (!user) {
