@@ -17,14 +17,13 @@
     body {
       background: #ffffff;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 16px;
     }
 
-    /* phone frame */
+    /* phone frame - FIXED HEIGHT with flex column */
     .phone {
       max-width: 390px;
       width: 100%;
@@ -32,15 +31,58 @@
       border-radius: 40px;
       box-shadow: 0 25px 60px rgba(0, 20, 30, 0.15);
       overflow: hidden;
-      padding: 30px 20px 0px 20px;
       display: flex;
       flex-direction: column;
-      height: 700px;
+      height: 700px; /* Fixed height */
+    }
+
+    /* Scrollable content area - THIS IS WHAT SCROLLS */
+    .scroll-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 20px 10px 20px;
+    }
+
+    /* Bottom Navigation - FIXED AT BOTTOM */
+    .bottom-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: #ffffff;
+      padding: 12px 0 8px 0;
+      border-top: 1px solid #f0f0f0;
+      width: 100%;
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #999999;
+      font-size: 0.75rem;
+      font-weight: 500;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .nav-item i {
+      font-size: 1.3rem;
+      color: #999999;
+    }
+
+    .nav-item.active {
+      color: #006a7a;
+    }
+
+    .nav-item.active i {
+      color: #006a7a;
     }
 
     /* Auth Pages */
     .auth-container {
-      padding: 10px 0;
+      padding: 20px;
       height: 100%;
       overflow-y: auto;
     }
@@ -234,22 +276,15 @@
     }
 
     /* Main Dashboard (hidden initially) */
-    #mainDashboard, #profilePage, #levelPage, #bookPage, #adminPanel {
+    #mainDashboard, #profilePage, #levelPage, #taskPage, #incomePage, #adminPanel {
       display: none;
       flex-direction: column;
       height: 100%;
     }
 
-    /* Scrollable content area */
-    .scroll-content {
-      flex: 1;
-      overflow-y: auto;
-      padding-bottom: 10px;
-    }
-
     /* Welcome Section */
     .welcome-section {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .welcome-title {
@@ -261,12 +296,11 @@
     }
 
     .welcome-subtitle {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 400;
       color: #333333;
       line-height: 1.4;
-      margin-bottom: 20px;
-      max-width: 90%;
+      margin-bottom: 15px;
     }
 
     .divider-line {
@@ -289,7 +323,7 @@
       margin-right: 8px;
     }
 
-    /* Task Hall Section - UPDATED with Books */
+    /* Task Hall Section */
     .task-header {
       display: flex;
       align-items: center;
@@ -411,7 +445,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 25px 0 20px 0;
+      margin: 20px 0;
     }
 
     .action-item {
@@ -442,7 +476,7 @@
       background: white;
       padding: 15px 0;
       border-bottom: 1px solid #f0f0f0;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .company-line span {
@@ -456,45 +490,7 @@
       font-size: 1rem;
     }
 
-    /* Bottom Navigation */
-    .bottom-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      background: #ffffff;
-      padding: 15px 0 10px 0;
-      border-top: 1px solid #f0f0f0;
-      width: 100%;
-      background-color: white;
-      flex-shrink: 0;
-      margin-top: auto;
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #999999;
-      font-size: 0.75rem;
-      font-weight: 500;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .nav-item i {
-      font-size: 1.3rem;
-      color: #999999;
-    }
-
-    .nav-item.active {
-      color: #000000;
-    }
-
-    .nav-item.active i {
-      color: #000000;
-    }
-
-    /* Balance Display - UPDATED for two wallets */
+    /* Balance Display */
     .wallets-container {
       display: flex;
       gap: 10px;
@@ -559,7 +555,7 @@
       background: #f5f5f5;
     }
 
-    /* PROFILE PAGE STYLES - UPDATED */
+    /* PROFILE PAGE STYLES */
     .profile-header {
       display: flex;
       justify-content: space-between;
@@ -600,11 +596,11 @@
       font-weight: 400;
     }
 
-    /* Upgrade Section */
+    /* Upgrade Section - exactly as in image */
     .upgrade-section {
       background: #fff9e6;
       border-radius: 20px;
-      padding: 15px;
+      padding: 20px;
       margin-bottom: 25px;
       border: 2px dashed #ffc107;
     }
@@ -612,28 +608,38 @@
     .upgrade-title {
       font-weight: 700;
       color: #b45f06;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
     }
 
-    .level-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .upgrade-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .upgrade-list li {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
       gap: 8px;
-      margin-top: 10px;
     }
 
-    .level-option {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 8px;
-      text-align: center;
+    .upgrade-list li i {
+      color: #28a745;
+      font-size: 1rem;
+    }
+
+    .upgrade-btn {
+      background: #ff9800;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 30px;
+      width: 100%;
+      font-weight: 600;
+      font-size: 1rem;
       cursor: pointer;
-    }
-
-    .level-option.selected {
-      border: 2px solid #006a7a;
-      background: #e3f2fd;
     }
 
     /* Referral Section */
@@ -683,7 +689,6 @@
       font-size: 0.7rem;
       font-weight: 400;
       color: #999;
-      margin-left: 2px;
     }
 
     /* Commission Row */
@@ -736,7 +741,7 @@
       width: 20px;
     }
 
-    /* Deposit Modal Styles - UPDATED for Levels */
+    /* Deposit Modal Styles */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -871,12 +876,49 @@
       background: #333;
     }
 
-    /* Admin Panel Styles */
-    .admin-login {
-      text-align: center;
-      padding: 20px;
+    /* WITHDRAW MODAL */
+    .wallet-selector {
+      display: flex;
+      gap: 10px;
+      margin: 15px 0;
     }
 
+    .wallet-option {
+      flex: 1;
+      background: #f9f9f9;
+      border: 2px solid #ddd;
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .wallet-option.selected {
+      border-color: #006a7a;
+      background: #e3f2fd;
+    }
+
+    .wallet-option .wallet-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .wallet-option .wallet-balance {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .withdraw-note {
+      background: #fff3cd;
+      color: #856404;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      margin: 10px 0;
+    }
+
+    /* Admin Panel Styles */
     .admin-section {
       background: #f5f5f5;
       border-radius: 15px;
@@ -1064,47 +1106,13 @@
           <div class="divider-line"></div>
         </div>
 
-        <!-- Member Status Card -->
-        <div class="member-card" id="memberCard">
-          <div class="member-type" id="memberTypeDisplay">INTERN MEMBER</div>
-          <div class="member-days" id="memberDaysDisplay">4 days remaining</div>
-          <div class="progress-bar">
-            <div class="progress-fill" id="memberProgress" style="width: 100%;"></div>
-          </div>
+        <!-- Book Card - exactly as in image -->
+        <div class="book-card">
+          <div class="book-title">Financial literacy</div>
+          <button class="read-btn" onclick="alert('Read feature coming soon')">READ</button>
         </div>
 
-        <!-- Two-Wallet Display -->
-        <div class="wallets-container">
-          <div class="wallet-box main">
-            <div class="label">💰 MAIN WALLET</div>
-            <div class="amount" id="mainWalletAmount">0 <small>UGX</small></div>
-            <div style="font-size: 0.6rem; color:#999;">(Your money - can withdraw)</div>
-          </div>
-          <div class="wallet-box commission">
-            <div class="label">💼 COMMISSION</div>
-            <div class="amount" id="commissionWalletAmount">0 <small>UGX</small></div>
-            <div style="font-size: 0.6rem; color:#999;">(Earnings)</div>
-          </div>
-        </div>
-
-        <!-- Task Hall section -->
-        <div class="task-header">
-          <h3>Task Hall</h3>
-          <span class="teaser-badge">BOOKS</span>
-        </div>
-
-        <!-- Daily Counter -->
-        <div style="background:#f0f8ff; padding:12px; border-radius:15px; margin-bottom:15px; display:flex; justify-content:space-between;">
-          <span>📚 Today: <span id="booksReadToday">0</span>/<span id="dailyBookLimit">1</span></span>
-          <span>💰 Earned: <span id="dailyEarnings">0</span> UGX</span>
-        </div>
-
-        <!-- Books Grid -->
-        <div class="book-grid" id="bookGrid">
-          <!-- Books will be loaded here dynamically -->
-        </div>
-
-        <!-- Action row -->
+        <!-- Action Row -->
         <div class="action-row">
           <div class="action-item" onclick="openDepositModal()">
             <i class="fas fa-wallet"></i>
@@ -1120,29 +1128,18 @@
           </div>
         </div>
 
-        <!-- Referral Section (hidden for interns) -->
-        <div id="referralSection" style="display: none;">
-          <div class="referral-section">
-            <div class="upgrade-title">👥 REFER & EARN</div>
-            <p style="font-size:0.9rem; margin-bottom:10px;">Share this link with friends. Earn 500 UGX when they join!</p>
-            <div class="referral-link" id="referralLink">loading...</div>
-            <button onclick="copyReferralLink()" style="background:#006a7a; color:white; border:none; padding:10px; border-radius:30px; width:100%;">Copy Link</button>
-          </div>
-        </div>
-
-        <!-- Upgrade Section (for interns) -->
+        <!-- Upgrade Section - exactly as in image -->
         <div id="upgradeSection">
           <div class="upgrade-section">
             <div class="upgrade-title">⬆️ UPGRADE TO LEVEL 1-9</div>
-            <p style="font-size:0.9rem; margin-bottom:10px;">Deposit to unlock:</p>
-            <ul style="margin-left:20px; font-size:0.85rem;">
-              <li>✅ Withdraw Monday-Saturday</li>
-              <li>✅ Referral bonuses</li>
-              <li>✅ More books per day</li>
-              <li>✅ Higher rewards</li>
-              <li>✅ 365 days access</li>
+            <ul class="upgrade-list">
+              <li><i class="fas fa-check-circle"></i> Withdraw Monday-Saturday</li>
+              <li><i class="fas fa-check-circle"></i> Referral bonuses</li>
+              <li><i class="fas fa-check-circle"></i> More books per day</li>
+              <li><i class="fas fa-check-circle"></i> Higher rewards</li>
+              <li><i class="fas fa-check-circle"></i> 365 days access</li>
             </ul>
-            <button onclick="openDepositModal()" style="background:#ff9800; color:white; border:none; padding:12px; border-radius:30px; width:100%; margin-top:10px; font-weight:600;">
+            <button class="upgrade-btn" onclick="openDepositModal()">
               DEPOSIT & UPGRADE NOW
             </button>
           </div>
@@ -1155,7 +1152,7 @@
         </div>
       </div>
 
-      <!-- Bottom navigation -->
+      <!-- Bottom navigation - FIXED AT BOTTOM -->
       <div class="bottom-nav">
         <div class="nav-item active" onclick="showHomePage()">
           <i class="fas fa-home"></i>
@@ -1274,7 +1271,7 @@
         </div>
       </div>
 
-      <!-- Bottom navigation -->
+      <!-- Bottom navigation - FIXED AT BOTTOM -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showHomePage()">
           <i class="fas fa-home"></i>
@@ -1492,9 +1489,21 @@
         <button class="close-btn" onclick="closeWithdrawModal()">&times;</button>
       </div>
       
-      <div class="wallet-box main" style="margin-bottom:20px;">
-        <div class="label">💰 MAIN WALLET BALANCE</div>
-        <div class="amount" id="withdrawMainBalance">0 <small>UGX</small></div>
+      <!-- Wallet Selection -->
+      <div class="wallet-selector">
+        <div class="wallet-option" id="walletMainOption" onclick="selectWallet('main')">
+          <div class="wallet-name">💰 MAIN</div>
+          <div class="wallet-balance" id="withdrawMainBalance">0 UGX</div>
+        </div>
+        <div class="wallet-option" id="walletCommissionOption" onclick="selectWallet('commission')">
+          <div class="wallet-name">💼 COMMISSION</div>
+          <div class="wallet-balance" id="withdrawCommissionBalance">0 UGX</div>
+        </div>
+      </div>
+
+      <!-- Withdrawal Notes -->
+      <div class="withdraw-note" id="withdrawNote">
+        <i class="fas fa-info-circle"></i> Main wallet: No minimum. Commission wallet: Min 10,000 UGX
       </div>
 
       <div class="form-group">
@@ -1520,8 +1529,9 @@
     let users = JSON.parse(localStorage.getItem('cueUsers')) || {};
     let currentUser = localStorage.getItem('currentUser');
     let pendingDeposits = JSON.parse(localStorage.getItem('pendingDeposits')) || [];
+    let selectedWallet = 'main';
     let books = [
-      { id: 1, title: "The 7 Habits", desc: "Short summary of effective habits", pages: 5 },
+      { id: 1, title: "Financial literacy", desc: "Learn about money management", pages: 5 },
       { id: 2, title: "Think and Grow Rich", desc: "Napoleon Hill's classic", pages: 8 },
       { id: 3, title: "Rich Dad Poor Dad", desc: "Financial literacy", pages: 6 },
       { id: 4, title: "Atomic Habits", desc: "Tiny changes, remarkable results", pages: 7 },
@@ -1680,14 +1690,13 @@
       hideAllPages();
       document.getElementById('mainDashboard').style.display = 'flex';
       updateActiveNav('home');
-      loadBooks();
     }
 
     function showProfilePage() {
       hideAllPages();
       document.getElementById('profilePage').style.display = 'flex';
       updateActiveNav('me');
-      updateProfileData();
+      loadUserData();
     }
 
     function showLevelPage() {
@@ -1707,12 +1716,6 @@
       hideAllPages();
       document.getElementById('incomePage').style.display = 'flex';
       updateActiveNav('income');
-    }
-
-    function showAdminPanel() {
-      hideAllPages();
-      document.getElementById('adminPanel').style.display = 'flex';
-      loadAdminData();
     }
 
     function hideAllPages() {
@@ -1744,116 +1747,22 @@
       const user = users[currentUser];
       if (!user) return;
 
-      // Check member expiry
-      checkMemberExpiry(user);
-
-      // Update displays
-      document.getElementById('balanceAmount').innerHTML = `${(user.mainWallet || 0).toLocaleString()} <small>UGX</small>`;
-      document.getElementById('mainWalletAmount').innerHTML = `${(user.mainWallet || 0).toLocaleString()} <small>UGX</small>`;
-      document.getElementById('commissionWalletAmount').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} <small>UGX</small>`;
-      
-      // Profile page
+      // Update profile page
       document.getElementById('profileFullName').textContent = user.fullName || 'User';
       document.getElementById('profileDisplayName').textContent = user.fullName?.split(' ')[0] || 'User';
-      document.getElementById('profileMainWallet').innerHTML = `${(user.mainWallet || 0).toLocaleString()} <small>UGX</small>`;
-      document.getElementById('profileCommissionWallet').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} <small>UGX</small>`;
       
-      // Member type
       const level = user.memberLevel || 0;
       const levelData = levels[level] || levels[0];
-      document.getElementById('memberTypeDisplay').textContent = levelData.name;
       document.getElementById('profileMemberType').textContent = levelData.name;
       
-      // Days left
-      if (user.memberExpiry) {
-        const expiry = new Date(user.memberExpiry);
-        const now = new Date();
-        const daysLeft = Math.max(0, Math.ceil((expiry - now) / (1000 * 60 * 60 * 24)));
-        document.getElementById('memberDaysDisplay').textContent = `${daysLeft} days remaining`;
-        document.getElementById('profileDaysLeft').textContent = daysLeft;
-        
-        // Progress bar
-        const total = levelData.duration;
-        const progress = ((total - daysLeft) / total) * 100;
-        document.getElementById('memberProgress').style.width = Math.min(100, progress) + '%';
-      }
-
-      // Daily book tracking
-      const today = new Date().toDateString();
-      if (user.lastReadDate !== today) {
-        user.booksReadToday = 0;
-        user.lastReadDate = today;
-        localStorage.setItem('cueUsers', JSON.stringify(users));
-      }
-
-      const dailyLimit = levelData.dailyBooks;
-      document.getElementById('booksReadToday').textContent = user.booksReadToday || 0;
-      document.getElementById('dailyBookLimit').textContent = dailyLimit;
-      document.getElementById('profileBooksToday').textContent = `${user.booksReadToday || 0}/${dailyLimit}`;
-
-      // Show/hide referral section based on level
-      if (levelData.hasReferral) {
-        document.getElementById('referralSection').style.display = 'block';
-        document.getElementById('upgradeSection').style.display = 'none';
-        document.getElementById('referralLink').textContent = `https://ciue.com/ref/${user.referralCode || ''}`;
-      } else {
-        document.getElementById('referralSection').style.display = 'none';
-        document.getElementById('upgradeSection').style.display = 'block';
-      }
-
-      // Enable/disable withdraw button
-      const withdrawBtn = document.getElementById('withdrawBtn');
-      const profileWithdrawBtn = document.getElementById('profileWithdrawBtn');
-      if (levelData.canWithdraw) {
-        withdrawBtn.classList.remove('disabled');
-        profileWithdrawBtn.disabled = false;
-      } else {
-        withdrawBtn.classList.add('disabled');
-        profileWithdrawBtn.disabled = true;
-      }
+      // Wallet balances
+      document.getElementById('profileMainWallet').innerHTML = `${(user.mainWallet || 0).toLocaleString()} <small>UGX</small>`;
+      document.getElementById('profileCommissionWallet').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} <small>UGX</small>`;
 
       updateTime();
     }
 
-    function checkMemberExpiry(user) {
-      if (!user.memberExpiry) return;
-      
-      const expiry = new Date(user.memberExpiry);
-      const now = new Date();
-      
-      if (now > expiry && user.memberLevel !== 0) {
-        // Expired - revert to intern
-        const newExpiry = new Date(now);
-        newExpiry.setDate(newExpiry.getDate() + 4);
-        
-        user.memberLevel = 0;
-        user.memberType = 'intern';
-        user.memberExpiry = newExpiry.toISOString();
-        
-        localStorage.setItem('cueUsers', JSON.stringify(users));
-        showMessage('Your membership has expired. You are now an Intern member.', false);
-      }
-    }
-
     // ========== BOOK FUNCTIONS ==========
-    function loadBooks() {
-      const bookGrid = document.getElementById('bookGrid');
-      if (!bookGrid) return;
-
-      let html = '';
-      books.slice(0, 3).forEach(book => {
-        html += `
-          <div class="book-card">
-            <div class="book-title">📖 ${book.title}</div>
-            <div class="book-desc">${book.desc}</div>
-            <button class="read-btn" onclick="startReading(${book.id})" id="book-${book.id}">READ</button>
-            <div id="timer-${book.id}" style="display:none;" class="timer-display">10s</div>
-          </div>
-        `;
-      });
-      bookGrid.innerHTML = html;
-    }
-
     function loadTaskBooks() {
       const bookGrid = document.getElementById('taskBookGrid');
       if (!bookGrid) return;
@@ -1864,111 +1773,11 @@
           <div class="book-card">
             <div class="book-title">📖 ${book.title}</div>
             <div class="book-desc">${book.desc}</div>
-            <button class="read-btn" onclick="startReading(${book.id})" id="task-book-${book.id}">READ</button>
-            <div id="task-timer-${book.id}" style="display:none;" class="timer-display">10s</div>
+            <button class="read-btn" onclick="alert('Read feature coming soon')">READ</button>
           </div>
         `;
       });
       bookGrid.innerHTML = html;
-    }
-
-    function startReading(bookId) {
-      const user = users[currentUser];
-      if (!user) return;
-
-      const level = user.memberLevel || 0;
-      const levelData = levels[level] || levels[0];
-
-      // Check daily limit
-      if (user.booksReadToday >= levelData.dailyBooks) {
-        showMessage(`You've reached your daily limit of ${levelData.dailyBooks} books`, false);
-        return;
-      }
-
-      // Hide READ button, show timer
-      const bookBtn = document.getElementById(`book-${bookId}`);
-      const taskBookBtn = document.getElementById(`task-book-${bookId}`);
-      const timerDiv = document.getElementById(`timer-${bookId}`);
-      const taskTimer = document.getElementById(`task-timer-${bookId}`);
-
-      if (bookBtn) {
-        bookBtn.style.display = 'none';
-        timerDiv.style.display = 'block';
-      }
-      if (taskBookBtn) {
-        taskBookBtn.style.display = 'none';
-        taskTimer.style.display = 'block';
-      }
-
-      // Start 10-second countdown
-      let seconds = 10;
-      const timer = setInterval(() => {
-        seconds--;
-        
-        if (bookBtn) timerDiv.textContent = seconds + 's';
-        if (taskBookBtn) taskTimer.textContent = seconds + 's';
-
-        if (seconds <= 0) {
-          clearInterval(timer);
-          
-          // Show HARVEST button
-          if (bookBtn) {
-            timerDiv.style.display = 'none';
-            bookBtn.style.display = 'block';
-            bookBtn.textContent = '🌾 HARVEST';
-            bookBtn.classList.add('harvest-ready');
-            bookBtn.onclick = () => harvestReward(bookId);
-          }
-          if (taskBookBtn) {
-            taskTimer.style.display = 'none';
-            taskBookBtn.style.display = 'block';
-            taskBookBtn.textContent = '🌾 HARVEST';
-            taskBookBtn.classList.add('harvest-ready');
-            taskBookBtn.onclick = () => harvestReward(bookId);
-          }
-        }
-      }, 1000);
-    }
-
-    function harvestReward(bookId) {
-      const user = users[currentUser];
-      if (!user) return;
-
-      const level = user.memberLevel || 0;
-      const levelData = levels[level] || levels[0];
-      
-      // Calculate reward
-      let reward = levelData.reward;
-      
-      // Update user data
-      user.commissionWallet = (user.commissionWallet || 0) + reward;
-      user.booksReadToday = (user.booksReadToday || 0) + 1;
-      user.lastReadDate = new Date().toDateString();
-      
-      // Update daily earnings
-      const today = new Date().toDateString();
-      if (!user.dailyEarnings) user.dailyEarnings = {};
-      user.dailyEarnings[today] = (user.dailyEarnings[today] || 0) + reward;
-
-      localStorage.setItem('cueUsers', JSON.stringify(users));
-
-      // Update UI
-      const bookBtn = document.getElementById(`book-${bookId}`);
-      const taskBookBtn = document.getElementById(`task-book-${bookId}`);
-
-      if (bookBtn) {
-        bookBtn.textContent = '✅ DONE';
-        bookBtn.classList.remove('harvest-ready');
-        bookBtn.disabled = true;
-      }
-      if (taskBookBtn) {
-        taskBookBtn.textContent = '✅ DONE';
-        taskBookBtn.classList.remove('harvest-ready');
-        taskBookBtn.disabled = true;
-      }
-
-      showMessage(`+${reward} UGX added to Commission Wallet!`);
-      loadUserData();
     }
 
     // ========== DEPOSIT FUNCTIONS ==========
@@ -2011,17 +1820,9 @@
 
     function submitDeposit() {
       const amount = parseInt(document.getElementById('depositAmount').value);
-      const level = parseInt(document.getElementById('levelSelect').value);
       
       if (!amount || amount < 1000) {
         alert('Please enter a valid amount');
-        return;
-      }
-
-      // Check if amount matches selected level
-      const requiredAmounts = [0, 25000, 50000, 100000, 200000, 350000, 500000, 750000, 1000000, 1500000];
-      if (amount < requiredAmounts[level]) {
-        alert(`Level ${level} requires at least ${requiredAmounts[level].toLocaleString()} UGX`);
         return;
       }
 
@@ -2029,48 +1830,33 @@
       const ussdCode = `*165*1*0756673144*${amount}#`;
       window.location.href = `tel:${ussdCode}`;
 
-      // Create pending deposit
-      const deposit = {
-        id: Date.now(),
-        userId: currentUser,
-        phone: users[currentUser]?.phone,
-        amount: amount,
-        level: level,
-        timestamp: new Date().toISOString(),
-        status: 'pending'
-      };
-
-      pendingDeposits.push(deposit);
-      localStorage.setItem('pendingDeposits', JSON.stringify(pendingDeposits));
-
-      // Send email notification (simulated)
-      showEmailStatus('📧 Deposit notification sent to admin', true);
-
       alert(`Please complete payment via USSD. Admin will verify and add to your wallet.`);
       closeDepositModal();
     }
 
     // ========== WITHDRAW FUNCTIONS ==========
+    function selectWallet(wallet) {
+      selectedWallet = wallet;
+      
+      document.getElementById('walletMainOption').classList.toggle('selected', wallet === 'main');
+      document.getElementById('walletCommissionOption').classList.toggle('selected', wallet === 'commission');
+      
+      const note = document.getElementById('withdrawNote');
+      if (wallet === 'commission') {
+        note.innerHTML = '<i class="fas fa-info-circle"></i> Commission wallet: Minimum withdrawal 10,000 UGX';
+      } else {
+        note.innerHTML = '<i class="fas fa-info-circle"></i> Main wallet: No minimum. Commission wallet: Min 10,000 UGX';
+      }
+    }
+
     function openWithdrawModal() {
       const user = users[currentUser];
       if (!user) return;
 
-      const level = user.memberLevel || 0;
-      const levelData = levels[level] || levels[0];
-
-      if (!levelData.canWithdraw) {
-        alert('Withdrawal is only available for Level 1-9 members. Please upgrade first.');
-        return;
-      }
-
-      // Check if today is withdrawal day (Monday-Saturday)
-      const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-      if (today === 0) {
-        alert('Withdrawals are only available Monday to Saturday. Please try again tomorrow.');
-        return;
-      }
-
-      document.getElementById('withdrawMainBalance').innerHTML = `${(user.mainWallet || 0).toLocaleString()} <small>UGX</small>`;
+      document.getElementById('withdrawMainBalance').innerHTML = (user.mainWallet || 0).toLocaleString() + ' UGX';
+      document.getElementById('withdrawCommissionBalance').innerHTML = (user.commissionWallet || 0).toLocaleString() + ' UGX';
+      
+      selectWallet('main');
       document.getElementById('withdrawModal').style.display = 'flex';
     }
 
@@ -2093,128 +1879,30 @@
         return;
       }
 
-      if (amount > (user.mainWallet || 0)) {
-        alert('Insufficient balance in Main Wallet');
-        return;
+      if (selectedWallet === 'main') {
+        if (amount > (user.mainWallet || 0)) {
+          alert('Insufficient balance in Main Wallet');
+          return;
+        }
+        user.mainWallet -= amount;
+      } else {
+        if (amount < 10000) {
+          alert('Commission wallet withdrawals minimum is 10,000 UGX');
+          return;
+        }
+        if (amount > (user.commissionWallet || 0)) {
+          alert('Insufficient balance in Commission Wallet');
+          return;
+        }
+        user.commissionWallet -= amount;
       }
-
-      // Process withdrawal
-      user.mainWallet -= amount;
-      
-      // Add to transactions
-      if (!user.transactions) user.transactions = [];
-      user.transactions.unshift({
-        type: 'withdrawal',
-        amount: amount,
-        phone: phone,
-        date: new Date().toLocaleString(),
-        status: 'processed'
-      });
 
       localStorage.setItem('cueUsers', JSON.stringify(users));
 
-      alert(`Withdrawal of ${amount.toLocaleString()} UGX to ${phone} has been submitted. You will receive money shortly.`);
+      alert(`Withdrawal of ${amount.toLocaleString()} UGX to ${phone} has been submitted.`);
       
       loadUserData();
       closeWithdrawModal();
-    }
-
-    // ========== REFERRAL FUNCTIONS ==========
-    function copyReferralLink() {
-      const link = document.getElementById('referralLink').textContent;
-      navigator.clipboard.writeText(link).then(() => {
-        alert('Referral link copied!');
-      });
-    }
-
-    // ========== ADMIN FUNCTIONS ==========
-    function loadAdminData() {
-      // Check if user is admin (you)
-      if (currentUser !== '0756673144') {
-        alert('Unauthorized');
-        showHomePage();
-        return;
-      }
-
-      // Load pending deposits
-      const list = document.getElementById('pendingDepositsList');
-      if (pendingDeposits.length === 0) {
-        list.innerHTML = '<p style="color:#666;">No pending deposits</p>';
-      } else {
-        let html = '';
-        pendingDeposits.forEach(deposit => {
-          html += `
-            <div class="pending-item">
-              <div>
-                <div>${deposit.phone}</div>
-                <div style="font-weight:700;">${deposit.amount.toLocaleString()} UGX</div>
-                <div style="font-size:0.7rem;">Level ${deposit.level}</div>
-              </div>
-              <div>
-                <button class="approve-btn" onclick="approveDeposit(${deposit.id})">Approve</button>
-                <button class="reject-btn" onclick="rejectDeposit(${deposit.id})">Reject</button>
-              </div>
-            </div>
-          `;
-        });
-        list.innerHTML = html;
-      }
-
-      // Update stats
-      document.getElementById('adminTotalUsers').textContent = Object.keys(users).length;
-      
-      const today = new Date().toDateString();
-      const newToday = Object.values(users).filter(u => new Date(u.registeredDate).toDateString() === today).length;
-      document.getElementById('adminNewToday').textContent = newToday;
-
-      const totalDeposits = pendingDeposits.filter(d => d.status === 'approved').reduce((sum, d) => sum + d.amount, 0);
-      document.getElementById('adminTotalDeposits').textContent = totalDeposits.toLocaleString();
-    }
-
-    function approveDeposit(id) {
-      const deposit = pendingDeposits.find(d => d.id === id);
-      if (!deposit) return;
-
-      // Update user
-      const user = users[deposit.userId];
-      if (user) {
-        // Add to main wallet
-        user.mainWallet = (user.mainWallet || 0) + deposit.amount;
-        
-        // Upgrade to selected level
-        user.memberLevel = deposit.level;
-        user.memberType = `level${deposit.level}`;
-        
-        // Set expiry to 365 days from now
-        const expiry = new Date();
-        expiry.setDate(expiry.getDate() + 365);
-        user.memberExpiry = expiry.toISOString();
-
-        // Add transaction
-        if (!user.transactions) user.transactions = [];
-        user.transactions.unshift({
-          type: 'deposit',
-          amount: deposit.amount,
-          level: deposit.level,
-          date: new Date().toLocaleString(),
-          status: 'approved'
-        });
-
-        localStorage.setItem('cueUsers', JSON.stringify(users));
-      }
-
-      // Remove from pending
-      pendingDeposits = pendingDeposits.filter(d => d.id !== id);
-      localStorage.setItem('pendingDeposits', JSON.stringify(pendingDeposits));
-
-      showMessage(`Deposit approved! User upgraded to Level ${deposit.level}`);
-      loadAdminData();
-    }
-
-    function rejectDeposit(id) {
-      pendingDeposits = pendingDeposits.filter(d => d.id !== id);
-      localStorage.setItem('pendingDeposits', JSON.stringify(pendingDeposits));
-      loadAdminData();
     }
 
     // ========== UTILITY FUNCTIONS ==========
@@ -2237,9 +1925,7 @@
 
     // ========== INITIALIZATION ==========
     window.onload = function() {
-      // Create demo accounts if none exist
       if (Object.keys(users).length === 0) {
-        // Admin account (you)
         users['0756673144'] = {
           fullName: 'Admin User',
           phone: '0756673144',
@@ -2257,41 +1943,15 @@
           referralCode: 'ADMIN001',
           transactions: []
         };
-
-        // Demo intern
-        users['0777123456'] = {
-          fullName: 'Intern User',
-          phone: '0777123456',
-          country: 'Uganda',
-          password: '123456',
-          registeredDate: new Date().toISOString(),
-          memberType: 'intern',
-          memberLevel: 0,
-          memberExpiry: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString(),
-          mainWallet: 0,
-          commissionWallet: 1500,
-          booksReadToday: 0,
-          lastReadDate: new Date().toDateString(),
-          referrals: [],
-          referralCode: 'INTERN001',
-          transactions: []
-        };
-
         localStorage.setItem('cueUsers', JSON.stringify(users));
       }
 
-      // Check for admin access via URL
-      if (window.location.hash === '#admin' && currentUser === '0756673144') {
-        showAdminPanel();
-      } else if (currentUser && users[currentUser]) {
+      if (currentUser && users[currentUser]) {
         loadUserData();
         showHomePage();
       }
 
-      // Listen for input on deposit amount
       document.getElementById('depositAmount')?.addEventListener('input', updateDepositUssd);
-      
-      // Update time every minute
       setInterval(updateTime, 60000);
     };
   </script>
