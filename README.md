@@ -224,7 +224,7 @@
     }
 
     /* Main Dashboard Pages */
-    #mainDashboard, #profilePage, #levelPage, #taskPage, #incomePage {
+    #mainDashboard, #profilePage, #levelPage, #taskPage, #incomePage, #taskRecordPage {
       display: none;
       flex-direction: column;
       height: 100%;
@@ -526,6 +526,7 @@
       align-items: center;
       gap: 10px;
       font-size: 0.95rem;
+      cursor: pointer;
     }
 
     .menu-item i {
@@ -577,6 +578,87 @@
       padding: 8px;
       text-align: center;
       border-bottom: 1px solid #ddd;
+    }
+
+    /* Task Record Page Styles */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #eaeaea;
+    }
+
+    .stat-card .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #006a7a;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .task-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .task-table th {
+      background: #f0f0f0;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .task-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.85rem;
+    }
+
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .status-complete {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 20px 0 10px 0;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: #006a7a;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-bottom: 15px;
     }
 
     /* Modals */
@@ -791,7 +873,7 @@
       </div>
     </div>
 
-    <!-- PROFILE PAGE (ME) - CLEAN VERSION -->
+    <!-- PROFILE PAGE (ME) -->
     <div id="profilePage">
       <div class="scroll-content">
         <div class="profile-header">
@@ -824,19 +906,14 @@
 
         <!-- INCOME GRID - CLEAN -->
         <div class="income-grid">
-          <!-- Today's income -->
           <div class="income-item">
             <div class="income-label">today's income</div>
             <div class="income-value" id="todayIncomeValue">0.00 UGX</div>
           </div>
-          
-          <!-- Total income -->
           <div class="income-item">
             <div class="income-label">total income</div>
             <div class="income-value" id="totalIncomeValue">0.00 UGX</div>
           </div>
-          
-          <!-- Month's income -->
           <div class="income-item">
             <div class="income-label">month's income</div>
             <div class="income-value" id="monthIncomeValue">0.00 UGX</div>
@@ -849,14 +926,14 @@
           <span class="commission-value" id="subordinateCommission">0.00 UGX</span>
         </div>
 
-        <!-- Menu Grid -->
+        <!-- Menu Grid - Clickable -->
         <div class="menu-grid">
-          <div class="menu-item"><i class="fas fa-clipboard-list"></i> task record</div>
-          <div class="menu-item"><i class="fas fa-users"></i> team report</div>
-          <div class="menu-item"><i class="fas fa-calendar-alt"></i> daily report</div>
-          <div class="menu-item"><i class="fas fa-file-invoice"></i> bill record</div>
-          <div class="menu-item"><i class="fas fa-chart-line"></i> Position Salary</div>
-          <div class="menu-item"><i class="fas fa-download"></i> APP download</div>
+          <div class="menu-item" onclick="showTaskRecord()"><i class="fas fa-clipboard-list"></i> task record</div>
+          <div class="menu-item" onclick="alert('team report coming soon')"><i class="fas fa-users"></i> team report</div>
+          <div class="menu-item" onclick="alert('daily report coming soon')"><i class="fas fa-calendar-alt"></i> daily report</div>
+          <div class="menu-item" onclick="alert('bill record coming soon')"><i class="fas fa-file-invoice"></i> bill record</div>
+          <div class="menu-item" onclick="alert('Position Salary coming soon')"><i class="fas fa-chart-line"></i> Position Salary</div>
+          <div class="menu-item" onclick="alert('APP download coming soon')"><i class="fas fa-download"></i> APP download</div>
         </div>
 
         <!-- Logout -->
@@ -870,6 +947,57 @@
         <div class="nav-item" onclick="showPage('level')"><i class="fas fa-chart-simple"></i><span>Level</span></div>
         <div class="nav-item" onclick="showPage('income')"><i class="fas fa-coins"></i><span>Income</span></div>
         <div class="nav-item active" onclick="showPage('profile')"><i class="fas fa-user"></i><span>Me</span></div>
+      </div>
+    </div>
+
+    <!-- TASK RECORD PAGE (NEW) -->
+    <div id="taskRecordPage">
+      <div class="scroll-content">
+        <!-- Back Button -->
+        <button class="back-btn" onclick="showPage('profile')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
+
+        <h3 style="margin-bottom:20px;">📋 Task Record</h3>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="totalReadBooks">0</div>
+            <div class="stat-label">Read Books</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="completeBooks">0</div>
+            <div class="stat-label">Complete Books</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="pendingBooks">0</div>
+            <div class="stat-label">Pending Books</div>
+          </div>
+        </div>
+
+        <!-- Task History Table -->
+        <div class="section-title">📚 Book History</div>
+        <table class="task-table" id="taskHistoryTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Book</th>
+              <th>Status</th>
+              <th>Reward</th>
+            </tr>
+          </thead>
+          <tbody id="taskHistoryBody">
+            <!-- Filled by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Bottom Nav (same as others) -->
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showPage('task')"><i class="fas fa-tasks"></i><span>Task</span></div>
+        <div class="nav-item" onclick="showPage('level')"><i class="fas fa-chart-simple"></i><span>Level</span></div>
+        <div class="nav-item" onclick="showPage('income')"><i class="fas fa-coins"></i><span>Income</span></div>
+        <div class="nav-item" onclick="showPage('profile')"><i class="fas fa-user"></i><span>Me</span></div>
       </div>
     </div>
 
@@ -1043,6 +1171,7 @@
         booksReadToday: 0,
         lastReadDate: now.toDateString(),
         totalEarned: 0,
+        taskHistory: [],
         registeredDate: now.toISOString()
       };
 
@@ -1078,6 +1207,7 @@
       document.getElementById('levelPage').style.display = page === 'level' ? 'flex' : 'none';
       document.getElementById('taskPage').style.display = page === 'task' ? 'flex' : 'none';
       document.getElementById('incomePage').style.display = page === 'income' ? 'flex' : 'none';
+      document.getElementById('taskRecordPage').style.display = page === 'taskRecord' ? 'flex' : 'none';
 
       // Update active nav
       document.querySelectorAll('.bottom-nav').forEach(nav => {
@@ -1092,6 +1222,11 @@
 
       if (page === 'task') loadTaskBooks();
       if (page === 'home') loadHomeBooks();
+      if (page === 'taskRecord') loadTaskRecord();
+    }
+
+    function showTaskRecord() {
+      showPage('taskRecord');
     }
 
     // ========== LOAD USER DATA ==========
@@ -1131,7 +1266,7 @@
       document.getElementById('profileDaysLeft').textContent = daysLeft;
       document.getElementById('profileBooksToday').textContent = `${user.booksReadToday || 0}/${levelData.dailyBooks}`;
       
-      // Update income values (today's income = commission earned today)
+      // Update income values
       document.getElementById('todayIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
       document.getElementById('totalIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
       document.getElementById('monthIncomeValue').innerHTML = `0.00 UGX`;
@@ -1142,6 +1277,45 @@
       document.getElementById('withdrawCommissionBalance').innerHTML = (user.commissionWallet || 0).toLocaleString() + ' UGX';
 
       updateTime();
+    }
+
+    // ========== TASK RECORD ==========
+    function loadTaskRecord() {
+      const user = users[currentUser];
+      if (!user) return;
+
+      // Calculate stats
+      const history = user.taskHistory || [];
+      const completed = history.filter(task => task.status === 'complete');
+      const pending = history.filter(task => task.status === 'pending');
+      
+      document.getElementById('totalReadBooks').textContent = history.length;
+      document.getElementById('completeBooks').textContent = completed.length;
+      document.getElementById('pendingBooks').textContent = pending.length;
+
+      // Load table
+      const tbody = document.getElementById('taskHistoryBody');
+      if (history.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px;">No task history yet</td></tr>';
+        return;
+      }
+
+      let html = '';
+      history.slice().reverse().forEach(task => {
+        const statusClass = task.status === 'complete' ? 'status-complete' : 'status-pending';
+        const statusText = task.status === 'complete' ? '✅ Complete' : '⏳ Pending';
+        const rewardDisplay = task.status === 'complete' ? `+${task.reward} UGX` : '-';
+        
+        html += `
+          <tr>
+            <td>${task.date}</td>
+            <td>${task.book}</td>
+            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+            <td>${rewardDisplay}</td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
     }
 
     // ========== BOOKS ==========
@@ -1183,11 +1357,22 @@
 
       const level = user.memberLevel || 0;
       const levelData = levels[level];
+      const book = books.find(b => b.id === bookId);
 
       if (user.booksReadToday >= levelData.dailyBooks) {
         alert(`Daily limit of ${levelData.dailyBooks} books reached`);
         return;
       }
+
+      // Add to task history as pending
+      if (!user.taskHistory) user.taskHistory = [];
+      user.taskHistory.push({
+        date: new Date().toLocaleDateString(),
+        book: book.title,
+        status: 'pending',
+        reward: 0
+      });
+      localStorage.setItem('cueUsers', JSON.stringify(users));
 
       // Hide button, show timer
       const homeBtn = document.getElementById(`home-book-${bookId}`);
@@ -1233,11 +1418,24 @@
       const level = user.memberLevel || 0;
       const levelData = levels[level];
       const reward = levelData.reward;
+      const book = books.find(b => b.id === bookId);
 
       // Add to COMMISSION WALLET
       user.commissionWallet = (user.commissionWallet || 0) + reward;
       user.booksReadToday = (user.booksReadToday || 0) + 1;
       user.lastReadDate = new Date().toDateString();
+
+      // Update task history - find most recent pending entry for this book
+      if (user.taskHistory) {
+        const pendingTask = user.taskHistory
+          .slice()
+          .reverse()
+          .find(t => t.book === book.title && t.status === 'pending');
+        if (pendingTask) {
+          pendingTask.status = 'complete';
+          pendingTask.reward = reward;
+        }
+      }
 
       localStorage.setItem('cueUsers', JSON.stringify(users));
 
@@ -1367,6 +1565,7 @@
       document.getElementById('levelPage').style.display = 'none';
       document.getElementById('taskPage').style.display = 'none';
       document.getElementById('incomePage').style.display = 'none';
+      document.getElementById('taskRecordPage').style.display = 'none';
     }
 
     // ========== INIT ==========
@@ -1384,7 +1583,8 @@
           commissionWallet: 0,
           booksReadToday: 0,
           lastReadDate: new Date().toDateString(),
-          totalEarned: 0
+          totalEarned: 0,
+          taskHistory: []
         };
         users['0777123456'] = {
           fullName: 'Intern User',
@@ -1397,7 +1597,12 @@
           commissionWallet: 1500,
           booksReadToday: 1,
           lastReadDate: new Date().toDateString(),
-          totalEarned: 1500
+          totalEarned: 1500,
+          taskHistory: [
+            { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1500 },
+            { date: '2/23/2026', book: 'Think and Grow Rich', status: 'pending', reward: 0 },
+            { date: '2/22/2026', book: 'Rich Dad Poor Dad', status: 'complete', reward: 1500 }
+          ]
         };
         localStorage.setItem('cueUsers', JSON.stringify(users));
       }
