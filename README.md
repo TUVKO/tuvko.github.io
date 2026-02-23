@@ -676,16 +676,43 @@
     .team-member {
       padding: 8px 0 8px 20px;
       border-bottom: 1px solid #f0f0f0;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
-    .team-member span {
+    .member-phone {
       font-weight: 600;
     }
 
     .member-level {
       color: #666;
-      font-size: 0.9rem;
+      margin-left: 5px;
+    }
+
+    .member-deposit {
+      color: #ff0000;
+      font-weight: 600;
+      margin-left: 5px;
+    }
+
+    .member-tasks {
+      color: #006a7a;
+      margin-left: 5px;
+    }
+
+    .section-total {
+      margin-top: 10px;
+      padding: 10px 0 10px 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .total-deposit {
+      color: #ff0000;
+    }
+
+    .total-tasks {
+      color: #006a7a;
       margin-left: 10px;
     }
 
@@ -1049,7 +1076,7 @@
       </div>
     </div>
 
-    <!-- TEAM REPORT PAGE (NEW) -->
+    <!-- TEAM REPORT PAGE (UPDATED) -->
     <div id="teamReportPage">
       <div class="scroll-content">
         <!-- Back Button -->
@@ -1269,8 +1296,8 @@
         lastReadDate: now.toDateString(),
         totalEarned: 0,
         taskHistory: [],
-        referredBy: null, // Who referred this user
-        referrals: [], // People this user referred
+        referredBy: null,
+        referrals: [],
         registeredDate: now.toISOString()
       };
 
@@ -1385,6 +1412,16 @@
     }
 
     // ========== TEAM REPORT ==========
+    function maskPhone(phone) {
+      if (!phone || phone.length < 7) return phone;
+      return phone.substring(0, 4) + '***' + phone.substring(phone.length - 3);
+    }
+
+    function countCompletedTasks(user) {
+      if (!user.taskHistory) return 0;
+      return user.taskHistory.filter(task => task.status === 'complete').length;
+    }
+
     function loadTeamReport() {
       const user = users[currentUser];
       if (!user) return;
@@ -1406,10 +1443,26 @@
         aSection.innerHTML = '<div class="empty-section">(empty)</div>';
       } else {
         let html = '';
+        let aTotalDeposit = 0;
+        let aTotalTasks = 0;
+        
         aMembers.forEach(member => {
           const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
-          html += `<div class="team-member"><span>${member.fullName}</span> <span class="member-level">${levelText}</span></div>`;
+          const maskedPhone = maskPhone(member.phone);
+          const deposit = member.mainWallet || 0;
+          aTotalDeposit += deposit;
+          
+          // Only count tasks for active members (level > 0)
+          if (member.memberLevel > 0) {
+            const tasks = countCompletedTasks(member);
+            aTotalTasks += tasks;
+            html += `<div class="team-member"><span class="member-phone">${maskedPhone}</span> <span class="member-level">${levelText}</span> | <span class="member-deposit">💰 ${deposit.toLocaleString()} UGX</span> | <span class="member-tasks">📚 ${tasks} tasks</span></div>`;
+          } else {
+            html += `<div class="team-member"><span class="member-phone">${maskedPhone}</span> <span class="member-level">${levelText}</span> | <span class="member-deposit">💰 ${deposit.toLocaleString()} UGX</span></div>`;
+          }
         });
+        
+        html += `<div class="section-total"><span class="total-deposit">🔴 A Total: ${aTotalDeposit.toLocaleString()} UGX</span> | <span class="total-tasks">📚 Active Tasks: ${aTotalTasks}</span></div>`;
         aSection.innerHTML = html;
       }
 
@@ -1419,10 +1472,25 @@
         bSection.innerHTML = '<div class="empty-section">(empty)</div>';
       } else {
         let html = '';
+        let bTotalDeposit = 0;
+        let bTotalTasks = 0;
+        
         bMembers.forEach(member => {
           const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
-          html += `<div class="team-member"><span>${member.fullName}</span> <span class="member-level">${levelText}</span></div>`;
+          const maskedPhone = maskPhone(member.phone);
+          const deposit = member.mainWallet || 0;
+          bTotalDeposit += deposit;
+          
+          if (member.memberLevel > 0) {
+            const tasks = countCompletedTasks(member);
+            bTotalTasks += tasks;
+            html += `<div class="team-member"><span class="member-phone">${maskedPhone}</span> <span class="member-level">${levelText}</span> | <span class="member-deposit">💰 ${deposit.toLocaleString()} UGX</span> | <span class="member-tasks">📚 ${tasks} tasks</span></div>`;
+          } else {
+            html += `<div class="team-member"><span class="member-phone">${maskedPhone}</span> <span class="member-level">${levelText}</span> | <span class="member-deposit">💰 ${deposit.toLocaleString()} UGX</span></div>`;
+          }
         });
+        
+        html += `<div class="section-total"><span class="total-deposit">🔴 B Total: ${bTotalDeposit.toLocaleString()} UGX</span> | <span class="total-tasks">📚 Active Tasks: ${bTotalTasks}</span></div>`;
         bSection.innerHTML = html;
       }
 
@@ -1432,10 +1500,25 @@
         cSection.innerHTML = '<div class="empty-section">(empty)</div>';
       } else {
         let html = '';
+        let cTotalDeposit = 0;
+        let cTotalTasks = 0;
+        
         cMembers.forEach(member => {
           const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
-          html += `<div class="team-member"><span>${member.fullName}</span> <span class="member-level">${levelText}</span></div>`;
+          const maskedPhone = maskPhone(member.phone);
+          const deposit = member.mainWallet || 0;
+          cTotalDeposit += deposit;
+          
+          if (member.memberLevel > 0) {
+            const tasks = countCompletedTasks(member);
+            cTotalTasks += tasks;
+            html += `<div class="team-member"><span class="member-phone">${maskedPhone}</span> <span class="member-level">${levelText}</span> | <span class="member-deposit">💰 ${deposit.toLocaleString()} UGX</span> | <span class="member-tasks">📚 ${tasks} tasks</span></div>`;
+          } else {
+            html += `<div class="team-member"><span class="member-phone">${maskedPhone}</span> <span class="member-level">${levelText}</span> | <span class="member-deposit">💰 ${deposit.toLocaleString()} UGX</span></div>`;
+          }
         });
+        
+        html += `<div class="section-total"><span class="total-deposit">🔴 C Total: ${cTotalDeposit.toLocaleString()} UGX</span> | <span class="total-tasks">📚 Active Tasks: ${cTotalTasks}</span></div>`;
         cSection.innerHTML = html;
       }
 
@@ -1795,7 +1878,10 @@
           booksReadToday: 2,
           lastReadDate: new Date().toDateString(),
           totalEarned: 3000,
-          taskHistory: [],
+          taskHistory: [
+            { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1500 },
+            { date: '2/22/2026', book: 'Think and Grow Rich', status: 'complete', reward: 1500 }
+          ],
           referredBy: '0777123456',
           referrals: []
         };
@@ -1812,7 +1898,9 @@
           booksReadToday: 1,
           lastReadDate: new Date().toDateString(),
           totalEarned: 1500,
-          taskHistory: [],
+          taskHistory: [
+            { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1500 }
+          ],
           referredBy: '0788123456',
           referrals: []
         };
