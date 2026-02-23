@@ -307,6 +307,12 @@
       margin-bottom: 10px;
     }
 
+    .book-desc {
+      color: #666;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+
     .read-btn {
       background: #006a7a;
       color: white;
@@ -463,7 +469,7 @@
       margin-bottom: 20px;
     }
 
-    /* Income Grid - ALL SET TO 0 */
+    /* Income Grid - CLEAN */
     .income-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -487,12 +493,6 @@
       color: #000;
     }
 
-    .income-value small {
-      font-size: 0.7rem;
-      color: #999;
-      font-weight: 400;
-    }
-
     /* Commission Row */
     .commission-row {
       display: flex;
@@ -501,6 +501,16 @@
       border-top: 1px solid #eaeaea;
       border-bottom: 1px solid #eaeaea;
       margin-bottom: 20px;
+    }
+
+    .commission-label {
+      color: #000;
+      font-size: 0.9rem;
+    }
+
+    .commission-value {
+      font-weight: 700;
+      color: #000;
     }
 
     /* Menu Grid */
@@ -676,6 +686,8 @@
                 <option value="Uganda">Uganda 🇺🇬</option>
                 <option value="Kenya">Kenya 🇰🇪</option>
                 <option value="Tanzania">Tanzania 🇹🇿</option>
+                <option value="Burundi">Burundi 🇧🇮</option>
+                <option value="South Sudan">South Sudan 🇸🇸</option>
               </select>
             </div>
           </div>
@@ -714,11 +726,11 @@
         <div class="wallets-container">
           <div class="wallet-box main">
             <div class="label">💰 MAIN WALLET</div>
-            <div class="amount" id="mainWalletAmount">0 <small>UGX</small></div>
+            <div class="amount" id="mainWalletAmount">0 UGX</div>
           </div>
           <div class="wallet-box commission">
-            <div class="label">💼 COMMISSION</div>
-            <div class="amount" id="commissionWalletAmount">0 <small>UGX</small></div>
+            <div class="label">💰 COMMISSION</div>
+            <div class="amount" id="commissionWalletAmount">0 UGX</div>
           </div>
         </div>
 
@@ -779,7 +791,7 @@
       </div>
     </div>
 
-    <!-- PROFILE PAGE (ME) - ALL VALUES SET TO 0 -->
+    <!-- PROFILE PAGE (ME) - CLEAN VERSION -->
     <div id="profilePage">
       <div class="scroll-content">
         <div class="profile-header">
@@ -794,11 +806,11 @@
         <div class="wallets-container">
           <div class="wallet-box main">
             <div class="label">💰 MAIN WALLET</div>
-            <div class="amount" id="profileMainWallet">0 <small>UGX</small></div>
+            <div class="amount" id="profileMainWallet">0 UGX</div>
           </div>
           <div class="wallet-box commission">
-            <div class="label">💼 COMMISSION</div>
-            <div class="amount" id="profileCommissionWallet">0 <small>UGX</small></div>
+            <div class="label">💰 COMMISSION</div>
+            <div class="amount" id="profileCommissionWallet">0 UGX</div>
           </div>
         </div>
 
@@ -810,34 +822,31 @@
           </div>
         </div>
 
-        <!-- INCOME GRID - ALL ZERO -->
+        <!-- INCOME GRID - CLEAN -->
         <div class="income-grid">
-          <div class="income-item">
-            <div class="income-label">yesterday's income</div>
-            <div class="income-value">0.00 <small>UGX</small></div>
-          </div>
+          <!-- Today's income -->
           <div class="income-item">
             <div class="income-label">today's income</div>
-            <div class="income-value" id="todayIncomeValue">0.00 <small>UGX</small></div>
+            <div class="income-value" id="todayIncomeValue">0.00 UGX</div>
           </div>
+          
+          <!-- Total income -->
           <div class="income-item">
             <div class="income-label">total income</div>
-            <div class="income-value" id="totalIncomeValue">0.00 <small>UGX</small></div>
+            <div class="income-value" id="totalIncomeValue">0.00 UGX</div>
           </div>
+          
+          <!-- Month's income -->
           <div class="income-item">
-            <div class="income-label">this week's income</div>
-            <div class="income-value" id="weekIncomeValue">0.00 <small>UGX</small></div>
-          </div>
-          <div class="income-item">
-            <div class="income-label">this month's income</div>
-            <div class="income-value" id="monthIncomeValue">0.00 <small>UGX</small></div>
+            <div class="income-label">month's income</div>
+            <div class="income-value" id="monthIncomeValue">0.00 UGX</div>
           </div>
         </div>
 
-        <!-- Commission Row - ZERO -->
+        <!-- Commission Row -->
         <div class="commission-row">
           <span class="commission-label">Commission from subordinate tasks</span>
-          <span class="commission-value" id="subordinateCommission">0.00 <small>UGX</small></span>
+          <span class="commission-value" id="subordinateCommission">0.00 UGX</span>
         </div>
 
         <!-- Menu Grid -->
@@ -930,41 +939,41 @@
   <!-- DEPOSIT MODAL -->
   <div class="modal-overlay" id="depositModal">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="display:flex; justify-content:space-between; margin-bottom:20px;">
         <h2>Deposit</h2>
-        <button class="close-btn" onclick="closeDepositModal()">&times;</button>
+        <button class="close-btn" onclick="closeDepositModal()" style="font-size:1.8rem; background:none; border:none;">&times;</button>
       </div>
       <div class="recipient-card">
         <div class="number">0756 673 144</div>
         <div class="name">NAMUHANGA VERONIC</div>
       </div>
       <div class="custom-amount">
-        <input type="number" id="depositAmount" placeholder="Enter amount">
+        <input type="number" id="depositAmount" placeholder="Enter amount" style="width:100%; padding:15px; border:1px solid #ddd; border-radius:15px;">
       </div>
-      <button class="deposit-btn" onclick="submitDeposit()">Send Money</button>
+      <button class="deposit-btn" onclick="submitDeposit()" style="background:#000; color:white; width:100%; padding:15px; border:none; border-radius:30px; margin-top:15px;">Send Money</button>
     </div>
   </div>
 
   <!-- WITHDRAW MODAL -->
   <div class="modal-overlay" id="withdrawModal">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="display:flex; justify-content:space-between; margin-bottom:20px;">
         <h2>Withdraw</h2>
-        <button class="close-btn" onclick="closeWithdrawModal()">&times;</button>
+        <button class="close-btn" onclick="closeWithdrawModal()" style="font-size:1.8rem; background:none; border:none;">&times;</button>
       </div>
-      <div class="wallet-selector">
-        <div class="wallet-option" id="walletMainOption" onclick="selectWallet('main')">
-          <div class="wallet-name">MAIN</div>
+      <div class="wallet-selector" style="display:flex; gap:10px; margin:15px 0;">
+        <div class="wallet-option" id="walletMainOption" onclick="selectWallet('main')" style="flex:1; background:#f9f9f9; border:2px solid #ddd; border-radius:15px; padding:15px; text-align:center; cursor:pointer;">
+          <div class="wallet-name" style="font-weight:600;">MAIN</div>
           <div class="wallet-balance" id="withdrawMainBalance">0 UGX</div>
         </div>
-        <div class="wallet-option" id="walletCommissionOption" onclick="selectWallet('commission')">
-          <div class="wallet-name">COMMISSION</div>
+        <div class="wallet-option" id="walletCommissionOption" onclick="selectWallet('commission')" style="flex:1; background:#f9f9f9; border:2px solid #ddd; border-radius:15px; padding:15px; text-align:center; cursor:pointer;">
+          <div class="wallet-name" style="font-weight:600;">COMMISSION</div>
           <div class="wallet-balance" id="withdrawCommissionBalance">0 UGX</div>
         </div>
       </div>
-      <input type="number" id="withdrawAmount" placeholder="Amount">
-      <input type="tel" id="withdrawPhone" placeholder="Mobile number">
-      <button class="deposit-btn" onclick="submitWithdraw()">Withdraw</button>
+      <input type="number" id="withdrawAmount" placeholder="Amount" style="width:100%; padding:15px; border:1px solid #ddd; border-radius:15px; margin-bottom:10px;">
+      <input type="tel" id="withdrawPhone" placeholder="Mobile number" style="width:100%; padding:15px; border:1px solid #ddd; border-radius:15px; margin-bottom:10px;">
+      <button onclick="submitWithdraw()" style="background:#000; color:white; width:100%; padding:15px; border:none; border-radius:30px;">Withdraw</button>
     </div>
   </div>
 
@@ -1103,8 +1112,8 @@
       const levelData = levels[level];
 
       // Update home page
-      document.getElementById('mainWalletAmount').innerHTML = `${(user.mainWallet || 0).toLocaleString()} <small>UGX</small>`;
-      document.getElementById('commissionWalletAmount').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} <small>UGX</small>`;
+      document.getElementById('mainWalletAmount').innerHTML = `${(user.mainWallet || 0).toLocaleString()} UGX`;
+      document.getElementById('commissionWalletAmount').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} UGX`;
       document.getElementById('memberTypeDisplay').textContent = levelData.name;
       
       const daysLeft = Math.ceil((new Date(user.memberExpiry) - new Date()) / (1000*60*60*24));
@@ -1117,18 +1126,20 @@
       document.getElementById('profileFullName').textContent = user.fullName;
       document.getElementById('profileDisplayName').textContent = user.fullName.split(' ')[0];
       document.getElementById('profileMemberType').textContent = levelData.name;
-      document.getElementById('profileMainWallet').innerHTML = `${(user.mainWallet || 0).toLocaleString()} <small>UGX</small>`;
-      document.getElementById('profileCommissionWallet').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} <small>UGX</small>`;
+      document.getElementById('profileMainWallet').innerHTML = `${(user.mainWallet || 0).toLocaleString()} UGX`;
+      document.getElementById('profileCommissionWallet').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} UGX`;
       document.getElementById('profileDaysLeft').textContent = daysLeft;
       document.getElementById('profileBooksToday').textContent = `${user.booksReadToday || 0}/${levelData.dailyBooks}`;
       
       // Update income values (today's income = commission earned today)
-      document.getElementById('todayIncomeValue').textContent = `${(user.commissionWallet || 0).toFixed(2)} <small>UGX</small>`;
-      document.getElementById('totalIncomeValue').textContent = `${(user.commissionWallet || 0).toFixed(2)} <small>UGX</small>`;
+      document.getElementById('todayIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
+      document.getElementById('totalIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
+      document.getElementById('monthIncomeValue').innerHTML = `0.00 UGX`;
+      document.getElementById('subordinateCommission').innerHTML = `0.00 UGX`;
       
       // Update withdraw modal balances
-      document.getElementById('withdrawMainBalance').textContent = (user.mainWallet || 0).toLocaleString() + ' UGX';
-      document.getElementById('withdrawCommissionBalance').textContent = (user.commissionWallet || 0).toLocaleString() + ' UGX';
+      document.getElementById('withdrawMainBalance').innerHTML = (user.mainWallet || 0).toLocaleString() + ' UGX';
+      document.getElementById('withdrawCommissionBalance').innerHTML = (user.commissionWallet || 0).toLocaleString() + ' UGX';
 
       updateTime();
     }
@@ -1383,10 +1394,10 @@
           memberLevel: 0,
           memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
           mainWallet: 0,
-          commissionWallet: 0,
-          booksReadToday: 0,
+          commissionWallet: 1500,
+          booksReadToday: 1,
           lastReadDate: new Date().toDateString(),
-          totalEarned: 0
+          totalEarned: 1500
         };
         localStorage.setItem('cueUsers', JSON.stringify(users));
       }
