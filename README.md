@@ -43,7 +43,7 @@
       padding: 20px 20px 10px 20px;
     }
 
-    /* Bottom Navigation */
+    /* Bottom Navigation - Home Dashboard Active Colors Changed to Purple */
     .bottom-nav {
       display: flex;
       align-items: center;
@@ -73,11 +73,11 @@
     }
 
     .nav-item.active {
-      color: #006a7a;
+      color: #7d5ba6;  /* Changed from #006a7a to Purple */
     }
 
     .nav-item.active i {
-      color: #006a7a;
+      color: #7d5ba6;  /* Changed from #006a7a to Purple */
     }
 
     /* Auth Pages */
@@ -230,62 +230,62 @@
       height: 100%;
     }
 
-    /* Welcome Section */
+    /* Welcome Section - Home Dashboard */
     .welcome-title {
       font-size: 2.2rem;
       font-weight: 700;
-      color: #000000;
+      color: #4a3b5e;  /* Changed from #000000 to Deep Purple-Gray */
       margin-bottom: 5px;
     }
 
     .welcome-subtitle {
       font-size: 0.9rem;
-      color: #333333;
+      color: #8a7a9c;  /* Changed from #333333 to Medium Purple-Gray */
       margin-bottom: 15px;
     }
 
     .divider-line {
       height: 1px;
-      background-color: #e0e0e0;
+      background-color: #e0d0eb;  /* Changed from #e0e0e0 to Light Purple */
       margin: 15px 0;
     }
 
-    /* Member Card */
+    /* Member Card - Home Dashboard */
     .member-card {
-      background: #f0f8ff;
+      background: #f5edff;  /* Changed from #f0f8ff to Light Purple */
       border-radius: 20px;
       padding: 15px;
       margin-bottom: 20px;
-      border: 1px solid #b8e0f0;
+      border: 1px solid #d9c5f0;  /* Changed from #b8e0f0 to Light Purple Border */
     }
 
     .member-type {
       font-size: 1.2rem;
       font-weight: 700;
-      color: #006a7a;
+      color: #7d5ba6;  /* Changed from #006a7a to Medium Purple */
       margin-bottom: 5px;
     }
 
     .member-days {
       font-size: 0.9rem;
-      color: #333;
+      color: #4a3b5e;  /* Changed from #333 to Deep Purple-Gray */
       margin-bottom: 10px;
     }
 
     .progress-bar {
       height: 8px;
-      background: #e0e0e0;
+      background: #e0d0eb;  /* Changed from #e0e0e0 to Light Purple */
       border-radius: 10px;
       overflow: hidden;
     }
 
     .progress-fill {
       height: 100%;
-      background: #00bcd4;
+      background: #b8a3d9;  /* Changed from #00bcd4 to Light Purple */
       width: 0%;
     }
 
-    /* Book Cards */
+    /* Book Cards - Home Dashboard */
     .book-grid {
       display: flex;
       flex-direction: column;
@@ -294,27 +294,27 @@
     }
 
     .book-card {
-      background: #f9f9f9;
+      background: #faf5ff;  /* Changed from #f9f9f9 to Off-White with Purple Tint */
       border-radius: 20px;
       padding: 15px;
-      border: 1px solid #eaeaea;
+      border: 1px solid #e0d0eb;  /* Changed from #eaeaea to Light Purple Border */
     }
 
     .book-title {
       font-weight: 700;
       font-size: 1.1rem;
-      color: #000;
+      color: #4a3b5e;  /* Changed from #000 to Deep Purple-Gray */
       margin-bottom: 5px;
     }
 
     .book-desc {
-      color: #666;
+      color: #8a7a9c;  /* Changed from #666 to Medium Purple-Gray */
       font-size: 0.8rem;
       margin-bottom: 10px;
     }
 
     .read-btn {
-      background: #006a7a;
+      background: #7d5ba6;  /* Changed from #006a7a to Medium Purple */
       color: white;
       border: none;
       padding: 12px;
@@ -325,11 +325,11 @@
     }
 
     .read-btn.harvest-ready {
-      background: #28a745;
+      background: #9b8abf;  /* Changed from #28a745 to Muted Purple */
     }
 
     .read-btn:disabled {
-      background: #ccc;
+      background: #d9c5f0;  /* Changed from #ccc to Light Purple */
       cursor: not-allowed;
     }
 
@@ -338,10 +338,10 @@
       font-weight: 700;
       text-align: center;
       margin: 10px 0;
-      color: #006a7a;
+      color: #7d5ba6;  /* Changed from #006a7a to Medium Purple */
     }
 
-    /* Action Row */
+    /* Action Row - Home Dashboard */
     .action-row {
       display: flex;
       align-items: center;
@@ -354,7 +354,7 @@
       flex-direction: column;
       align-items: center;
       gap: 5px;
-      color: #000000;
+      color: #4a3b5e;  /* Changed from #000000 to Deep Purple-Gray */
       font-weight: 500;
       font-size: 0.9rem;
       cursor: pointer;
@@ -362,21 +362,21 @@
 
     .action-item i {
       font-size: 1.3rem;
-      color: #000000;
+      color: #7d5ba6;  /* Changed from #000000 to Medium Purple */
     }
 
-    /* Upgrade Section */
+    /* Upgrade Section - Home Dashboard */
     .upgrade-section {
-      background: #fff9e6;
+      background: #f2eaff;  /* Changed from #fff9e6 to Light Purple */
       border-radius: 20px;
       padding: 20px;
       margin-bottom: 25px;
-      border: 2px dashed #ffc107;
+      border: 2px dashed #b8a3d9;  /* Changed from #ffc107 to Light Purple */
     }
 
     .upgrade-title {
       font-weight: 700;
-      color: #b45f06;
+      color: #4a3b5e;  /* Changed from #b45f06 to Deep Purple-Gray */
       margin-bottom: 15px;
       font-size: 1.1rem;
     }
@@ -392,15 +392,16 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      color: #4a3b5e;  /* Added Deep Purple-Gray */
     }
 
     .upgrade-list li i {
-      color: #28a745;
+      color: #7d5ba6;  /* Changed from #28a745 to Medium Purple */
     }
 
     .upgrade-btn {
-      background: #ff9800;
-      color: white;
+      background: #b8a3d9;  /* Changed from #ff9800 to Light Purple */
+      color: #4a3b5e;  /* Changed from white to Deep Purple-Gray */
       border: none;
       padding: 14px;
       border-radius: 30px;
@@ -414,10 +415,18 @@
       align-items: center;
       justify-content: space-between;
       padding: 15px 0;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid #e0d0eb;  /* Changed from #f0f0f0 to Light Purple */
     }
 
-    /* Wallets */
+    .company-line span {
+      color: #4a3b5e;  /* Added Deep Purple-Gray */
+    }
+
+    .company-line i {
+      color: #7d5ba6;  /* Added Medium Purple */
+    }
+
+    /* Wallets - Home Dashboard */
     .wallets-container {
       display: flex;
       gap: 10px;
@@ -426,14 +435,14 @@
 
     .wallet-box {
       flex: 1;
-      background: #f9f9f9;
+      background: #faf5ff;  /* Changed from #f9f9f9 to Off-White with Purple Tint */
       border-radius: 15px;
       padding: 12px;
-      border: 1px solid #eaeaea;
+      border: 1px solid #e0d0eb;  /* Changed from #eaeaea to Light Purple Border */
     }
 
     .wallet-box .label {
-      color: #666;
+      color: #8a7a9c;  /* Changed from #666 to Medium Purple-Gray */
       font-size: 0.7rem;
       margin-bottom: 3px;
     }
@@ -441,17 +450,24 @@
     .wallet-box .amount {
       font-size: 1.1rem;
       font-weight: 700;
+      color: #4a3b5e;  /* Added Deep Purple-Gray */
     }
 
     .wallet-box.main {
-      border-left: 3px solid #006a7a;
+      border-left: 3px solid #7d5ba6;  /* Changed from #006a7a to Medium Purple */
     }
 
     .wallet-box.commission {
-      border-left: 3px solid #ff9800;
+      border-left: 3px solid #b8a3d9;  /* Changed from #ff9800 to Light Purple */
     }
 
-    /* Profile Page */
+    /* Daily Counter - Home Dashboard */
+    div[style*="background:#f0f8ff"] {
+      background: #f5edff !important;  /* Changed from #f0f8ff to Light Purple */
+      color: #4a3b5e;  /* Added Deep Purple-Gray */
+    }
+
+    /* Profile Page - UNCHANGED (kept original colors) */
     .profile-header {
       display: flex;
       justify-content: space-between;
@@ -469,7 +485,7 @@
       margin-bottom: 20px;
     }
 
-    /* Income Grid - CLEAN */
+    /* Income Grid - UNCHANGED */
     .income-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -493,7 +509,7 @@
       color: #000;
     }
 
-    /* Commission Row */
+    /* Commission Row - UNCHANGED */
     .commission-row {
       display: flex;
       justify-content: space-between;
@@ -513,7 +529,7 @@
       color: #000;
     }
 
-    /* Menu Grid */
+    /* Menu Grid - UNCHANGED */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -543,7 +559,7 @@
       cursor: pointer;
     }
 
-    /* Level Page - ULTRA COMPACT WITH COLORS (Line height 0.9) */
+    /* Level Page - ULTRA COMPACT WITH COLORS (UNCHANGED) */
     .level-page-title {
       font-size: 1.6rem;
       font-weight: 700;
@@ -591,7 +607,7 @@
       margin: 3px 0 5px 0;
     }
 
-    /* Wallet Displays */
+    /* Wallet Displays - UNCHANGED */
     .main-wallet-display {
       background: #e6f3ff;
       border-radius: 12px;
@@ -616,7 +632,7 @@
       border: 2px solid #ffc107;
     }
 
-    /* Task Record Page Styles */
+    /* Task Record Page Styles - UNCHANGED */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -697,7 +713,7 @@
       margin-bottom: 15px;
     }
 
-    /* Team Report Page Styles */
+    /* Team Report Page Styles - UNCHANGED */
     .team-section {
       margin-bottom: 25px;
     }
@@ -772,7 +788,7 @@
       margin-bottom: 8px;
     }
 
-    /* Modals */
+    /* Modals - UNCHANGED */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -899,7 +915,7 @@
       </div>
     </div>
 
-    <!-- MAIN DASHBOARD (Home Page) -->
+    <!-- MAIN DASHBOARD (Home Page) - NOW WITH GRAY-PURPLE THEME -->
     <div id="mainDashboard">
       <div class="scroll-content">
         <div class="welcome-title">WELCOME</div>
@@ -928,7 +944,7 @@
         </div>
 
         <!-- Daily Counter -->
-        <div style="background:#f0f8ff; padding:12px; border-radius:15px; margin-bottom:15px; display:flex; justify-content:space-between;">
+        <div style="background:#f5edff; padding:12px; border-radius:15px; margin-bottom:15px; display:flex; justify-content:space-between; color:#4a3b5e;">
           <span>📚 Today: <span id="booksReadToday">0</span>/<span id="dailyBookLimit">1</span></span>
           <span>💰 Earned: <span id="dailyEarnings">0</span> UGX</span>
         </div>
@@ -984,7 +1000,7 @@
       </div>
     </div>
 
-    <!-- PROFILE PAGE (ME) -->
+    <!-- PROFILE PAGE (ME) - UNCHANGED -->
     <div id="profilePage">
       <div class="scroll-content">
         <div class="profile-header">
@@ -1061,7 +1077,7 @@
       </div>
     </div>
 
-    <!-- TASK RECORD PAGE -->
+    <!-- TASK RECORD PAGE - UNCHANGED -->
     <div id="taskRecordPage">
       <div class="scroll-content">
         <!-- Back Button -->
@@ -1112,7 +1128,7 @@
       </div>
     </div>
 
-    <!-- TEAM REPORT PAGE -->
+    <!-- TEAM REPORT PAGE - UNCHANGED -->
     <div id="teamReportPage">
       <div class="scroll-content">
         <!-- Back Button -->
@@ -1161,7 +1177,7 @@
       </div>
     </div>
 
-    <!-- LEVEL PAGE - ULTRA COMPACT WITH COLORS (Line height 0.9) -->
+    <!-- LEVEL PAGE - ULTRA COMPACT WITH COLORS (UNCHANGED) -->
     <div id="levelPage">
       <div class="scroll-content">
         <div class="level-page-title">LEVELS PRICE AND SALARIES</div>
@@ -1275,7 +1291,7 @@
       </div>
     </div>
 
-    <!-- TASK PAGE -->
+    <!-- TASK PAGE - UNCHANGED -->
     <div id="taskPage">
       <div class="scroll-content">
         <h3 style="margin-bottom:20px;">Book Library</h3>
@@ -1290,7 +1306,7 @@
       </div>
     </div>
 
-    <!-- INCOME PAGE -->
+    <!-- INCOME PAGE - UNCHANGED -->
     <div id="incomePage">
       <div class="scroll-content">
         <h3 style="margin:20px 0;">Income History</h3>
@@ -1306,7 +1322,7 @@
     </div>
   </div>
 
-  <!-- DEPOSIT MODAL -->
+  <!-- DEPOSIT MODAL - UNCHANGED -->
   <div class="modal-overlay" id="depositModal">
     <div class="modal-content">
       <div class="modal-header" style="display:flex; justify-content:space-between; margin-bottom:20px;">
@@ -1324,7 +1340,7 @@
     </div>
   </div>
 
-  <!-- WITHDRAW MODAL -->
+  <!-- WITHDRAW MODAL - UNCHANGED -->
   <div class="modal-overlay" id="withdrawModal">
     <div class="modal-content">
       <div class="modal-header" style="display:flex; justify-content:space-between; margin-bottom:20px;">
