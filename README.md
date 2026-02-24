@@ -6,6 +6,8 @@
   <title>CIUE · Coffee Earn Platform</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- QR Code Generator Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -73,11 +75,11 @@
     }
 
     .nav-item.active {
-      color: #7d5ba6;  /* Changed from #006a7a to Purple */
+      color: #7d5ba6;
     }
 
     .nav-item.active i {
-      color: #7d5ba6;  /* Changed from #006a7a to Purple */
+      color: #7d5ba6;
     }
 
     /* Auth Pages */
@@ -187,6 +189,43 @@
       background: white;
     }
 
+    .input-icon input:focus,
+    .input-icon select:focus {
+      border-color: #7d5ba6;
+      box-shadow: 0 0 0 3px rgba(125, 91, 166, 0.1);
+    }
+
+    /* Password field with eye icon */
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    
+    .password-wrapper input {
+      width: 100%;
+      padding: 15px 45px 15px 45px;
+      border: 2px solid #e0f0f3;
+      border-radius: 30px;
+      font-size: 1rem;
+      outline: none;
+      background: white;
+    }
+    
+    .password-wrapper i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b8a3d9;
+      cursor: pointer;
+      font-size: 1.2rem;
+      z-index: 10;
+    }
+    
+    .password-wrapper i:hover {
+      color: #7d5ba6;
+    }
+
     .auth-btn {
       background: linear-gradient(135deg, #006a7a, #00bcd4);
       color: white;
@@ -200,6 +239,11 @@
       cursor: pointer;
     }
 
+    .auth-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,150,170,0.4);
+    }
+
     .auth-footer {
       text-align: center;
       color: #597e89;
@@ -210,6 +254,12 @@
       color: #006a7a;
       font-weight: 600;
       text-decoration: none;
+    }
+
+    .password-hint {
+      font-size: 0.8rem;
+      color: #8a7a9c;
+      margin-top: 5px;
     }
 
     /* Success Message */
@@ -234,54 +284,54 @@
     .welcome-title {
       font-size: 2.2rem;
       font-weight: 700;
-      color: #4a3b5e;  /* Changed from #000000 to Deep Purple-Gray */
+      color: #4a3b5e;
       margin-bottom: 5px;
     }
 
     .welcome-subtitle {
       font-size: 0.9rem;
-      color: #8a7a9c;  /* Changed from #333333 to Medium Purple-Gray */
+      color: #8a7a9c;
       margin-bottom: 15px;
     }
 
     .divider-line {
       height: 1px;
-      background-color: #e0d0eb;  /* Changed from #e0e0e0 to Light Purple */
+      background-color: #e0d0eb;
       margin: 15px 0;
     }
 
     /* Member Card - Home Dashboard */
     .member-card {
-      background: #f5edff;  /* Changed from #f0f8ff to Light Purple */
+      background: #f5edff;
       border-radius: 20px;
       padding: 15px;
       margin-bottom: 20px;
-      border: 1px solid #d9c5f0;  /* Changed from #b8e0f0 to Light Purple Border */
+      border: 1px solid #d9c5f0;
     }
 
     .member-type {
       font-size: 1.2rem;
       font-weight: 700;
-      color: #7d5ba6;  /* Changed from #006a7a to Medium Purple */
+      color: #7d5ba6;
       margin-bottom: 5px;
     }
 
     .member-days {
       font-size: 0.9rem;
-      color: #4a3b5e;  /* Changed from #333 to Deep Purple-Gray */
+      color: #4a3b5e;
       margin-bottom: 10px;
     }
 
     .progress-bar {
       height: 8px;
-      background: #e0d0eb;  /* Changed from #e0e0e0 to Light Purple */
+      background: #e0d0eb;
       border-radius: 10px;
       overflow: hidden;
     }
 
     .progress-fill {
       height: 100%;
-      background: #b8a3d9;  /* Changed from #00bcd4 to Light Purple */
+      background: #b8a3d9;
       width: 0%;
     }
 
@@ -294,27 +344,27 @@
     }
 
     .book-card {
-      background: #faf5ff;  /* Changed from #f9f9f9 to Off-White with Purple Tint */
+      background: #faf5ff;
       border-radius: 20px;
       padding: 15px;
-      border: 1px solid #e0d0eb;  /* Changed from #eaeaea to Light Purple Border */
+      border: 1px solid #e0d0eb;
     }
 
     .book-title {
       font-weight: 700;
       font-size: 1.1rem;
-      color: #4a3b5e;  /* Changed from #000 to Deep Purple-Gray */
+      color: #4a3b5e;
       margin-bottom: 5px;
     }
 
     .book-desc {
-      color: #8a7a9c;  /* Changed from #666 to Medium Purple-Gray */
+      color: #8a7a9c;
       font-size: 0.8rem;
       margin-bottom: 10px;
     }
 
     .read-btn {
-      background: #7d5ba6;  /* Changed from #006a7a to Medium Purple */
+      background: #7d5ba6;
       color: white;
       border: none;
       padding: 12px;
@@ -325,11 +375,11 @@
     }
 
     .read-btn.harvest-ready {
-      background: #9b8abf;  /* Changed from #28a745 to Muted Purple */
+      background: #9b8abf;
     }
 
     .read-btn:disabled {
-      background: #d9c5f0;  /* Changed from #ccc to Light Purple */
+      background: #d9c5f0;
       cursor: not-allowed;
     }
 
@@ -338,7 +388,7 @@
       font-weight: 700;
       text-align: center;
       margin: 10px 0;
-      color: #7d5ba6;  /* Changed from #006a7a to Medium Purple */
+      color: #7d5ba6;
     }
 
     /* Action Row - Home Dashboard */
@@ -354,7 +404,7 @@
       flex-direction: column;
       align-items: center;
       gap: 5px;
-      color: #4a3b5e;  /* Changed from #000000 to Deep Purple-Gray */
+      color: #4a3b5e;
       font-weight: 500;
       font-size: 0.9rem;
       cursor: pointer;
@@ -362,36 +412,34 @@
 
     .action-item i {
       font-size: 1.3rem;
-      color: #7d5ba6;  /* Changed from #000000 to Medium Purple */
+      color: #7d5ba6;
     }
-
-    /* REMOVED: Upgrade Section - Completely deleted as requested */
 
     .company-line {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 15px 0;
-      border-bottom: 1px solid #e0d0eb;  /* Changed from #f0f0f0 to Light Purple */
+      border-bottom: 1px solid #e0d0eb;
     }
 
     .company-line span {
-      color: #4a3b5e;  /* Added Deep Purple-Gray */
+      color: #4a3b5e;
     }
 
     .company-line i {
-      color: #7d5ba6;  /* Added Medium Purple */
+      color: #7d5ba6;
     }
 
-    /* WALLETS REMOVED FROM HOME DASHBOARD as requested */
+    /* WALLETS REMOVED FROM HOME DASHBOARD */
 
     /* Daily Counter - Home Dashboard */
     div[style*="background:#f0f8ff"] {
-      background: #f5edff !important;  /* Changed from #f0f8ff to Light Purple */
-      color: #4a3b5e;  /* Added Deep Purple-Gray */
+      background: #f5edff !important;
+      color: #4a3b5e;
     }
 
-    /* Profile Page - UNCHANGED (kept original colors) */
+    /* Profile Page - UNCHANGED */
     .profile-header {
       display: flex;
       justify-content: space-between;
@@ -487,7 +535,7 @@
       color: #000;
     }
 
-    /* Menu Grid - CHANGED: bill record to Golden Handshake */
+    /* Menu Grid - Golden Handshake added */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -517,7 +565,7 @@
       cursor: pointer;
     }
 
-    /* Level Page - ULTRA COMPACT WITH COLORS (UNCHANGED) */
+    /* Level Page - ULTRA COMPACT WITH COLORS */
     .level-page-title {
       font-size: 1.6rem;
       font-weight: 700;
@@ -590,7 +638,7 @@
       border: 2px solid #ffc107;
     }
 
-    /* Task Record Page Styles - UNCHANGED */
+    /* Task Record Page Styles */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -671,7 +719,7 @@
       margin-bottom: 15px;
     }
 
-    /* Team Report Page Styles - UNCHANGED */
+    /* Team Report Page Styles */
     .team-section {
       margin-bottom: 25px;
     }
@@ -746,108 +794,139 @@
       margin-bottom: 8px;
     }
 
-    /* Golden Handshake Page Styles (NEW) */
+    /* GOLDEN HANDSHAKE PAGE - EXACTLY LIKE YOUR IMAGE */
     .golden-header {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
     
     .golden-header h2 {
       color: #7d5ba6;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
     }
     
-    .referral-link-box {
+    /* Share Link Button - Like your image */
+    .share-link-btn {
       background: #f5edff;
-      border: 2px dashed #7d5ba6;
-      border-radius: 15px;
+      border: 2px solid #7d5ba6;
+      border-radius: 50px;
       padding: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-    }
-    
-    .referral-link-box span {
-      color: #4a3b5e;
-      font-size: 0.9rem;
-      word-break: break-all;
-    }
-    
-    .copy-btn {
-      background: #7d5ba6;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      justify-content: center;
+      gap: 10px;
+      color: #7d5ba6;
+      font-weight: 600;
+      font-size: 1.1rem;
       cursor: pointer;
     }
     
-    .commission-card {
-      background: linear-gradient(135deg, #7d5ba6, #b8a3d9);
+    .share-link-btn i {
+      font-size: 1.3rem;
+    }
+    
+    /* QR Code Container - Like your image */
+    .qr-container {
+      background: white;
       border-radius: 20px;
       padding: 20px;
       margin-bottom: 20px;
-      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px dashed #e0d0eb;
     }
     
-    .commission-amount {
-      font-size: 2rem;
-      font-weight: 700;
+    .qr-code {
+      width: 200px;
+      height: 200px;
+      margin: 10px auto;
+      padding: 10px;
+      background: white;
     }
     
-    .commission-breakdown {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
+    .qr-label {
+      color: #4a3b5e;
+      font-weight: 600;
+      margin-top: 10px;
+      font-size: 1rem;
     }
     
-    .breakdown-item {
+    /* Referral Code Box - Like your image */
+    .referral-code-box {
       background: #f5edff;
       border-radius: 15px;
-      padding: 12px;
+      padding: 15px;
+      margin: 20px 0;
       text-align: center;
     }
     
-    .breakdown-percent {
-      font-size: 1.2rem;
+    .referral-code-label {
+      color: #4a3b5e;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    
+    .referral-code-display {
+      font-size: 1.8rem;
       font-weight: 700;
       color: #7d5ba6;
+      letter-spacing: 2px;
+      margin: 10px 0;
+      font-family: monospace;
     }
     
-    .breakdown-label {
-      font-size: 0.7rem;
-      color: #666;
-    }
-    
-    .breakdown-value {
-      font-size: 0.9rem;
+    .copy-code-btn {
+      background: #7d5ba6;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
       font-weight: 600;
-      color: #4a3b5e;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
     }
     
-    .team-stats-box {
-      background: #f9f9f9;
-      border-radius: 15px;
-      padding: 15px;
+    /* Upgrade Required Message */
+    .upgrade-required {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 20px;
+      padding: 40px 20px;
+      text-align: center;
+      margin: 30px 0;
+    }
+    
+    .upgrade-required i {
+      font-size: 3rem;
+      color: #ff9800;
       margin-bottom: 15px;
-      border-left: 3px solid #7d5ba6;
     }
     
-    .team-stats-box h4 {
-      color: #4a3b5e;
+    .upgrade-required h3 {
+      color: #b45f06;
       margin-bottom: 10px;
     }
     
-    .team-stats-box .stat-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 5px;
-      font-size: 0.9rem;
+    .upgrade-required p {
+      color: #856404;
+      margin-bottom: 20px;
+    }
+    
+    .upgrade-now-btn {
+      background: #ff9800;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
     }
     
     /* Modals - UNCHANGED */
@@ -931,7 +1010,7 @@
         </form>
       </div>
 
-      <!-- REGISTRATION FORM - Updated with Referrer Field -->
+      <!-- REGISTRATION FORM - REDESIGNED with Country FIRST, Phone SECOND, Password show/hide, Confirm password -->
       <div id="registerForm" class="auth-form">
         <form onsubmit="handleRegister(event)">
           <div class="form-group">
@@ -941,13 +1020,8 @@
               <input type="text" id="regFullName" placeholder="Enter your full names" required>
             </div>
           </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <div class="input-icon">
-              <i class="fas fa-phone-alt"></i>
-              <input type="tel" id="regPhone" placeholder="Enter your phone number" required>
-            </div>
-          </div>
+          
+          <!-- Country FIRST (moved up) -->
           <div class="form-group">
             <label>Country</label>
             <div class="input-icon">
@@ -962,21 +1036,50 @@
               </select>
             </div>
           </div>
+          
+          <!-- Phone Number SECOND (with 0 validation) -->
           <div class="form-group">
-            <label>Password</label>
+            <label>Phone Number (must start with 0)</label>
+            <div class="input-icon">
+              <i class="fas fa-phone-alt"></i>
+              <input type="tel" id="regPhone" placeholder="Enter your phone number" required pattern="0[0-9]{8,}" title="Phone number must start with 0 and be at least 9 digits">
+            </div>
+          </div>
+          
+          <!-- Password with show/hide toggle -->
+          <div class="form-group">
+            <label>Password (minimum 6 characters)</label>
             <div class="input-icon">
               <i class="fas fa-lock"></i>
-              <input type="password" id="regPassword" placeholder="Create a password" required>
+              <div class="password-wrapper">
+                <input type="password" id="regPassword" placeholder="Create a password" minlength="6" required>
+                <i class="fas fa-eye" id="togglePassword" onclick="togglePasswordVisibility('regPassword', this)"></i>
+              </div>
             </div>
           </div>
+          
+          <!-- Confirm Password with show/hide toggle -->
           <div class="form-group">
-            <label>Referrer Phone (Optional)</label>
+            <label>Confirm Password</label>
+            <div class="input-icon">
+              <i class="fas fa-lock"></i>
+              <div class="password-wrapper">
+                <input type="password" id="regConfirmPassword" placeholder="Confirm your password" minlength="6" required>
+                <i class="fas fa-eye" id="toggleConfirmPassword" onclick="togglePasswordVisibility('regConfirmPassword', this)"></i>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Referral Code (auto-filled from URL) -->
+          <div class="form-group">
+            <label>Referral Code (Optional)</label>
             <div class="input-icon">
               <i class="fas fa-user-plus"></i>
-              <input type="tel" id="regReferrer" placeholder="Enter referrer's phone number">
+              <input type="text" id="regReferralCode" placeholder="Enter referral code">
             </div>
-            <div class="password-hint">If someone referred you, enter their phone</div>
+            <div class="password-hint">If someone referred you, enter their code</div>
           </div>
+          
           <button type="submit" class="auth-btn">Register</button>
           <div class="auth-footer">
             Already have an account? <a href="#" onclick="switchAuthTab('login'); return false;">Login here</a>
@@ -985,7 +1088,7 @@
       </div>
     </div>
 
-    <!-- MAIN DASHBOARD (Home Page) - WALLETS REMOVED, 60 COFFEE BOOKS -->
+    <!-- MAIN DASHBOARD (Home Page) -->
     <div id="mainDashboard">
       <div class="scroll-content">
         <div class="welcome-title">WELCOME</div>
@@ -1001,7 +1104,7 @@
           </div>
         </div>
 
-        <!-- WALLETS REMOVED FROM HOME DASHBOARD - As requested -->
+        <!-- WALLETS REMOVED FROM HOME DASHBOARD -->
 
         <!-- Daily Counter -->
         <div style="background:#f5edff; padding:12px; border-radius:15px; margin-bottom:15px; display:flex; justify-content:space-between; color:#4a3b5e;">
@@ -1009,7 +1112,7 @@
           <span>💰 Earned: <span id="dailyEarnings">0</span> UGX</span>
         </div>
 
-        <!-- Books - 60 Coffee Books with Level-Based Display and Daily Shuffle -->
+        <!-- Books -->
         <div class="book-grid" id="bookGrid"></div>
 
         <!-- Actions -->
@@ -1045,7 +1148,7 @@
       </div>
     </div>
 
-    <!-- PROFILE PAGE (ME) - CHANGED: bill record to Golden Handshake -->
+    <!-- PROFILE PAGE (ME) -->
     <div id="profilePage">
       <div class="scroll-content">
         <div class="profile-header">
@@ -1076,7 +1179,7 @@
           </div>
         </div>
 
-        <!-- INCOME GRID - CLEAN -->
+        <!-- INCOME GRID -->
         <div class="income-grid">
           <div class="income-item">
             <div class="income-label">today's income</div>
@@ -1098,7 +1201,7 @@
           <span class="commission-value" id="subordinateCommission">0.00 UGX</span>
         </div>
 
-        <!-- Menu Grid - CHANGED: bill record to Golden Handshake -->
+        <!-- Menu Grid -->
         <div class="menu-grid">
           <div class="menu-item" onclick="showTaskRecord()"><i class="fas fa-clipboard-list"></i> task record</div>
           <div class="menu-item" onclick="showTeamReport()"><i class="fas fa-users"></i> team report</div>
@@ -1122,65 +1225,42 @@
       </div>
     </div>
 
-    <!-- GOLDEN HANDSHAKE PAGE (NEW) - Referral Program -->
+    <!-- GOLDEN HANDSHAKE PAGE - EXACTLY LIKE YOUR IMAGE -->
     <div id="goldenHandshakePage">
       <div class="scroll-content">
         <!-- Back Button -->
         <button class="back-btn" onclick="showPage('profile')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
 
         <div class="golden-header">
-          <i class="fas fa-handshake" style="font-size: 2rem; color: #7d5ba6;"></i>
+          <i class="fas fa-handshake" style="font-size: 2.5rem; color: #7d5ba6;"></i>
           <h2>Golden Handshake</h2>
         </div>
 
-        <!-- Referral Link -->
-        <div class="referral-link-box">
-          <span id="referralLink">https://tuvko.github.io/ref/...</span>
-          <button class="copy-btn" onclick="copyReferralLink()"><i class="fas fa-copy"></i> Copy</button>
-        </div>
-
-        <!-- Total Commissions Card -->
-        <div class="commission-card">
-          <div style="font-size: 0.9rem; opacity: 0.9;">Total Referral Commissions</div>
-          <div class="commission-amount" id="totalReferralCommission">0 UGX</div>
-          <div style="font-size: 0.8rem; margin-top: 5px;">From your network</div>
-        </div>
-
-        <!-- Commission Breakdown -->
-        <div class="commission-breakdown">
-          <div class="breakdown-item">
-            <div class="breakdown-percent">11%</div>
-            <div class="breakdown-label">A Team</div>
-            <div class="breakdown-value" id="aCommission">0 UGX</div>
+        <!-- Check if user is Intern (Level 0) -->
+        <div id="referralAccessCheck"></div>
+        
+        <!-- This content will be shown/hidden based on member level -->
+        <div id="referralContent">
+          <!-- Share Link Button - Like your image -->
+          <div class="share-link-btn" onclick="shareReferralLink()">
+            <i class="fas fa-share-alt"></i>
+            <span>Share link</span>
           </div>
-          <div class="breakdown-item">
-            <div class="breakdown-percent">4%</div>
-            <div class="breakdown-label">B Team</div>
-            <div class="breakdown-value" id="bCommission">0 UGX</div>
-          </div>
-          <div class="breakdown-item">
-            <div class="breakdown-percent">2%</div>
-            <div class="breakdown-label">C Team</div>
-            <div class="breakdown-value" id="cCommission">0 UGX</div>
-          </div>
-        </div>
 
-        <!-- Team Stats -->
-        <div class="team-stats-box">
-          <h4><i class="fas fa-users" style="color: #7d5ba6;"></i> Your Referral Network</h4>
-          <div class="stat-row"><span>A Team (Direct - 11%):</span> <span id="aTeamCount">0</span></div>
-          <div class="stat-row"><span>B Team (Indirect - 4%):</span> <span id="bTeamCount">0</span></div>
-          <div class="stat-row"><span>C Team (Third - 2%):</span> <span id="cTeamCount">0</span></div>
-        </div>
+          <!-- QR Code - Like your image -->
+          <div class="qr-container">
+            <div id="qrCode" class="qr-code"></div>
+            <div class="qr-label">Scan to get referral code</div>
+          </div>
 
-        <!-- How It Works -->
-        <div style="background: #f9f9f9; border-radius: 15px; padding: 15px; margin-top: 10px;">
-          <h4 style="color: #4a3b5e; margin-bottom: 10px;">📋 How It Works</h4>
-          <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">✓ Share your referral link with friends</p>
-          <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">✓ When they join, they become your A Team</p>
-          <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">✓ Earn 11% from their upgrades</p>
-          <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">✓ Earn 4% from their referrals (B Team)</p>
-          <p style="font-size: 0.85rem; color: #666;">✓ Earn 2% from third level (C Team)</p>
+          <!-- Referral Code Box - Like your image -->
+          <div class="referral-code-box">
+            <div class="referral-code-label">Your Referral Code</div>
+            <div class="referral-code-display" id="referralCodeDisplay">DRT683490HYK</div>
+            <button class="copy-code-btn" onclick="copyReferralCode()">
+              <i class="fas fa-copy"></i> COPY CODE
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1194,15 +1274,11 @@
       </div>
     </div>
 
-    <!-- TASK RECORD PAGE - UNCHANGED -->
+    <!-- TASK RECORD PAGE -->
     <div id="taskRecordPage">
       <div class="scroll-content">
-        <!-- Back Button -->
         <button class="back-btn" onclick="showPage('profile')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
-
         <h3 style="margin-bottom:20px;">📋 Task Record</h3>
-
-        <!-- Stats Cards -->
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-value" id="totalReadBooks">0</div>
@@ -1217,8 +1293,6 @@
             <div class="stat-label">Pending Books</div>
           </div>
         </div>
-
-        <!-- Task History Table -->
         <div class="section-title">📚 Book History</div>
         <table class="task-table" id="taskHistoryTable">
           <thead>
@@ -1229,13 +1303,9 @@
               <th>Reward</th>
             </tr>
           </thead>
-          <tbody id="taskHistoryBody">
-            <!-- Filled by JavaScript -->
-          </tbody>
+          <tbody id="taskHistoryBody"></tbody>
         </table>
       </div>
-
-      <!-- Bottom Nav -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
         <div class="nav-item" onclick="showPage('task')"><i class="fas fa-tasks"></i><span>Task</span></div>
@@ -1245,46 +1315,28 @@
       </div>
     </div>
 
-    <!-- TEAM REPORT PAGE - UNCHANGED -->
+    <!-- TEAM REPORT PAGE -->
     <div id="teamReportPage">
       <div class="scroll-content">
-        <!-- Back Button -->
         <button class="back-btn" onclick="showPage('profile')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
-
         <h3 style="margin-bottom:20px;">👥 Team Report</h3>
-
-        <!-- A Section -->
         <div class="team-section">
           <div class="team-letter">A</div>
-          <div id="teamASection">
-            <!-- Filled by JavaScript -->
-          </div>
+          <div id="teamASection"></div>
         </div>
-
-        <!-- B Section -->
         <div class="team-section">
           <div class="team-letter">B</div>
-          <div id="teamBSection">
-            <!-- Filled by JavaScript -->
-          </div>
+          <div id="teamBSection"></div>
         </div>
-
-        <!-- C Section -->
         <div class="team-section">
           <div class="team-letter">C</div>
-          <div id="teamCSection">
-            <!-- Filled by JavaScript -->
-          </div>
+          <div id="teamCSection"></div>
         </div>
-
-        <!-- Team Stats -->
         <div class="team-stats">
           <div><span>Total Team Members:</span> <span id="totalTeamMembers">0</span></div>
           <div><span>Active Today:</span> <span id="activeTeamMembers">0</span></div>
         </div>
       </div>
-
-      <!-- Bottom Nav -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
         <div class="nav-item" onclick="showPage('task')"><i class="fas fa-tasks"></i><span>Task</span></div>
@@ -1294,21 +1346,14 @@
       </div>
     </div>
 
-    <!-- LEVEL PAGE - ULTRA COMPACT WITH COLORS (UNCHANGED) -->
+    <!-- LEVEL PAGE -->
     <div id="levelPage">
       <div class="scroll-content">
         <div class="level-page-title">LEVELS PRICE AND SALARIES</div>
-
-        <!-- Wallet Displays -->
-        <div class="main-wallet-display" id="levelMainWallet">
-          Main Wallet: 0 UGX
-        </div>
-
-        <div class="commission-wallet-display" id="levelCommissionWallet">
-          Commission Wallet: 0 UGX
-        </div>
-
-        <!-- D1 - Light Blue -->
+        <div class="main-wallet-display" id="levelMainWallet">Main Wallet: 0 UGX</div>
+        <div class="commission-wallet-display" id="levelCommissionWallet">Commission Wallet: 0 UGX</div>
+        
+        <!-- D1 -->
         <div class="level-card-ultra" style="background-color: #e6f7ff;">
           <div class="level-name-ultra" style="color: #0066cc;">D1</div>
           <div class="level-detail-ultra">UGX 63000. 2 tasks</div>
@@ -1317,8 +1362,8 @@
           <div class="click-to-join-ultra" style="color: #0066cc;" onclick="purchaseLevel(1, 63000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
-
-        <!-- D2 - Light Green -->
+        
+        <!-- D2 -->
         <div class="level-card-ultra" style="background-color: #e6ffe6;">
           <div class="level-name-ultra" style="color: #008000;">D2</div>
           <div class="level-detail-ultra">UGX 200000. 4 tasks</div>
@@ -1327,8 +1372,8 @@
           <div class="click-to-join-ultra" style="color: #008000;" onclick="purchaseLevel(2, 200000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
-
-        <!-- D3 - Light Yellow -->
+        
+        <!-- D3 -->
         <div class="level-card-ultra" style="background-color: #ffffe6;">
           <div class="level-name-ultra" style="color: #999900;">D3</div>
           <div class="level-detail-ultra">UGX 532000. 12 tasks</div>
@@ -1337,8 +1382,8 @@
           <div class="click-to-join-ultra" style="color: #999900;" onclick="purchaseLevel(3, 532000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
-
-        <!-- D4 - Light Orange -->
+        
+        <!-- D4 -->
         <div class="level-card-ultra" style="background-color: #fff0e6;">
           <div class="level-name-ultra" style="color: #cc6600;">D4</div>
           <div class="level-detail-ultra">UGX 1450000 16 tasks</div>
@@ -1347,8 +1392,8 @@
           <div class="click-to-join-ultra" style="color: #cc6600;" onclick="purchaseLevel(4, 1450000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
-
-        <!-- D5 - Light Pink -->
+        
+        <!-- D5 -->
         <div class="level-card-ultra" style="background-color: #ffe6f0;">
           <div class="level-name-ultra" style="color: #cc3399;">D5</div>
           <div class="level-detail-ultra">UGX 3920000 24 tasks</div>
@@ -1357,8 +1402,8 @@
           <div class="click-to-join-ultra" style="color: #cc3399;" onclick="purchaseLevel(5, 3920000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
-
-        <!-- D6 - Light Purple (CORRECTED) -->
+        
+        <!-- D6 -->
         <div class="level-card-ultra" style="background-color: #f0e6ff;">
           <div class="level-name-ultra" style="color: #6633cc;">D6</div>
           <div class="level-detail-ultra">UGX 10640000 40 tasks</div>
@@ -1367,8 +1412,8 @@
           <div class="click-to-join-ultra" style="color: #6633cc;" onclick="purchaseLevel(6, 10640000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
-
-        <!-- D7 - Light Cyan -->
+        
+        <!-- D7 -->
         <div class="level-card-ultra" style="background-color: #e6ffff;">
           <div class="level-name-ultra" style="color: #009999;">D7</div>
           <div class="level-detail-ultra">UGX 40040000 52 tasks</div>
@@ -1377,8 +1422,8 @@
           <div class="click-to-join-ultra" style="color: #009999;" onclick="purchaseLevel(7, 40040000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
-
-        <!-- D8 - Light Coral -->
+        
+        <!-- D8 -->
         <div class="level-card-ultra" style="background-color: #ffe6e6;">
           <div class="level-name-ultra" style="color: #cc3333;">D8</div>
           <div class="level-detail-ultra">UGX 57120000 64 tasks</div>
@@ -1387,8 +1432,8 @@
           <div class="click-to-join-ultra" style="color: #cc3333;" onclick="purchaseLevel(8, 57120000)">Click to join</div>
         </div>
         <div class="level-separator-ultra"></div>
-
-        <!-- D9 - Light Lavender -->
+        
+        <!-- D9 -->
         <div class="level-card-ultra" style="background-color: #f2e6ff;">
           <div class="level-name-ultra" style="color: #7733cc;">D9</div>
           <div class="level-detail-ultra">UGX 84000000 74 tasks</div>
@@ -1397,8 +1442,6 @@
           <div class="click-to-join-ultra" style="color: #7733cc;" onclick="purchaseLevel(9, 84000000)">Click to join</div>
         </div>
       </div>
-
-      <!-- Bottom Nav -->
       <div class="bottom-nav">
         <div class="nav-item" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
         <div class="nav-item" onclick="showPage('task')"><i class="fas fa-tasks"></i><span>Task</span></div>
@@ -1408,7 +1451,7 @@
       </div>
     </div>
 
-    <!-- TASK PAGE - UNCHANGED (will show all 60 books) -->
+    <!-- TASK PAGE -->
     <div id="taskPage">
       <div class="scroll-content">
         <h3 style="margin-bottom:20px;">Coffee Library</h3>
@@ -1423,7 +1466,7 @@
       </div>
     </div>
 
-    <!-- INCOME PAGE - UNCHANGED -->
+    <!-- INCOME PAGE -->
     <div id="incomePage">
       <div class="scroll-content">
         <h3 style="margin:20px 0;">Income History</h3>
@@ -1439,7 +1482,7 @@
     </div>
   </div>
 
-  <!-- DEPOSIT MODAL - UNCHANGED -->
+  <!-- DEPOSIT MODAL -->
   <div class="modal-overlay" id="depositModal">
     <div class="modal-content">
       <div class="modal-header" style="display:flex; justify-content:space-between; margin-bottom:20px;">
@@ -1457,7 +1500,7 @@
     </div>
   </div>
 
-  <!-- WITHDRAW MODAL - UNCHANGED -->
+  <!-- WITHDRAW MODAL -->
   <div class="modal-overlay" id="withdrawModal">
     <div class="modal-content">
       <div class="modal-header" style="display:flex; justify-content:space-between; margin-bottom:20px;">
@@ -1481,16 +1524,16 @@
   </div>
 
   <script>
-    // ========== DATA ==========
+    // ========== GLOBAL VARIABLES ==========
     let users = JSON.parse(localStorage.getItem('cueUsers')) || {};
     let currentUser = localStorage.getItem('currentUser');
     let pendingDeposits = JSON.parse(localStorage.getItem('pendingDeposits')) || [];
     let pendingWithdrawals = JSON.parse(localStorage.getItem('pendingWithdrawals')) || [];
     let selectedWallet = 'main';
+    let inactivityTimer;
     
     // ========== 60 COFFEE GROWING BOOKS ==========
     let allBooks = [
-      // Uganda-Specific Books (1-15)
       { id: 1, title: "Regenerative Agriculture in Coffee", desc: "Handbook for practitioners in Uganda - Bioversity International, 2023" },
       { id: 2, title: "Coffee Agroforestry Training Handbook", desc: "Training of Trainers - World Agroforestry Centre, 2025" },
       { id: 3, title: "Arabica Coffee Production Handbook", desc: "Uganda Coffee Development Authority - soil, pests, harvesting" },
@@ -1506,8 +1549,6 @@
       { id: 13, title: "Shade-Grown Coffee Systems", desc: "Research Report - benefits of shade in Uganda" },
       { id: 14, title: "Climate-Resilient Coffee Farming", desc: "CIAT Study - adapting to climate change" },
       { id: 15, title: "Organic Coffee Certification Guide", desc: "Export Guide for Ugandan farmers" },
-      
-      // East Africa Regional Books (16-30)
       { id: 16, title: "Coffee Growing: East Africa Reference", desc: "Classic text covering Kenya, Uganda, Tanzania" },
       { id: 17, title: "East African Coffee: From Seed to Cup", desc: "Regional guide to coffee production" },
       { id: 18, title: "Coffee Diseases in East Africa", desc: "CABI Publishing - disease management" },
@@ -1523,8 +1564,6 @@
       { id: 28, title: "Coffee Quality Assessment", desc: "Cupping Guide - East African beans" },
       { id: 29, title: "Sustainable Coffee Production", desc: "Environmental Handbook - East Africa" },
       { id: 30, title: "Coffee Certification Schemes", desc: "Standards Guide - East Africa" },
-      
-      // International Coffee Books (31-60)
       { id: 31, title: "Coffee: Growing, Processing, Sustainable Production", desc: "Jean Nicolas Wintgens - 1022 pages" },
       { id: 32, title: "Terroir: Coffee From Seed to Harvest", desc: "Jeremy Challender, Barista Hustle" },
       { id: 33, title: "The Craft and Science of Coffee", desc: "Britta Folmer, Academic Press" },
@@ -1557,7 +1596,7 @@
       { id: 60, title: "Coffee Growing (Tropical Agriculturalist)", desc: "H. Cambrony, 119 pages - practical guide" }
     ];
 
-    // Level definitions with exact numbers
+    // Level definitions
     const levels = {
       0: { name: "Intern", dailyBooks: 1, reward: 1500, duration: 4, canWithdraw: false, hasReferral: false, bookLimit: 1 },
       1: { name: "D1", dailyBooks: 2, reward: 1125, deposit: 63000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 2 },
@@ -1578,118 +1617,195 @@
       c: 0.02  // 2% for third level
     };
 
-    // Track today's shuffled book order
     let todaysBookOrder = [];
 
-    // ========== SHUFFLE BOOKS FUNCTION (Daily Random Order) ==========
+    // ========== UTILITY FUNCTIONS ==========
+    
+    // Generate random referral code (12 characters)
+    function generateReferralCode() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < 12; i++) {
+        code += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return code;
+    }
+
+    // Generate referral link from code
+    function generateReferralLink(code) {
+      return `https://tuvko.github.io/register?ref=${code}`;
+    }
+
+    // Copy referral code to clipboard
+    function copyReferralCode() {
+      const code = document.getElementById('referralCodeDisplay').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert('✅ Referral code copied to clipboard!');
+      }).catch(() => {
+        alert('❌ Could not copy code. Please select and copy manually.');
+      });
+    }
+
+    // Share referral link
+    function shareReferralLink() {
+      const user = users[currentUser];
+      if (!user || !user.referralCode) return;
+      
+      const link = generateReferralLink(user.referralCode);
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'Join CIUE Coffee Earn Platform',
+          text: 'Use my referral code to join and earn rewards!',
+          url: link
+        }).catch(() => {
+          prompt('Copy this link to share:', link);
+        });
+      } else {
+        prompt('Copy this link to share:', link);
+      }
+    }
+
+    // Password visibility toggle
+    function togglePasswordVisibility(inputId, icon) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+
+    // Get URL parameters
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Reset inactivity timer
+    function resetInactivityTimer() {
+      if (inactivityTimer) clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        if (currentUser) {
+          alert('You have been logged out due to inactivity (30 minutes).');
+          logout();
+        }
+      }, 30 * 60 * 1000); // 30 minutes
+    }
+
+    // Track user activity
+    document.addEventListener('mousemove', resetInactivityTimer);
+    document.addEventListener('keypress', resetInactivityTimer);
+    document.addEventListener('click', resetInactivityTimer);
+    document.addEventListener('scroll', resetInactivityTimer);
+
+    // ========== SHUFFLE BOOKS FUNCTION ==========
     function getTodaysBooks() {
       const today = new Date().toDateString();
       const stored = localStorage.getItem('bookShuffleDate');
       const storedOrder = localStorage.getItem('bookShuffleOrder');
       
-      // If it's a new day or no stored order, create new shuffle
       if (stored !== today || !storedOrder) {
-        // Create copy of all books and shuffle
         todaysBookOrder = [...allBooks];
         for (let i = todaysBookOrder.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [todaysBookOrder[i], todaysBookOrder[j]] = [todaysBookOrder[j], todaysBookOrder[i]];
         }
-        
-        // Store for today
         localStorage.setItem('bookShuffleDate', today);
         localStorage.setItem('bookShuffleOrder', JSON.stringify(todaysBookOrder));
       } else {
-        // Use stored order
         todaysBookOrder = JSON.parse(storedOrder);
       }
-      
       return todaysBookOrder;
     }
 
-    // ========== AUTH ==========
+    // ========== AUTH FUNCTIONS ==========
     function switchAuthTab(tab) {
       document.getElementById('loginForm').classList.toggle('active', tab === 'login');
       document.getElementById('registerForm').classList.toggle('active', tab === 'register');
       document.getElementById('loginTab').classList.toggle('active', tab === 'login');
       document.getElementById('registerTab').classList.toggle('active', tab === 'register');
-    }
-
-    // ========== REFERRAL FUNCTIONS ==========
-    function generateReferralLink(phone) {
-      return `https://tuvko.github.io/register?ref=${phone}`;
-    }
-
-    function copyReferralLink() {
-      const link = document.getElementById('referralLink').textContent;
-      navigator.clipboard.writeText(link).then(() => {
-        alert('✅ Referral link copied to clipboard!');
-      }).catch(() => {
-        alert('❌ Could not copy link. Please select and copy manually.');
-      });
-    }
-
-    function calculateReferralCommissions(user) {
-      if (!user || !user.referralCommissions) {
-        return { total: 0, a: 0, b: 0, c: 0 };
+      
+      // Check for referral code in URL when switching to register tab
+      if (tab === 'register') {
+        const refCode = getUrlParameter('ref');
+        if (refCode) {
+          document.getElementById('regReferralCode').value = refCode;
+        }
       }
-      return user.referralCommissions;
     }
 
-    function addReferralCommission(referrerPhone, level, amount) {
-      if (!referrerPhone || !users[referrerPhone]) return;
-      
-      const referrer = users[referrerPhone];
-      if (!referrer.referralCommissions) {
-        referrer.referralCommissions = { a: 0, b: 0, c: 0, total: 0 };
-      }
-      
-      let commission = 0;
-      if (level === 'a') commission = amount * referralRates.a;
-      else if (level === 'b') commission = amount * referralRates.b;
-      else if (level === 'c') commission = amount * referralRates.c;
-      
-      referrer.referralCommissions[level] += commission;
-      referrer.referralCommissions.total += commission;
-      
-      // Add to commission wallet
-      referrer.commissionWallet = (referrer.commissionWallet || 0) + commission;
-      
-      localStorage.setItem('cueUsers', JSON.stringify(users));
-    }
-
-    // Updated handleRegister with referral
+    // Handle Registration
     function handleRegister(e) {
       e.preventDefault();
+      
       const fullName = document.getElementById('regFullName').value;
-      const phone = document.getElementById('regPhone').value;
       const country = document.getElementById('regCountry').value;
+      const phone = document.getElementById('regPhone').value;
       const password = document.getElementById('regPassword').value;
-      const referrerPhone = document.getElementById('regReferrer')?.value || null;
+      const confirmPassword = document.getElementById('regConfirmPassword').value;
+      const referralCode = document.getElementById('regReferralCode').value;
 
-      if (!fullName || !phone || !country || !password) {
+      // Validate all fields
+      if (!fullName || !country || !phone || !password || !confirmPassword) {
         alert('Please fill all fields');
         return;
       }
 
+      // Validate phone starts with 0
+      if (!phone.startsWith('0')) {
+        alert('Phone number must start with 0');
+        return;
+      }
+
+      // Validate password length
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters');
+        return;
+      }
+
+      // Validate password match
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+
+      // Check if user already exists
       if (users[phone]) {
         alert('Phone already registered');
         switchAuthTab('login');
         return;
       }
 
-      // Validate referrer if provided
-      if (referrerPhone && !users[referrerPhone]) {
-        alert('Referrer phone number not found. Please check or leave blank.');
-        return;
+      // Find referrer by code if provided
+      let referredBy = null;
+      if (referralCode) {
+        const referrer = Object.values(users).find(u => u.referralCode === referralCode);
+        if (referrer) {
+          referredBy = referrer.phone;
+        } else {
+          alert('Referral code not found. Please check or leave blank.');
+          return;
+        }
       }
 
       const now = new Date();
       const expiry = new Date(now);
       expiry.setDate(expiry.getDate() + 4);
 
+      // Create new user with unique referral code
+      const newReferralCode = generateReferralCode();
+      
       users[phone] = {
-        fullName, phone, country, password,
+        fullName, 
+        phone, 
+        country, 
+        password,
+        referralCode: newReferralCode,
         memberLevel: 0,
         memberExpiry: expiry.toISOString(),
         mainWallet: 0,
@@ -1698,159 +1814,34 @@
         lastReadDate: now.toDateString(),
         totalEarned: 0,
         taskHistory: [],
-        referredBy: referrerPhone,
+        referredBy: referredBy,
         referrals: [],
         referralCommissions: { a: 0, b: 0, c: 0, total: 0 },
         registeredDate: now.toISOString()
       };
 
       // Add to referrer's referrals if exists
-      if (referrerPhone && users[referrerPhone]) {
-        if (!users[referrerPhone].referrals) {
-          users[referrerPhone].referrals = [];
+      if (referredBy && users[referredBy]) {
+        if (!users[referredBy].referrals) {
+          users[referredBy].referrals = [];
         }
-        users[referrerPhone].referrals.push(phone);
+        users[referredBy].referrals.push(phone);
       }
 
       localStorage.setItem('cueUsers', JSON.stringify(users));
       localStorage.setItem('currentUser', phone);
       currentUser = phone;
+      
       alert('Registration successful!');
       loadUserData();
       showPage('home');
+      resetInactivityTimer();
     }
 
-    // Update purchaseLevel to handle referral commissions
-    const originalPurchaseLevel = purchaseLevel;
-    purchaseLevel = function(level, cost) {
-      const user = users[currentUser];
-      if (!user) {
-        alert('Please login first');
-        return;
-      }
-
-      // Check if already at this level or higher
-      if (user.memberLevel >= level) {
-        alert(`You are already at ${levels[level].name} or higher!`);
-        return;
-      }
-
-      // INTERN MEMBER (level 0) - Main Wallet only
-      if (user.memberLevel === 0) {
-        if (user.mainWallet < cost) {
-          alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX in Main Wallet`);
-          return;
-        }
-        
-        // Deduct from main wallet only
-        if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
-          user.mainWallet -= cost;
-          upgradeUser(user, level, cost);
-          
-          // Handle referral commissions
-          if (user.referredBy) {
-            // A commission to referrer
-            addReferralCommission(user.referredBy, 'a', cost);
-            
-            // B commission to referrer's referrer
-            const aReferrer = users[user.referredBy];
-            if (aReferrer && aReferrer.referredBy) {
-              addReferralCommission(aReferrer.referredBy, 'b', cost);
-              
-              // C commission to referrer's referrer's referrer
-              const bReferrer = users[aReferrer.referredBy];
-              if (bReferrer && bReferrer.referredBy) {
-                addReferralCommission(bReferrer.referredBy, 'c', cost);
-              }
-            }
-          }
-        }
-      } 
-      // EXISTING MEMBER (level 1-8) - Can use both wallets
-      else {
-        const totalBalance = (user.mainWallet || 0) + (user.commissionWallet || 0);
-        
-        if (totalBalance < cost) {
-          alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX total in both wallets`);
-          return;
-        }
-
-        if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX? This will use funds from your wallets.`)) {
-          // Deduct from main wallet first, then commission if needed
-          let remaining = cost;
-          
-          // Take from main wallet first
-          if (user.mainWallet > 0) {
-            const fromMain = Math.min(user.mainWallet, remaining);
-            user.mainWallet -= fromMain;
-            remaining -= fromMain;
-          }
-          
-          // Take from commission wallet if still needed
-          if (remaining > 0 && user.commissionWallet > 0) {
-            const fromCommission = Math.min(user.commissionWallet, remaining);
-            user.commissionWallet -= fromCommission;
-            remaining -= fromCommission;
-          }
-          
-          upgradeUser(user, level, cost);
-          
-          // Handle referral commissions
-          if (user.referredBy) {
-            // A commission to referrer
-            addReferralCommission(user.referredBy, 'a', cost);
-            
-            // B commission to referrer's referrer
-            const aReferrer = users[user.referredBy];
-            if (aReferrer && aReferrer.referredBy) {
-              addReferralCommission(aReferrer.referredBy, 'b', cost);
-              
-              // C commission to referrer's referrer's referrer
-              const bReferrer = users[aReferrer.referredBy];
-              if (bReferrer && bReferrer.referredBy) {
-                addReferralCommission(bReferrer.referredBy, 'c', cost);
-              }
-            }
-          }
-        }
-      }
-    };
-
-    function upgradeUser(user, level, cost) {
-      // Upgrade member level
-      user.memberLevel = level;
-      
-      // Set expiry to 365 days from now
-      const expiry = new Date();
-      expiry.setDate(expiry.getDate() + 365);
-      user.memberExpiry = expiry.toISOString();
-
-      // Add transaction record
-      if (!user.transactions) user.transactions = [];
-      user.transactions.unshift({
-        type: 'level_upgrade',
-        level: level,
-        amount: cost,
-        date: new Date().toLocaleString()
-      });
-
-      localStorage.setItem('cueUsers', JSON.stringify(users));
-      
-      alert(`✅ Congratulations! You are now ${levels[level].name} member!`);
-      loadUserData();
-      updateLevelWalletDisplay();
-    }
-
-    function updateLevelWalletDisplay() {
-      const user = users[currentUser];
-      if (user) {
-        document.getElementById('levelMainWallet').innerHTML = `Main Wallet: ${(user.mainWallet || 0).toLocaleString()} UGX`;
-        document.getElementById('levelCommissionWallet').innerHTML = `Commission Wallet: ${(user.commissionWallet || 0).toLocaleString()} UGX`;
-      }
-    }
-
+    // Handle Login
     function handleLogin(e) {
       e.preventDefault();
+      
       const phone = document.getElementById('loginPhone').value;
       const password = document.getElementById('loginPassword').value;
 
@@ -1860,6 +1851,7 @@
         alert('Login successful!');
         loadUserData();
         showPage('home');
+        resetInactivityTimer();
       } else {
         alert('Invalid phone or password');
       }
@@ -1894,6 +1886,8 @@
       if (page === 'teamReport') loadTeamReport();
       if (page === 'level') updateLevelWalletDisplay();
       if (page === 'goldenHandshake') loadGoldenHandshake();
+      
+      resetInactivityTimer();
     }
 
     function showTaskRecord() {
@@ -1913,26 +1907,121 @@
       const user = users[currentUser];
       if (!user) return;
       
-      // Set referral link
-      document.getElementById('referralLink').textContent = generateReferralLink(user.phone);
+      const accessCheck = document.getElementById('referralAccessCheck');
+      const referralContent = document.getElementById('referralContent');
       
-      // Calculate commissions
-      const commissions = calculateReferralCommissions(user);
-      document.getElementById('totalReferralCommission').innerHTML = `${commissions.total.toLocaleString()} UGX`;
-      document.getElementById('aCommission').innerHTML = `${commissions.a.toLocaleString()} UGX`;
-      document.getElementById('bCommission').innerHTML = `${commissions.b.toLocaleString()} UGX`;
-      document.getElementById('cCommission').innerHTML = `${commissions.c.toLocaleString()} UGX`;
+      // Check if user is Intern (Level 0)
+      if (user.memberLevel === 0) {
+        // Show upgrade message
+        accessCheck.innerHTML = `
+          <div class="upgrade-required">
+            <i class="fas fa-lock"></i>
+            <h3>Upgrade Required</h3>
+            <p>Upgrade to D levels to access referral link</p>
+            <button class="upgrade-now-btn" onclick="showPage('level')">UPGRADE NOW</button>
+          </div>
+        `;
+        referralContent.style.display = 'none';
+      } else {
+        // Show referral content
+        accessCheck.innerHTML = '';
+        referralContent.style.display = 'block';
+        
+        // Set referral code
+        document.getElementById('referralCodeDisplay').textContent = user.referralCode || generateReferralCode();
+        
+        // Generate QR Code
+        const qrContainer = document.getElementById('qrCode');
+        qrContainer.innerHTML = '';
+        const referralLink = generateReferralLink(user.referralCode);
+        new QRCode(qrContainer, {
+          text: referralLink,
+          width: 180,
+          height: 180
+        });
+      }
+    }
+
+    // ========== LEVEL PURCHASE ==========
+    function purchaseLevel(level, cost) {
+      const user = users[currentUser];
+      if (!user) {
+        alert('Please login first');
+        return;
+      }
+
+      if (user.memberLevel >= level) {
+        alert(`You are already at ${levels[level].name} or higher!`);
+        return;
+      }
+
+      // Check balance based on member level
+      if (user.memberLevel === 0) {
+        if (user.mainWallet < cost) {
+          alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX in Main Wallet`);
+          return;
+        }
+        
+        if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
+          user.mainWallet -= cost;
+          upgradeUser(user, level, cost);
+        }
+      } else {
+        const totalBalance = (user.mainWallet || 0) + (user.commissionWallet || 0);
+        
+        if (totalBalance < cost) {
+          alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX total in both wallets`);
+          return;
+        }
+
+        if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
+          let remaining = cost;
+          
+          if (user.mainWallet > 0) {
+            const fromMain = Math.min(user.mainWallet, remaining);
+            user.mainWallet -= fromMain;
+            remaining -= fromMain;
+          }
+          
+          if (remaining > 0 && user.commissionWallet > 0) {
+            const fromCommission = Math.min(user.commissionWallet, remaining);
+            user.commissionWallet -= fromCommission;
+            remaining -= fromCommission;
+          }
+          
+          upgradeUser(user, level, cost);
+        }
+      }
+    }
+
+    function upgradeUser(user, level, cost) {
+      user.memberLevel = level;
       
-      // Count referrals
-      const aMembers = user.referrals || [];
-      const aPhones = aMembers.map(m => m);
-      const bMembers = Object.values(users).filter(u => aPhones.includes(u.referredBy));
-      const bPhones = bMembers.map(m => m.phone);
-      const cMembers = Object.values(users).filter(u => bPhones.includes(u.referredBy));
+      const expiry = new Date();
+      expiry.setDate(expiry.getDate() + 365);
+      user.memberExpiry = expiry.toISOString();
+
+      if (!user.transactions) user.transactions = [];
+      user.transactions.unshift({
+        type: 'level_upgrade',
+        level: level,
+        amount: cost,
+        date: new Date().toLocaleString()
+      });
+
+      localStorage.setItem('cueUsers', JSON.stringify(users));
       
-      document.getElementById('aTeamCount').textContent = aMembers.length;
-      document.getElementById('bTeamCount').textContent = bMembers.length;
-      document.getElementById('cTeamCount').textContent = cMembers.length;
+      alert(`✅ Congratulations! You are now ${levels[level].name} member!`);
+      loadUserData();
+      updateLevelWalletDisplay();
+    }
+
+    function updateLevelWalletDisplay() {
+      const user = users[currentUser];
+      if (user) {
+        document.getElementById('levelMainWallet').innerHTML = `Main Wallet: ${(user.mainWallet || 0).toLocaleString()} UGX`;
+        document.getElementById('levelCommissionWallet').innerHTML = `Commission Wallet: ${(user.commissionWallet || 0).toLocaleString()} UGX`;
+      }
     }
 
     // ========== LOAD USER DATA ==========
@@ -1952,7 +2041,7 @@
       const level = user.memberLevel || 0;
       const levelData = levels[level];
 
-      // Update home page - WALLETS REMOVED
+      // Update home page
       document.getElementById('memberTypeDisplay').textContent = levelData.name;
       
       const daysLeft = Math.ceil((new Date(user.memberExpiry) - new Date()) / (1000*60*60*24));
@@ -1974,15 +2063,12 @@
       document.getElementById('todayIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
       document.getElementById('totalIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
       document.getElementById('monthIncomeValue').innerHTML = `0.00 UGX`;
-      document.getElementById('subordinateCommission').innerHTML = `${(user.referralCommissions?.total || 0).toFixed(2)} UGX`;
       
       // Update withdraw modal balances
       document.getElementById('withdrawMainBalance').innerHTML = (user.mainWallet || 0).toLocaleString() + ' UGX';
       document.getElementById('withdrawCommissionBalance').innerHTML = (user.commissionWallet || 0).toLocaleString() + ' UGX';
 
-      // Update level page wallet
       updateLevelWalletDisplay();
-
       updateTime();
     }
 
@@ -2001,14 +2087,9 @@
       const user = users[currentUser];
       if (!user) return;
 
-      // Find A members (direct referrals)
       const aMembers = Object.values(users).filter(u => u.referredBy === currentUser);
-      
-      // Find B members (referrals of A members)
       const aPhones = aMembers.map(m => m.phone);
       const bMembers = Object.values(users).filter(u => aPhones.includes(u.referredBy));
-      
-      // Find C members (referrals of B members)
       const bPhones = bMembers.map(m => m.phone);
       const cMembers = Object.values(users).filter(u => bPhones.includes(u.referredBy));
 
@@ -2100,7 +2181,6 @@
       const total = aMembers.length + bMembers.length + cMembers.length;
       document.getElementById('totalTeamMembers').textContent = total;
 
-      // Count active today
       const today = new Date().toDateString();
       const activeCount = [aMembers, bMembers, cMembers].flat().filter(m => m.lastReadDate === today).length;
       document.getElementById('activeTeamMembers').textContent = activeCount;
@@ -2111,7 +2191,6 @@
       const user = users[currentUser];
       if (!user) return;
 
-      // Calculate stats
       const history = user.taskHistory || [];
       const completed = history.filter(task => task.status === 'complete');
       const pending = history.filter(task => task.status === 'pending');
@@ -2120,7 +2199,6 @@
       document.getElementById('completeBooks').textContent = completed.length;
       document.getElementById('pendingBooks').textContent = pending.length;
 
-      // Load table
       const tbody = document.getElementById('taskHistoryBody');
       if (history.length === 0) {
         tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px;">No task history yet</td></tr>';
@@ -2153,21 +2231,16 @@
       const level = user.memberLevel || 0;
       const levelData = levels[level];
       
-      // Get today's shuffled books
       const todaysBooks = getTodaysBooks();
-      
-      // Show only the number of books this level can see
       const visibleBooks = todaysBooks.slice(0, levelData.bookLimit);
       
       const grid = document.getElementById('bookGrid');
       let html = '';
       
-      // Only show books if user hasn't reached daily limit
       if (user.booksReadToday >= levelData.dailyBooks) {
         html = '<div style="text-align:center; padding:30px; color:#8a7a9c;">📚 You\'ve read all your books for today! Come back tomorrow.</div>';
       } else {
         visibleBooks.forEach(book => {
-          // Check if this book has been read today
           const bookReadToday = user.taskHistory?.some(task => 
             task.book === book.title && 
             task.date === new Date().toLocaleDateString() && 
@@ -2197,17 +2270,13 @@
       const level = user.memberLevel || 0;
       const levelData = levels[level];
       
-      // Get today's shuffled books
       const todaysBooks = getTodaysBooks();
-      
-      // Show all books for task page (but limited by level)
       const visibleBooks = todaysBooks.slice(0, levelData.bookLimit);
       
       const grid = document.getElementById('taskBookGrid');
       let html = '';
       
       visibleBooks.forEach(book => {
-        // Check if this book has been read today
         const bookReadToday = user.taskHistory?.some(task => 
           task.book === book.title && 
           task.date === new Date().toLocaleDateString() && 
@@ -2242,7 +2311,6 @@
         return;
       }
 
-      // Check if already read this book today
       const bookReadToday = user.taskHistory?.some(task => 
         task.book === book.title && 
         task.date === new Date().toLocaleDateString() && 
@@ -2254,7 +2322,6 @@
         return;
       }
 
-      // Add to task history as pending
       if (!user.taskHistory) user.taskHistory = [];
       user.taskHistory.push({
         date: new Date().toLocaleDateString(),
@@ -2264,7 +2331,6 @@
       });
       localStorage.setItem('cueUsers', JSON.stringify(users));
 
-      // Hide button, show timer
       const homeBtn = document.getElementById(`home-book-${bookId}`);
       const taskBtn = document.getElementById(`task-book-${bookId}`);
       const homeTimer = document.getElementById(`home-timer-${bookId}`);
@@ -2282,7 +2348,6 @@
         if (seconds <= 0) {
           clearInterval(timer);
           
-          // Show harvest button
           if (homeBtn) {
             homeTimer.style.display = 'none';
             homeBtn.style.display = 'block';
@@ -2310,12 +2375,10 @@
       const reward = levelData.reward;
       const book = allBooks.find(b => b.id === bookId);
 
-      // Add to COMMISSION WALLET
       user.commissionWallet = (user.commissionWallet || 0) + reward;
       user.booksReadToday = (user.booksReadToday || 0) + 1;
       user.lastReadDate = new Date().toDateString();
 
-      // Update task history - find most recent pending entry for this book
       if (user.taskHistory) {
         const pendingTask = user.taskHistory
           .slice()
@@ -2329,7 +2392,6 @@
 
       localStorage.setItem('cueUsers', JSON.stringify(users));
 
-      // Update buttons
       const homeBtn = document.getElementById(`home-book-${bookId}`);
       const taskBtn = document.getElementById(`task-book-${bookId}`);
       
@@ -2346,8 +2408,6 @@
 
       alert(`+${reward} UGX added to Commission Wallet!`);
       loadUserData();
-      
-      // Reload books to hide the read one
       loadHomeBooks();
       loadTaskBooks();
     }
@@ -2462,6 +2522,8 @@
       document.getElementById('taskRecordPage').style.display = 'none';
       document.getElementById('teamReportPage').style.display = 'none';
       document.getElementById('goldenHandshakePage').style.display = 'none';
+      
+      if (inactivityTimer) clearTimeout(inactivityTimer);
     }
 
     // ========== INIT ==========
@@ -2473,6 +2535,7 @@
           phone: '0756673144',
           country: 'Uganda',
           password: 'admin123',
+          referralCode: 'ADMIN123456',
           memberLevel: 9,
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
           mainWallet: 1000000,
@@ -2486,12 +2549,12 @@
           referralCommissions: { a: 25000, b: 8000, c: 3000, total: 36000 }
         };
         
-        // Demo intern user
         users['0777123456'] = {
           fullName: 'Intern User',
           phone: '0777123456',
           country: 'Uganda',
           password: '123456',
+          referralCode: 'INTERN789012',
           memberLevel: 0,
           memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
           mainWallet: 100000,
@@ -2505,12 +2568,12 @@
           referralCommissions: { a: 0, b: 0, c: 0, total: 0 }
         };
 
-        // Demo D1 member
         users['0788123456'] = {
           fullName: 'John D1',
           phone: '0788123456',
           country: 'Uganda',
           password: '123456',
+          referralCode: 'D1CODE345678',
           memberLevel: 1,
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
           mainWallet: 150000,
@@ -2527,36 +2590,24 @@
         localStorage.setItem('cueUsers', JSON.stringify(users));
       }
 
+      // Check for referral code in URL
+      const refCode = getUrlParameter('ref');
+      if (refCode) {
+        // If on register page, auto-fill
+        if (document.getElementById('registerForm').classList.contains('active')) {
+          document.getElementById('regReferralCode').value = refCode;
+        }
+      }
+
       if (currentUser && users[currentUser]) {
         loadUserData();
         showPage('home');
+        resetInactivityTimer();
       }
 
       setInterval(updateTime, 60000);
       updateTime();
     };
-  </script>
-  
-  <!-- FIX: This will remove any stray DOCTYPE text that appears on the page -->
-  <script>
-    // Run this immediately to clean any text nodes at the beginning of body
-    (function() {
-      // Remove any empty text nodes or DOCTYPE text at the start of body
-      const body = document.body;
-      for (let i = 0; i < body.childNodes.length; i++) {
-        const node = body.childNodes[i];
-        if (node.nodeType === 3) { // Text node
-          const text = node.textContent.trim();
-          if (text === '' || text.includes('<!DOCTYPE') || text.includes('<html')) {
-            body.removeChild(node);
-            i--; // Adjust index after removal
-          }
-        } else {
-          // Once we hit an element node, stop (we only care about the very beginning)
-          break;
-        }
-      }
-    })();
   </script>
 </body>
 </html>
