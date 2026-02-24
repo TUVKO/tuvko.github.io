@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>CIUE · Earn Platform</title>
+  <title>CIUE · Coffee Earn Platform</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -383,40 +383,7 @@
       color: #7d5ba6;  /* Added Medium Purple */
     }
 
-    /* Wallets - Home Dashboard */
-    .wallets-container {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .wallet-box {
-      flex: 1;
-      background: #faf5ff;  /* Changed from #f9f9f9 to Off-White with Purple Tint */
-      border-radius: 15px;
-      padding: 12px;
-      border: 1px solid #e0d0eb;  /* Changed from #eaeaea to Light Purple Border */
-    }
-
-    .wallet-box .label {
-      color: #8a7a9c;  /* Changed from #666 to Medium Purple-Gray */
-      font-size: 0.7rem;
-      margin-bottom: 3px;
-    }
-
-    .wallet-box .amount {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #4a3b5e;  /* Added Deep Purple-Gray */
-    }
-
-    .wallet-box.main {
-      border-left: 3px solid #7d5ba6;  /* Changed from #006a7a to Medium Purple */
-    }
-
-    .wallet-box.commission {
-      border-left: 3px solid #b8a3d9;  /* Changed from #ff9800 to Light Purple */
-    }
+    /* WALLETS REMOVED FROM HOME DASHBOARD as requested */
 
     /* Daily Counter - Home Dashboard */
     div[style*="background:#f0f8ff"] {
@@ -440,6 +407,40 @@
     .employee-role {
       color: #666;
       margin-bottom: 20px;
+    }
+
+    /* Wallets Container - Only visible on Profile Page */
+    .wallets-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .wallet-box {
+      flex: 1;
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 12px;
+      border: 1px solid #eaeaea;
+    }
+
+    .wallet-box .label {
+      color: #666;
+      font-size: 0.7rem;
+      margin-bottom: 3px;
+    }
+
+    .wallet-box .amount {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .wallet-box.main {
+      border-left: 3px solid #006a7a;
+    }
+
+    .wallet-box.commission {
+      border-left: 3px solid #ff9800;
     }
 
     /* Income Grid - UNCHANGED */
@@ -790,7 +791,7 @@
           <i class="fas fa-hand-holding-heart"></i>
         </div>
         <h1>CIUE</h1>
-        <p>Mobile Money • Earn • Task Hall</p>
+        <p>Coffee • Earn • Knowledge</p>
       </div>
 
       <div id="messageBox" class="success-message">
@@ -872,11 +873,11 @@
       </div>
     </div>
 
-    <!-- MAIN DASHBOARD (Home Page) - UPGRADE SECTION REMOVED -->
+    <!-- MAIN DASHBOARD (Home Page) - WALLETS REMOVED, 60 COFFEE BOOKS -->
     <div id="mainDashboard">
       <div class="scroll-content">
         <div class="welcome-title">WELCOME</div>
-        <div class="welcome-subtitle">NEW OPPORTUNITIES AND CHALLENGES WORK TOGETHER TO CREATE A BETTER FUTURE</div>
+        <div class="welcome-subtitle">Learn about coffee growing and earn rewards</div>
         <div class="divider-line"></div>
 
         <!-- Member Card -->
@@ -888,17 +889,7 @@
           </div>
         </div>
 
-        <!-- Wallets -->
-        <div class="wallets-container">
-          <div class="wallet-box main">
-            <div class="label">💰 MAIN WALLET</div>
-            <div class="amount" id="mainWalletAmount">0 UGX</div>
-          </div>
-          <div class="wallet-box commission">
-            <div class="label">💰 COMMISSION</div>
-            <div class="amount" id="commissionWalletAmount">0 UGX</div>
-          </div>
-        </div>
+        <!-- WALLETS REMOVED FROM HOME DASHBOARD - As requested -->
 
         <!-- Daily Counter -->
         <div style="background:#f5edff; padding:12px; border-radius:15px; margin-bottom:15px; display:flex; justify-content:space-between; color:#4a3b5e;">
@@ -906,7 +897,7 @@
           <span>💰 Earned: <span id="dailyEarnings">0</span> UGX</span>
         </div>
 
-        <!-- Books -->
+        <!-- Books - 60 Coffee Books with Level-Based Display and Daily Shuffle -->
         <div class="book-grid" id="bookGrid"></div>
 
         <!-- Actions -->
@@ -925,8 +916,6 @@
           </div>
         </div>
 
-        <!-- UPGRADE SECTION HAS BEEN REMOVED -->
-
         <!-- Company Profile -->
         <div class="company-line">
           <span>Company Profile</span>
@@ -944,7 +933,7 @@
       </div>
     </div>
 
-    <!-- PROFILE PAGE (ME) - UNCHANGED -->
+    <!-- PROFILE PAGE (ME) - WALLETS STILL HERE (unchanged) -->
     <div id="profilePage">
       <div class="scroll-content">
         <div class="profile-header">
@@ -955,7 +944,7 @@
         <div class="employee-name" id="profileFullName">User Name</div>
         <div class="employee-role" id="profileMemberType">INTERN MEMBER</div>
 
-        <!-- Wallets -->
+        <!-- Wallets - Still visible on Profile Page -->
         <div class="wallets-container">
           <div class="wallet-box main">
             <div class="label">💰 MAIN WALLET</div>
@@ -1235,10 +1224,10 @@
       </div>
     </div>
 
-    <!-- TASK PAGE - UNCHANGED -->
+    <!-- TASK PAGE - UNCHANGED (will show all 60 books) -->
     <div id="taskPage">
       <div class="scroll-content">
-        <h3 style="margin-bottom:20px;">Book Library</h3>
+        <h3 style="margin-bottom:20px;">Coffee Library</h3>
         <div class="book-grid" id="taskBookGrid"></div>
       </div>
       <div class="bottom-nav">
@@ -1314,25 +1303,121 @@
     let pendingDeposits = JSON.parse(localStorage.getItem('pendingDeposits')) || [];
     let pendingWithdrawals = JSON.parse(localStorage.getItem('pendingWithdrawals')) || [];
     let selectedWallet = 'main';
-    let books = [
-      { id: 1, title: "Financial Literacy", desc: "Learn about money management" },
-      { id: 2, title: "Think and Grow Rich", desc: "Napoleon Hill's classic" },
-      { id: 3, title: "Rich Dad Poor Dad", desc: "Robert Kiyosaki's bestseller" }
+    
+    // ========== 60 COFFEE GROWING BOOKS ==========
+    // Uganda-Specific Books (15)
+    // East Africa Regional Books (15)
+    // International Coffee Books (30)
+    let allBooks = [
+      // Uganda-Specific Books (1-15)
+      { id: 1, title: "Regenerative Agriculture in Coffee", desc: "Handbook for practitioners in Uganda - Bioversity International, 2023" },
+      { id: 2, title: "Coffee Agroforestry Training Handbook", desc: "Training of Trainers - World Agroforestry Centre, 2025" },
+      { id: 3, title: "Arabica Coffee Production Handbook", desc: "Uganda Coffee Development Authority - soil, pests, harvesting" },
+      { id: 4, title: "Planting in Uganda", desc: "Coffee, para rubber & cocoa cultivation - Legare Street Press, 2023" },
+      { id: 5, title: "Coffee Growing in East Africa", desc: "Classic 1930 text by J.H. McDonald - 205 pages with illustrations" },
+      { id: 6, title: "Coffee Agroforestry in Uganda", desc: "Resilient Landscapes, 2025 - sustainable farming practices" },
+      { id: 7, title: "Managing Coffee Nurseries in Uganda", desc: "World Agroforestry Centre - propagation techniques" },
+      { id: 8, title: "Managing Mature Coffee Trees", desc: "Uganda Guide - pruning, fertilizing, and care" },
+      { id: 9, title: "Soil Management for Ugandan Coffee", desc: "NARO Uganda - soil health and fertility" },
+      { id: 10, title: "Coffee Pests and Diseases in Uganda", desc: "Ministry of Agriculture - identification and control" },
+      { id: 11, title: "Harvesting and Processing Coffee", desc: "UCDA Handbook - from cherry to bean" },
+      { id: 12, title: "Coffee Farming as a Business", desc: "Agribusiness Guide for Ugandan farmers" },
+      { id: 13, title: "Shade-Grown Coffee Systems", desc: "Research Report - benefits of shade in Uganda" },
+      { id: 14, title: "Climate-Resilient Coffee Farming", desc: "CIAT Study - adapting to climate change" },
+      { id: 15, title: "Organic Coffee Certification Guide", desc: "Export Guide for Ugandan farmers" },
+      
+      // East Africa Regional Books (16-30)
+      { id: 16, title: "Coffee Growing: East Africa Reference", desc: "Classic text covering Kenya, Uganda, Tanzania" },
+      { id: 17, title: "East African Coffee: From Seed to Cup", desc: "Regional guide to coffee production" },
+      { id: 18, title: "Coffee Diseases in East Africa", desc: "CABI Publishing - disease management" },
+      { id: 19, title: "Smallholder Coffee Farming", desc: "FAO Report - Kenya, Uganda & Tanzania" },
+      { id: 20, title: "Coffee Berry Borer Management", desc: "ICIPE Guide - pest control in East Africa" },
+      { id: 21, title: "Coffee Marketing in East Africa", desc: "Trade Handbook - selling and exporting" },
+      { id: 22, title: "Robusta Coffee in Lake Victoria Basin", desc: "Research on cultivation practices" },
+      { id: 23, title: "High-Altitude Arabica in East Africa", desc: "Terroir Study - flavor profiles" },
+      { id: 24, title: "Coffee Cooperatives in East Africa", desc: "Social Impact - farmer organizations" },
+      { id: 25, title: "Gender and Coffee Farming", desc: "Development Report - women in coffee" },
+      { id: 26, title: "Coffee Value Chains in East Africa", desc: "Economic Analysis - from farm to market" },
+      { id: 27, title: "Climate Change Impacts on Coffee", desc: "Scientific Study - East Africa region" },
+      { id: 28, title: "Coffee Quality Assessment", desc: "Cupping Guide - East African beans" },
+      { id: 29, title: "Sustainable Coffee Production", desc: "Environmental Handbook - East Africa" },
+      { id: 30, title: "Coffee Certification Schemes", desc: "Standards Guide - East Africa" },
+      
+      // International Coffee Books (31-60)
+      { id: 31, title: "Coffee: Growing, Processing, Sustainable Production", desc: "Jean Nicolas Wintgens - 1022 pages" },
+      { id: 32, title: "Terroir: Coffee From Seed to Harvest", desc: "Jeremy Challender, Barista Hustle" },
+      { id: 33, title: "The Craft and Science of Coffee", desc: "Britta Folmer, Academic Press" },
+      { id: 34, title: "Coffee: Comprehensive Guide", desc: "Bean, beverage & industry - Robert W. Thurston" },
+      { id: 35, title: "The Coffee Guide", desc: "International Trade Centre - global trade" },
+      { id: 36, title: "Coffee Botany, Genetics and Genomics", desc: "Wiley Handbook - plant science" },
+      { id: 37, title: "Environmental Factors for Coffee", desc: "Wintgens - climate and soil requirements" },
+      { id: 38, title: "Coffee Selection and Breeding", desc: "Research Compendium - variety development" },
+      { id: 39, title: "Coffee Propagation Techniques", desc: "Agricultural Manual - seedlings and grafting" },
+      { id: 40, title: "Biotechnologies Applied to Coffee", desc: "Scientific Review - modern techniques" },
+      { id: 41, title: "Establishing a Coffee Plantation", desc: "Practical Guide - site selection and planting" },
+      { id: 42, title: "Crop Maintenance for Coffee", desc: "Field Handbook - pruning and nutrition" },
+      { id: 43, title: "Vermicomposting in Coffee", desc: "Soil Health - organic fertilizers" },
+      { id: 44, title: "Organic Coffee Farming", desc: "Certification Guide - standards and practices" },
+      { id: 45, title: "Shade Management and Coffee Quality", desc: "Research Findings - impact on flavor" },
+      { id: 46, title: "Coffee Pests in Africa", desc: "Pest Management - identification and control" },
+      { id: 47, title: "Major Pests of Coffee in Asia-Pacific", desc: "Regional Guide - pest species" },
+      { id: 48, title: "Nematodes in Coffee", desc: "Soil Biology - management strategies" },
+      { id: 49, title: "Coffee Diseases: Leaf Rust and Berry Disease", desc: "Pathology - symptoms and control" },
+      { id: 50, title: "Resistance to Coffee Diseases", desc: "Breeding Guide - resistant varieties" },
+      { id: 51, title: "Harvesting and Green Coffee Processing", desc: "Post-Harvest - methods and quality" },
+      { id: 52, title: "Ecological Processing of Coffee", desc: "Sustainable Methods - water conservation" },
+      { id: 53, title: "Green Coffee Storage and Shipment", desc: "Quality Control - preserving flavor" },
+      { id: 54, title: "Coffee Bean Quality Assessment", desc: "Cupping Standards - evaluating beans" },
+      { id: 55, title: "Factors Influencing Coffee Quality", desc: "Terroir Analysis - environmental effects" },
+      { id: 56, title: "Economic Aspects of Coffee Production", desc: "Market Analysis - pricing and trends" },
+      { id: 57, title: "Sustainable Coffee Initiatives", desc: "Governance Review, 2024 - certification" },
+      { id: 58, title: "Coffee Agroecosystem Management", desc: "Biodiversity Review, 2025 - ecosystem services" },
+      { id: 59, title: "Metabolite Profiles in Arabica", desc: "Food Research International, 2025 - chemistry" },
+      { id: 60, title: "Coffee Growing (Tropical Agriculturalist)", desc: "H. Cambrony, 119 pages - practical guide" }
     ];
 
-    // Level definitions with exact numbers from image (D6 corrected)
+    // Level definitions with exact numbers
     const levels = {
-      0: { name: "Intern", dailyBooks: 1, reward: 1500, duration: 4, canWithdraw: false, hasReferral: false },
-      1: { name: "D1", dailyBooks: 2, reward: 1125, deposit: 63000, duration: 365, canWithdraw: true, hasReferral: true },
-      2: { name: "D2", dailyBooks: 4, reward: 1775, deposit: 200000, duration: 365, canWithdraw: true, hasReferral: true },
-      3: { name: "D3", dailyBooks: 12, reward: 1584, deposit: 532000, duration: 365, canWithdraw: true, hasReferral: true },
-      4: { name: "D4", dailyBooks: 16, reward: 3238, deposit: 1450000, duration: 365, canWithdraw: true, hasReferral: true },
-      5: { name: "D5", dailyBooks: 24, reward: 6050, deposit: 3920000, duration: 365, canWithdraw: true, hasReferral: true },
-      6: { name: "D6", dailyBooks: 40, reward: 9500, deposit: 10640000, duration: 365, canWithdraw: true, hasReferral: true },
-      7: { name: "D7", dailyBooks: 52, reward: 27500, deposit: 40040000, duration: 365, canWithdraw: true, hasReferral: true },
-      8: { name: "D8", dailyBooks: 64, reward: 31875, deposit: 57120000, duration: 365, canWithdraw: true, hasReferral: true },
-      9: { name: "D9", dailyBooks: 74, reward: 40000, deposit: 84000000, duration: 365, canWithdraw: true, hasReferral: true }
+      0: { name: "Intern", dailyBooks: 1, reward: 1500, duration: 4, canWithdraw: false, hasReferral: false, bookLimit: 1 },
+      1: { name: "D1", dailyBooks: 2, reward: 1125, deposit: 63000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 2 },
+      2: { name: "D2", dailyBooks: 4, reward: 1775, deposit: 200000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 4 },
+      3: { name: "D3", dailyBooks: 12, reward: 1584, deposit: 532000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 8 },
+      4: { name: "D4", dailyBooks: 16, reward: 3238, deposit: 1450000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 12 },
+      5: { name: "D5", dailyBooks: 24, reward: 6050, deposit: 3920000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 20 },
+      6: { name: "D6", dailyBooks: 40, reward: 9500, deposit: 10640000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 30 },
+      7: { name: "D7", dailyBooks: 52, reward: 27500, deposit: 40040000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 40 },
+      8: { name: "D8", dailyBooks: 64, reward: 31875, deposit: 57120000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 50 },
+      9: { name: "D9", dailyBooks: 74, reward: 40000, deposit: 84000000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 60 }
     };
+
+    // Track today's shuffled book order
+    let todaysBookOrder = [];
+
+    // ========== SHUFFLE BOOKS FUNCTION (Daily Random Order) ==========
+    function getTodaysBooks() {
+      const today = new Date().toDateString();
+      const stored = localStorage.getItem('bookShuffleDate');
+      const storedOrder = localStorage.getItem('bookShuffleOrder');
+      
+      // If it's a new day or no stored order, create new shuffle
+      if (stored !== today || !storedOrder) {
+        // Create copy of all books and shuffle
+        todaysBookOrder = [...allBooks];
+        for (let i = todaysBookOrder.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [todaysBookOrder[i], todaysBookOrder[j]] = [todaysBookOrder[j], todaysBookOrder[i]];
+        }
+        
+        // Store for today
+        localStorage.setItem('bookShuffleDate', today);
+        localStorage.setItem('bookShuffleOrder', JSON.stringify(todaysBookOrder));
+      } else {
+        // Use stored order
+        todaysBookOrder = JSON.parse(storedOrder);
+      }
+      
+      return todaysBookOrder;
+    }
 
     // ========== AUTH ==========
     function switchAuthTab(tab) {
@@ -1549,9 +1634,7 @@
       const level = user.memberLevel || 0;
       const levelData = levels[level];
 
-      // Update home page
-      document.getElementById('mainWalletAmount').innerHTML = `${(user.mainWallet || 0).toLocaleString()} UGX`;
-      document.getElementById('commissionWalletAmount').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} UGX`;
+      // Update home page - WALLETS REMOVED
       document.getElementById('memberTypeDisplay').textContent = levelData.name;
       
       const daysLeft = Math.ceil((new Date(user.memberExpiry) - new Date()) / (1000*60*60*24));
@@ -1746,34 +1829,85 @@
 
     // ========== BOOKS ==========
     function loadHomeBooks() {
+      const user = users[currentUser];
+      if (!user) return;
+      
+      const level = user.memberLevel || 0;
+      const levelData = levels[level];
+      
+      // Get today's shuffled books
+      const todaysBooks = getTodaysBooks();
+      
+      // Show only the number of books this level can see
+      const visibleBooks = todaysBooks.slice(0, levelData.bookLimit);
+      
       const grid = document.getElementById('bookGrid');
       let html = '';
-      books.slice(0, 2).forEach(book => {
-        html += `
-          <div class="book-card">
-            <div class="book-title">📖 ${book.title}</div>
-            <div class="book-desc">${book.desc}</div>
-            <button class="read-btn" onclick="startReading(${book.id})" id="home-book-${book.id}">READ</button>
-            <div id="home-timer-${book.id}" class="timer-display" style="display:none;">10s</div>
-          </div>
-        `;
-      });
+      
+      // Only show books if user hasn't reached daily limit
+      if (user.booksReadToday >= levelData.dailyBooks) {
+        html = '<div style="text-align:center; padding:30px; color:#8a7a9c;">📚 You\'ve read all your books for today! Come back tomorrow.</div>';
+      } else {
+        visibleBooks.forEach(book => {
+          // Check if this book has been read today
+          const bookReadToday = user.taskHistory?.some(task => 
+            task.book === book.title && 
+            task.date === new Date().toLocaleDateString() && 
+            task.status === 'complete'
+          );
+          
+          if (!bookReadToday) {
+            html += `
+              <div class="book-card">
+                <div class="book-title">📖 ${book.title}</div>
+                <div class="book-desc">${book.desc}</div>
+                <button class="read-btn" onclick="startReading(${book.id})" id="home-book-${book.id}">READ</button>
+                <div id="home-timer-${book.id}" class="timer-display" style="display:none;">10s</div>
+              </div>
+            `;
+          }
+        });
+      }
+      
       grid.innerHTML = html;
     }
 
     function loadTaskBooks() {
+      const user = users[currentUser];
+      if (!user) return;
+      
+      const level = user.memberLevel || 0;
+      const levelData = levels[level];
+      
+      // Get today's shuffled books
+      const todaysBooks = getTodaysBooks();
+      
+      // Show all books for task page (but limited by level)
+      const visibleBooks = todaysBooks.slice(0, levelData.bookLimit);
+      
       const grid = document.getElementById('taskBookGrid');
       let html = '';
-      books.forEach(book => {
-        html += `
-          <div class="book-card">
-            <div class="book-title">📖 ${book.title}</div>
-            <div class="book-desc">${book.desc}</div>
-            <button class="read-btn" onclick="startReading(${book.id})" id="task-book-${book.id}">READ</button>
-            <div id="task-timer-${book.id}" class="timer-display" style="display:none;">10s</div>
-          </div>
-        `;
+      
+      visibleBooks.forEach(book => {
+        // Check if this book has been read today
+        const bookReadToday = user.taskHistory?.some(task => 
+          task.book === book.title && 
+          task.date === new Date().toLocaleDateString() && 
+          task.status === 'complete'
+        );
+        
+        if (!bookReadToday) {
+          html += `
+            <div class="book-card">
+              <div class="book-title">📖 ${book.title}</div>
+              <div class="book-desc">${book.desc}</div>
+              <button class="read-btn" onclick="startReading(${book.id})" id="task-book-${book.id}">READ</button>
+              <div id="task-timer-${book.id}" class="timer-display" style="display:none;">10s</div>
+            </div>
+          `;
+        }
       });
+      
       grid.innerHTML = html;
     }
 
@@ -1783,10 +1917,22 @@
 
       const level = user.memberLevel || 0;
       const levelData = levels[level];
-      const book = books.find(b => b.id === bookId);
+      const book = allBooks.find(b => b.id === bookId);
 
       if (user.booksReadToday >= levelData.dailyBooks) {
         alert(`Daily limit of ${levelData.dailyBooks} books reached`);
+        return;
+      }
+
+      // Check if already read this book today
+      const bookReadToday = user.taskHistory?.some(task => 
+        task.book === book.title && 
+        task.date === new Date().toLocaleDateString() && 
+        task.status === 'complete'
+      );
+      
+      if (bookReadToday) {
+        alert('You already read this book today!');
         return;
       }
 
@@ -1844,7 +1990,7 @@
       const level = user.memberLevel || 0;
       const levelData = levels[level];
       const reward = levelData.reward;
-      const book = books.find(b => b.id === bookId);
+      const book = allBooks.find(b => b.id === bookId);
 
       // Add to COMMISSION WALLET
       user.commissionWallet = (user.commissionWallet || 0) + reward;
@@ -1882,6 +2028,10 @@
 
       alert(`+${reward} UGX added to Commission Wallet!`);
       loadUserData();
+      
+      // Reload books to hide the read one
+      loadHomeBooks();
+      loadTaskBooks();
     }
 
     // ========== DEPOSIT ==========
@@ -2026,14 +2176,10 @@
           memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
           mainWallet: 100000,
           commissionWallet: 1500,
-          booksReadToday: 1,
+          booksReadToday: 0,
           lastReadDate: new Date().toDateString(),
           totalEarned: 1500,
-          taskHistory: [
-            { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1500 },
-            { date: '2/23/2026', book: 'Think and Grow Rich', status: 'pending', reward: 0 },
-            { date: '2/22/2026', book: 'Rich Dad Poor Dad', status: 'complete', reward: 1500 }
-          ],
+          taskHistory: [],
           referredBy: null,
           referrals: []
         };
@@ -2048,13 +2194,10 @@
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
           mainWallet: 150000,
           commissionWallet: 30000,
-          booksReadToday: 2,
+          booksReadToday: 0,
           lastReadDate: new Date().toDateString(),
           totalEarned: 3000,
-          taskHistory: [
-            { date: '2/23/2026', book: 'Financial Literacy', status: 'complete', reward: 1125 },
-            { date: '2/23/2026', book: 'Think and Grow Rich', status: 'complete', reward: 1125 }
-          ],
+          taskHistory: [],
           referredBy: null,
           referrals: []
         };
