@@ -855,8 +855,8 @@
       font-size: 1rem;
     }
     
-    /* Referral Code Box - Like your image */
-    .referral-code-box {
+    /* Referral Link Box - CHANGED from code to link */
+    .referral-link-box {
       background: #f5edff;
       border-radius: 15px;
       padding: 15px;
@@ -864,22 +864,25 @@
       text-align: center;
     }
     
-    .referral-code-label {
+    .referral-link-label {
       color: #4a3b5e;
       font-size: 0.9rem;
       margin-bottom: 5px;
     }
     
-    .referral-code-display {
-      font-size: 1.8rem;
-      font-weight: 700;
+    .referral-link-display {
+      font-size: 1rem;
+      font-weight: 600;
       color: #7d5ba6;
-      letter-spacing: 2px;
+      word-break: break-all;
       margin: 10px 0;
-      font-family: monospace;
+      padding: 10px;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #e0d0eb;
     }
     
-    .copy-code-btn {
+    .copy-link-btn {
       background: #7d5ba6;
       color: white;
       border: none;
@@ -892,8 +895,8 @@
       margin-top: 10px;
     }
     
-    /* Upgrade Required Message */
-    .upgrade-required {
+    /* Access Denied Message for Interns */
+    .access-denied {
       background: #fff3cd;
       border: 2px solid #ffc107;
       border-radius: 20px;
@@ -902,18 +905,18 @@
       margin: 30px 0;
     }
     
-    .upgrade-required i {
+    .access-denied i {
       font-size: 3rem;
       color: #ff9800;
       margin-bottom: 15px;
     }
     
-    .upgrade-required h3 {
+    .access-denied h3 {
       color: #b45f06;
       margin-bottom: 10px;
     }
     
-    .upgrade-required p {
+    .access-denied p {
       color: #856404;
       margin-bottom: 20px;
     }
@@ -1236,32 +1239,8 @@
           <h2>Golden Handshake</h2>
         </div>
 
-        <!-- Check if user is Intern (Level 0) -->
-        <div id="referralAccessCheck"></div>
-        
-        <!-- This content will be shown/hidden based on member level -->
-        <div id="referralContent">
-          <!-- Share Link Button - Like your image -->
-          <div class="share-link-btn" onclick="shareReferralLink()">
-            <i class="fas fa-share-alt"></i>
-            <span>Share link</span>
-          </div>
-
-          <!-- QR Code - Like your image -->
-          <div class="qr-container">
-            <div id="qrCode" class="qr-code"></div>
-            <div class="qr-label">Scan to get referral code</div>
-          </div>
-
-          <!-- Referral Code Box - Like your image -->
-          <div class="referral-code-box">
-            <div class="referral-code-label">Your Referral Code</div>
-            <div class="referral-code-display" id="referralCodeDisplay">DRT683490HYK</div>
-            <button class="copy-code-btn" onclick="copyReferralCode()">
-              <i class="fas fa-copy"></i> COPY CODE
-            </button>
-          </div>
-        </div>
+        <!-- This will show either access denied or referral content based on member level -->
+        <div id="goldenHandshakeContent"></div>
       </div>
 
       <!-- Bottom Nav -->
@@ -1636,17 +1615,21 @@
       return `https://tuvko.github.io/register?ref=${code}`;
     }
 
-    // Copy referral code to clipboard
-    function copyReferralCode() {
-      const code = document.getElementById('referralCodeDisplay').textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        alert('✅ Referral code copied to clipboard!');
+    // Copy full referral link to clipboard
+    function copyReferralLink() {
+      const user = users[currentUser];
+      if (!user || !user.referralCode) return;
+      
+      const link = generateReferralLink(user.referralCode);
+      
+      navigator.clipboard.writeText(link).then(() => {
+        alert('✅ Referral link copied to clipboard!');
       }).catch(() => {
-        alert('❌ Could not copy code. Please select and copy manually.');
+        prompt('Copy this link manually:', link);
       });
     }
 
-    // Share referral link
+    // Share referral link using Web Share API
     function shareReferralLink() {
       const user = users[currentUser];
       if (!user || !user.referralCode) return;
@@ -1656,7 +1639,7 @@
       if (navigator.share) {
         navigator.share({
           title: 'Join CIUE Coffee Earn Platform',
-          text: 'Use my referral code to join and earn rewards!',
+          text: 'Use my referral link to join and earn rewards!',
           url: link
         }).catch(() => {
           prompt('Copy this link to share:', link);
@@ -1797,7 +1780,7 @@
       const expiry = new Date(now);
       expiry.setDate(expiry.getDate() + 4);
 
-      // Create new user with unique referral code
+      // Create new user with unique referral code (ONCE, never changes)
       const newReferralCode = generateReferralCode();
       
       users[phone] = {
@@ -1805,7 +1788,7 @@
         phone, 
         country, 
         password,
-        referralCode: newReferralCode,
+        referralCode: newReferralCode, // PERMANENT - never changes
         memberLevel: 0,
         memberExpiry: expiry.toISOString(),
         mainWallet: 0,
@@ -1907,33 +1890,49 @@
       const user = users[currentUser];
       if (!user) return;
       
-      const accessCheck = document.getElementById('referralAccessCheck');
-      const referralContent = document.getElementById('referralContent');
+      const contentDiv = document.getElementById('goldenHandshakeContent');
       
       // Check if user is Intern (Level 0)
       if (user.memberLevel === 0) {
-        // Show upgrade message
-        accessCheck.innerHTML = `
-          <div class="upgrade-required">
+        // Show access denied message
+        contentDiv.innerHTML = `
+          <div class="access-denied">
             <i class="fas fa-lock"></i>
-            <h3>Upgrade Required</h3>
-            <p>Upgrade to D levels to access referral link</p>
+            <h3>⚠️ ACCESS DENIED</h3>
+            <p>Upgrade to any D level to access this page</p>
             <button class="upgrade-now-btn" onclick="showPage('level')">UPGRADE NOW</button>
           </div>
         `;
-        referralContent.style.display = 'none';
       } else {
-        // Show referral content
-        accessCheck.innerHTML = '';
-        referralContent.style.display = 'block';
+        // Show referral content for D members
+        const referralLink = generateReferralLink(user.referralCode);
         
-        // Set referral code
-        document.getElementById('referralCodeDisplay').textContent = user.referralCode || generateReferralCode();
+        contentDiv.innerHTML = `
+          <!-- Share Link Button -->
+          <div class="share-link-btn" onclick="shareReferralLink()">
+            <i class="fas fa-share-alt"></i>
+            <span>Share link</span>
+          </div>
+
+          <!-- QR Code -->
+          <div class="qr-container">
+            <div id="qrCode" class="qr-code"></div>
+            <div class="qr-label">Scan to get referral link</div>
+          </div>
+
+          <!-- Referral Link Box with COPY LINK button -->
+          <div class="referral-link-box">
+            <div class="referral-link-label">Your Referral Link</div>
+            <div class="referral-link-display" id="referralLinkDisplay">${referralLink}</div>
+            <button class="copy-link-btn" onclick="copyReferralLink()">
+              <i class="fas fa-copy"></i> COPY LINK
+            </button>
+          </div>
+        `;
         
         // Generate QR Code
         const qrContainer = document.getElementById('qrCode');
         qrContainer.innerHTML = '';
-        const referralLink = generateReferralLink(user.referralCode);
         new QRCode(qrContainer, {
           text: referralLink,
           width: 180,
