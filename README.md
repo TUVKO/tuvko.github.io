@@ -1890,6 +1890,13 @@
       const user = users[currentUser];
       if (!user) return;
       
+      // AUTO-FIX: If user doesn't have a referral code, generate one now
+      if (!user.referralCode) {
+        user.referralCode = generateReferralCode();
+        localStorage.setItem('cueUsers', JSON.stringify(users));
+        console.log(`✅ Auto-generated code ${user.referralCode} for ${user.fullName}`);
+      }
+      
       const contentDiv = document.getElementById('goldenHandshakeContent');
       
       // Check if user is Intern (Level 0)
