@@ -224,7 +224,7 @@
     }
 
     /* Main Dashboard Pages */
-    #mainDashboard, #profilePage, #levelPage, #taskPage, #incomePage, #taskRecordPage, #teamReportPage {
+    #mainDashboard, #profilePage, #levelPage, #taskPage, #incomePage, #taskRecordPage, #teamReportPage, #goldenHandshakePage {
       display: none;
       flex-direction: column;
       height: 100%;
@@ -487,7 +487,7 @@
       color: #000;
     }
 
-    /* Menu Grid - UNCHANGED */
+    /* Menu Grid - CHANGED: bill record to Golden Handshake */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -746,6 +746,110 @@
       margin-bottom: 8px;
     }
 
+    /* Golden Handshake Page Styles (NEW) */
+    .golden-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .golden-header h2 {
+      color: #7d5ba6;
+      font-size: 1.5rem;
+    }
+    
+    .referral-link-box {
+      background: #f5edff;
+      border: 2px dashed #7d5ba6;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .referral-link-box span {
+      color: #4a3b5e;
+      font-size: 0.9rem;
+      word-break: break-all;
+    }
+    
+    .copy-btn {
+      background: #7d5ba6;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    
+    .commission-card {
+      background: linear-gradient(135deg, #7d5ba6, #b8a3d9);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      color: white;
+    }
+    
+    .commission-amount {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    
+    .commission-breakdown {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .breakdown-item {
+      background: #f5edff;
+      border-radius: 15px;
+      padding: 12px;
+      text-align: center;
+    }
+    
+    .breakdown-percent {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #7d5ba6;
+    }
+    
+    .breakdown-label {
+      font-size: 0.7rem;
+      color: #666;
+    }
+    
+    .breakdown-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4a3b5e;
+    }
+    
+    .team-stats-box {
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 3px solid #7d5ba6;
+    }
+    
+    .team-stats-box h4 {
+      color: #4a3b5e;
+      margin-bottom: 10px;
+    }
+    
+    .team-stats-box .stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+    
     /* Modals - UNCHANGED */
     .modal-overlay {
       display: none;
@@ -827,7 +931,7 @@
         </form>
       </div>
 
-      <!-- REGISTRATION FORM -->
+      <!-- REGISTRATION FORM - Updated with Referrer Field -->
       <div id="registerForm" class="auth-form">
         <form onsubmit="handleRegister(event)">
           <div class="form-group">
@@ -864,6 +968,14 @@
               <i class="fas fa-lock"></i>
               <input type="password" id="regPassword" placeholder="Create a password" required>
             </div>
+          </div>
+          <div class="form-group">
+            <label>Referrer Phone (Optional)</label>
+            <div class="input-icon">
+              <i class="fas fa-user-plus"></i>
+              <input type="tel" id="regReferrer" placeholder="Enter referrer's phone number">
+            </div>
+            <div class="password-hint">If someone referred you, enter their phone</div>
           </div>
           <button type="submit" class="auth-btn">Register</button>
           <div class="auth-footer">
@@ -933,7 +1045,7 @@
       </div>
     </div>
 
-    <!-- PROFILE PAGE (ME) - WALLETS STILL HERE (unchanged) -->
+    <!-- PROFILE PAGE (ME) - CHANGED: bill record to Golden Handshake -->
     <div id="profilePage">
       <div class="scroll-content">
         <div class="profile-header">
@@ -986,12 +1098,12 @@
           <span class="commission-value" id="subordinateCommission">0.00 UGX</span>
         </div>
 
-        <!-- Menu Grid - Clickable -->
+        <!-- Menu Grid - CHANGED: bill record to Golden Handshake -->
         <div class="menu-grid">
           <div class="menu-item" onclick="showTaskRecord()"><i class="fas fa-clipboard-list"></i> task record</div>
           <div class="menu-item" onclick="showTeamReport()"><i class="fas fa-users"></i> team report</div>
           <div class="menu-item" onclick="alert('daily report coming soon')"><i class="fas fa-calendar-alt"></i> daily report</div>
-          <div class="menu-item" onclick="alert('bill record coming soon')"><i class="fas fa-file-invoice"></i> bill record</div>
+          <div class="menu-item" onclick="showGoldenHandshake()"><i class="fas fa-handshake"></i> Golden Handshake</div>
           <div class="menu-item" onclick="alert('Position Salary coming soon')"><i class="fas fa-chart-line"></i> Position Salary</div>
           <div class="menu-item" onclick="alert('APP download coming soon')"><i class="fas fa-download"></i> APP download</div>
         </div>
@@ -1007,6 +1119,78 @@
         <div class="nav-item" onclick="showPage('level')"><i class="fas fa-chart-simple"></i><span>Level</span></div>
         <div class="nav-item" onclick="showPage('income')"><i class="fas fa-coins"></i><span>Income</span></div>
         <div class="nav-item active" onclick="showPage('profile')"><i class="fas fa-user"></i><span>Me</span></div>
+      </div>
+    </div>
+
+    <!-- GOLDEN HANDSHAKE PAGE (NEW) - Referral Program -->
+    <div id="goldenHandshakePage">
+      <div class="scroll-content">
+        <!-- Back Button -->
+        <button class="back-btn" onclick="showPage('profile')"><i class="fas fa-arrow-left"></i> Back to Profile</button>
+
+        <div class="golden-header">
+          <i class="fas fa-handshake" style="font-size: 2rem; color: #7d5ba6;"></i>
+          <h2>Golden Handshake</h2>
+        </div>
+
+        <!-- Referral Link -->
+        <div class="referral-link-box">
+          <span id="referralLink">https://tuvko.github.io/ref/...</span>
+          <button class="copy-btn" onclick="copyReferralLink()"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+
+        <!-- Total Commissions Card -->
+        <div class="commission-card">
+          <div style="font-size: 0.9rem; opacity: 0.9;">Total Referral Commissions</div>
+          <div class="commission-amount" id="totalReferralCommission">0 UGX</div>
+          <div style="font-size: 0.8rem; margin-top: 5px;">From your network</div>
+        </div>
+
+        <!-- Commission Breakdown -->
+        <div class="commission-breakdown">
+          <div class="breakdown-item">
+            <div class="breakdown-percent">11%</div>
+            <div class="breakdown-label">A Team</div>
+            <div class="breakdown-value" id="aCommission">0 UGX</div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-percent">4%</div>
+            <div class="breakdown-label">B Team</div>
+            <div class="breakdown-value" id="bCommission">0 UGX</div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-percent">2%</div>
+            <div class="breakdown-label">C Team</div>
+            <div class="breakdown-value" id="cCommission">0 UGX</div>
+          </div>
+        </div>
+
+        <!-- Team Stats -->
+        <div class="team-stats-box">
+          <h4><i class="fas fa-users" style="color: #7d5ba6;"></i> Your Referral Network</h4>
+          <div class="stat-row"><span>A Team (Direct - 11%):</span> <span id="aTeamCount">0</span></div>
+          <div class="stat-row"><span>B Team (Indirect - 4%):</span> <span id="bTeamCount">0</span></div>
+          <div class="stat-row"><span>C Team (Third - 2%):</span> <span id="cTeamCount">0</span></div>
+        </div>
+
+        <!-- How It Works -->
+        <div style="background: #f9f9f9; border-radius: 15px; padding: 15px; margin-top: 10px;">
+          <h4 style="color: #4a3b5e; margin-bottom: 10px;">📋 How It Works</h4>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">✓ Share your referral link with friends</p>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">✓ When they join, they become your A Team</p>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">✓ Earn 11% from their upgrades</p>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">✓ Earn 4% from their referrals (B Team)</p>
+          <p style="font-size: 0.85rem; color: #666;">✓ Earn 2% from third level (C Team)</p>
+        </div>
+      </div>
+
+      <!-- Bottom Nav -->
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showPage('task')"><i class="fas fa-tasks"></i><span>Task</span></div>
+        <div class="nav-item" onclick="showPage('level')"><i class="fas fa-chart-simple"></i><span>Level</span></div>
+        <div class="nav-item" onclick="showPage('income')"><i class="fas fa-coins"></i><span>Income</span></div>
+        <div class="nav-item" onclick="showPage('profile')"><i class="fas fa-user"></i><span>Me</span></div>
       </div>
     </div>
 
@@ -1305,9 +1489,6 @@
     let selectedWallet = 'main';
     
     // ========== 60 COFFEE GROWING BOOKS ==========
-    // Uganda-Specific Books (15)
-    // East Africa Regional Books (15)
-    // International Coffee Books (30)
     let allBooks = [
       // Uganda-Specific Books (1-15)
       { id: 1, title: "Regenerative Agriculture in Coffee", desc: "Handbook for practitioners in Uganda - Bioversity International, 2023" },
@@ -1390,6 +1571,13 @@
       9: { name: "D9", dailyBooks: 74, reward: 40000, deposit: 84000000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 60 }
     };
 
+    // Referral commission rates
+    const referralRates = {
+      a: 0.11, // 11% for direct referrals
+      b: 0.04, // 4% for second level
+      c: 0.02  // 2% for third level
+    };
+
     // Track today's shuffled book order
     let todaysBookOrder = [];
 
@@ -1427,12 +1615,57 @@
       document.getElementById('registerTab').classList.toggle('active', tab === 'register');
     }
 
+    // ========== REFERRAL FUNCTIONS ==========
+    function generateReferralLink(phone) {
+      return `https://tuvko.github.io/register?ref=${phone}`;
+    }
+
+    function copyReferralLink() {
+      const link = document.getElementById('referralLink').textContent;
+      navigator.clipboard.writeText(link).then(() => {
+        alert('✅ Referral link copied to clipboard!');
+      }).catch(() => {
+        alert('❌ Could not copy link. Please select and copy manually.');
+      });
+    }
+
+    function calculateReferralCommissions(user) {
+      if (!user || !user.referralCommissions) {
+        return { total: 0, a: 0, b: 0, c: 0 };
+      }
+      return user.referralCommissions;
+    }
+
+    function addReferralCommission(referrerPhone, level, amount) {
+      if (!referrerPhone || !users[referrerPhone]) return;
+      
+      const referrer = users[referrerPhone];
+      if (!referrer.referralCommissions) {
+        referrer.referralCommissions = { a: 0, b: 0, c: 0, total: 0 };
+      }
+      
+      let commission = 0;
+      if (level === 'a') commission = amount * referralRates.a;
+      else if (level === 'b') commission = amount * referralRates.b;
+      else if (level === 'c') commission = amount * referralRates.c;
+      
+      referrer.referralCommissions[level] += commission;
+      referrer.referralCommissions.total += commission;
+      
+      // Add to commission wallet
+      referrer.commissionWallet = (referrer.commissionWallet || 0) + commission;
+      
+      localStorage.setItem('cueUsers', JSON.stringify(users));
+    }
+
+    // Updated handleRegister with referral
     function handleRegister(e) {
       e.preventDefault();
       const fullName = document.getElementById('regFullName').value;
       const phone = document.getElementById('regPhone').value;
       const country = document.getElementById('regCountry').value;
       const password = document.getElementById('regPassword').value;
+      const referrerPhone = document.getElementById('regReferrer')?.value || null;
 
       if (!fullName || !phone || !country || !password) {
         alert('Please fill all fields');
@@ -1442,6 +1675,12 @@
       if (users[phone]) {
         alert('Phone already registered');
         switchAuthTab('login');
+        return;
+      }
+
+      // Validate referrer if provided
+      if (referrerPhone && !users[referrerPhone]) {
+        alert('Referrer phone number not found. Please check or leave blank.');
         return;
       }
 
@@ -1459,10 +1698,19 @@
         lastReadDate: now.toDateString(),
         totalEarned: 0,
         taskHistory: [],
-        referredBy: null,
+        referredBy: referrerPhone,
         referrals: [],
+        referralCommissions: { a: 0, b: 0, c: 0, total: 0 },
         registeredDate: now.toISOString()
       };
+
+      // Add to referrer's referrals if exists
+      if (referrerPhone && users[referrerPhone]) {
+        if (!users[referrerPhone].referrals) {
+          users[referrerPhone].referrals = [];
+        }
+        users[referrerPhone].referrals.push(phone);
+      }
 
       localStorage.setItem('cueUsers', JSON.stringify(users));
       localStorage.setItem('currentUser', phone);
@@ -1472,61 +1720,9 @@
       showPage('home');
     }
 
-    function handleLogin(e) {
-      e.preventDefault();
-      const phone = document.getElementById('loginPhone').value;
-      const password = document.getElementById('loginPassword').value;
-
-      if (users[phone] && users[phone].password === password) {
-        localStorage.setItem('currentUser', phone);
-        currentUser = phone;
-        alert('Login successful!');
-        loadUserData();
-        showPage('home');
-      } else {
-        alert('Invalid phone or password');
-      }
-    }
-
-    // ========== PAGE NAVIGATION ==========
-    function showPage(page) {
-      document.getElementById('authContainer').style.display = 'none';
-      document.getElementById('mainDashboard').style.display = page === 'home' ? 'flex' : 'none';
-      document.getElementById('profilePage').style.display = page === 'profile' ? 'flex' : 'none';
-      document.getElementById('levelPage').style.display = page === 'level' ? 'flex' : 'none';
-      document.getElementById('taskPage').style.display = page === 'task' ? 'flex' : 'none';
-      document.getElementById('incomePage').style.display = page === 'income' ? 'flex' : 'none';
-      document.getElementById('taskRecordPage').style.display = page === 'taskRecord' ? 'flex' : 'none';
-      document.getElementById('teamReportPage').style.display = page === 'teamReport' ? 'flex' : 'none';
-
-      // Update active nav
-      document.querySelectorAll('.bottom-nav').forEach(nav => {
-        const items = nav.querySelectorAll('.nav-item');
-        items.forEach(item => item.classList.remove('active'));
-        if (page === 'home') items[0]?.classList.add('active');
-        else if (page === 'task') items[1]?.classList.add('active');
-        else if (page === 'level') items[2]?.classList.add('active');
-        else if (page === 'income') items[3]?.classList.add('active');
-        else if (page === 'profile') items[4]?.classList.add('active');
-      });
-
-      if (page === 'task') loadTaskBooks();
-      if (page === 'home') loadHomeBooks();
-      if (page === 'taskRecord') loadTaskRecord();
-      if (page === 'teamReport') loadTeamReport();
-      if (page === 'level') updateLevelWalletDisplay();
-    }
-
-    function showTaskRecord() {
-      showPage('taskRecord');
-    }
-
-    function showTeamReport() {
-      showPage('teamReport');
-    }
-
-    // ========== LEVEL PURCHASE ==========
-    function purchaseLevel(level, cost) {
+    // Update purchaseLevel to handle referral commissions
+    const originalPurchaseLevel = purchaseLevel;
+    purchaseLevel = function(level, cost) {
       const user = users[currentUser];
       if (!user) {
         alert('Please login first');
@@ -1550,6 +1746,24 @@
         if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
           user.mainWallet -= cost;
           upgradeUser(user, level, cost);
+          
+          // Handle referral commissions
+          if (user.referredBy) {
+            // A commission to referrer
+            addReferralCommission(user.referredBy, 'a', cost);
+            
+            // B commission to referrer's referrer
+            const aReferrer = users[user.referredBy];
+            if (aReferrer && aReferrer.referredBy) {
+              addReferralCommission(aReferrer.referredBy, 'b', cost);
+              
+              // C commission to referrer's referrer's referrer
+              const bReferrer = users[aReferrer.referredBy];
+              if (bReferrer && bReferrer.referredBy) {
+                addReferralCommission(bReferrer.referredBy, 'c', cost);
+              }
+            }
+          }
         }
       } 
       // EXISTING MEMBER (level 1-8) - Can use both wallets
@@ -1580,9 +1794,27 @@
           }
           
           upgradeUser(user, level, cost);
+          
+          // Handle referral commissions
+          if (user.referredBy) {
+            // A commission to referrer
+            addReferralCommission(user.referredBy, 'a', cost);
+            
+            // B commission to referrer's referrer
+            const aReferrer = users[user.referredBy];
+            if (aReferrer && aReferrer.referredBy) {
+              addReferralCommission(aReferrer.referredBy, 'b', cost);
+              
+              // C commission to referrer's referrer's referrer
+              const bReferrer = users[aReferrer.referredBy];
+              if (bReferrer && bReferrer.referredBy) {
+                addReferralCommission(bReferrer.referredBy, 'c', cost);
+              }
+            }
+          }
         }
       }
-    }
+    };
 
     function upgradeUser(user, level, cost) {
       // Upgrade member level
@@ -1615,6 +1847,92 @@
         document.getElementById('levelMainWallet').innerHTML = `Main Wallet: ${(user.mainWallet || 0).toLocaleString()} UGX`;
         document.getElementById('levelCommissionWallet').innerHTML = `Commission Wallet: ${(user.commissionWallet || 0).toLocaleString()} UGX`;
       }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const phone = document.getElementById('loginPhone').value;
+      const password = document.getElementById('loginPassword').value;
+
+      if (users[phone] && users[phone].password === password) {
+        localStorage.setItem('currentUser', phone);
+        currentUser = phone;
+        alert('Login successful!');
+        loadUserData();
+        showPage('home');
+      } else {
+        alert('Invalid phone or password');
+      }
+    }
+
+    // ========== PAGE NAVIGATION ==========
+    function showPage(page) {
+      document.getElementById('authContainer').style.display = 'none';
+      document.getElementById('mainDashboard').style.display = page === 'home' ? 'flex' : 'none';
+      document.getElementById('profilePage').style.display = page === 'profile' ? 'flex' : 'none';
+      document.getElementById('levelPage').style.display = page === 'level' ? 'flex' : 'none';
+      document.getElementById('taskPage').style.display = page === 'task' ? 'flex' : 'none';
+      document.getElementById('incomePage').style.display = page === 'income' ? 'flex' : 'none';
+      document.getElementById('taskRecordPage').style.display = page === 'taskRecord' ? 'flex' : 'none';
+      document.getElementById('teamReportPage').style.display = page === 'teamReport' ? 'flex' : 'none';
+      document.getElementById('goldenHandshakePage').style.display = page === 'goldenHandshake' ? 'flex' : 'none';
+
+      // Update active nav
+      document.querySelectorAll('.bottom-nav').forEach(nav => {
+        const items = nav.querySelectorAll('.nav-item');
+        items.forEach(item => item.classList.remove('active'));
+        if (page === 'home') items[0]?.classList.add('active');
+        else if (page === 'task') items[1]?.classList.add('active');
+        else if (page === 'level') items[2]?.classList.add('active');
+        else if (page === 'income') items[3]?.classList.add('active');
+        else if (page === 'profile') items[4]?.classList.add('active');
+      });
+
+      if (page === 'task') loadTaskBooks();
+      if (page === 'home') loadHomeBooks();
+      if (page === 'taskRecord') loadTaskRecord();
+      if (page === 'teamReport') loadTeamReport();
+      if (page === 'level') updateLevelWalletDisplay();
+      if (page === 'goldenHandshake') loadGoldenHandshake();
+    }
+
+    function showTaskRecord() {
+      showPage('taskRecord');
+    }
+
+    function showTeamReport() {
+      showPage('teamReport');
+    }
+
+    function showGoldenHandshake() {
+      showPage('goldenHandshake');
+    }
+
+    // ========== GOLDEN HANDSHAKE PAGE ==========
+    function loadGoldenHandshake() {
+      const user = users[currentUser];
+      if (!user) return;
+      
+      // Set referral link
+      document.getElementById('referralLink').textContent = generateReferralLink(user.phone);
+      
+      // Calculate commissions
+      const commissions = calculateReferralCommissions(user);
+      document.getElementById('totalReferralCommission').innerHTML = `${commissions.total.toLocaleString()} UGX`;
+      document.getElementById('aCommission').innerHTML = `${commissions.a.toLocaleString()} UGX`;
+      document.getElementById('bCommission').innerHTML = `${commissions.b.toLocaleString()} UGX`;
+      document.getElementById('cCommission').innerHTML = `${commissions.c.toLocaleString()} UGX`;
+      
+      // Count referrals
+      const aMembers = user.referrals || [];
+      const aPhones = aMembers.map(m => m);
+      const bMembers = Object.values(users).filter(u => aPhones.includes(u.referredBy));
+      const bPhones = bMembers.map(m => m.phone);
+      const cMembers = Object.values(users).filter(u => bPhones.includes(u.referredBy));
+      
+      document.getElementById('aTeamCount').textContent = aMembers.length;
+      document.getElementById('bTeamCount').textContent = bMembers.length;
+      document.getElementById('cTeamCount').textContent = cMembers.length;
     }
 
     // ========== LOAD USER DATA ==========
@@ -1656,7 +1974,7 @@
       document.getElementById('todayIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
       document.getElementById('totalIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
       document.getElementById('monthIncomeValue').innerHTML = `0.00 UGX`;
-      document.getElementById('subordinateCommission').innerHTML = `0.00 UGX`;
+      document.getElementById('subordinateCommission').innerHTML = `${(user.referralCommissions?.total || 0).toFixed(2)} UGX`;
       
       // Update withdraw modal balances
       document.getElementById('withdrawMainBalance').innerHTML = (user.mainWallet || 0).toLocaleString() + ' UGX';
@@ -2143,6 +2461,7 @@
       document.getElementById('incomePage').style.display = 'none';
       document.getElementById('taskRecordPage').style.display = 'none';
       document.getElementById('teamReportPage').style.display = 'none';
+      document.getElementById('goldenHandshakePage').style.display = 'none';
     }
 
     // ========== INIT ==========
@@ -2163,7 +2482,8 @@
           totalEarned: 0,
           taskHistory: [],
           referredBy: null,
-          referrals: []
+          referrals: [],
+          referralCommissions: { a: 25000, b: 8000, c: 3000, total: 36000 }
         };
         
         // Demo intern user
@@ -2180,8 +2500,9 @@
           lastReadDate: new Date().toDateString(),
           totalEarned: 1500,
           taskHistory: [],
-          referredBy: null,
-          referrals: []
+          referredBy: '0756673144',
+          referrals: [],
+          referralCommissions: { a: 0, b: 0, c: 0, total: 0 }
         };
 
         // Demo D1 member
@@ -2198,8 +2519,9 @@
           lastReadDate: new Date().toDateString(),
           totalEarned: 3000,
           taskHistory: [],
-          referredBy: null,
-          referrals: []
+          referredBy: '0777123456',
+          referrals: [],
+          referralCommissions: { a: 5000, b: 0, c: 0, total: 5000 }
         };
 
         localStorage.setItem('cueUsers', JSON.stringify(users));
