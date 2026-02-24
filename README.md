@@ -2214,5 +2214,27 @@
       updateTime();
     };
   </script>
+  
+  <!-- FIX: This will remove any stray DOCTYPE text that appears on the page -->
+  <script>
+    // Run this immediately to clean any text nodes at the beginning of body
+    (function() {
+      // Remove any empty text nodes or DOCTYPE text at the start of body
+      const body = document.body;
+      for (let i = 0; i < body.childNodes.length; i++) {
+        const node = body.childNodes[i];
+        if (node.nodeType === 3) { // Text node
+          const text = node.textContent.trim();
+          if (text === '' || text.includes('<!DOCTYPE') || text.includes('<html')) {
+            body.removeChild(node);
+            i--; // Adjust index after removal
+          }
+        } else {
+          // Once we hit an element node, stop (we only care about the very beginning)
+          break;
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
