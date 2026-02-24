@@ -365,50 +365,7 @@
       color: #7d5ba6;  /* Changed from #000000 to Medium Purple */
     }
 
-    /* Upgrade Section - Home Dashboard */
-    .upgrade-section {
-      background: #f2eaff;  /* Changed from #fff9e6 to Light Purple */
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 25px;
-      border: 2px dashed #b8a3d9;  /* Changed from #ffc107 to Light Purple */
-    }
-
-    .upgrade-title {
-      font-weight: 700;
-      color: #4a3b5e;  /* Changed from #b45f06 to Deep Purple-Gray */
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-
-    .upgrade-list {
-      list-style: none;
-      margin-bottom: 20px;
-    }
-
-    .upgrade-list li {
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #4a3b5e;  /* Added Deep Purple-Gray */
-    }
-
-    .upgrade-list li i {
-      color: #7d5ba6;  /* Changed from #28a745 to Medium Purple */
-    }
-
-    .upgrade-btn {
-      background: #b8a3d9;  /* Changed from #ff9800 to Light Purple */
-      color: #4a3b5e;  /* Changed from white to Deep Purple-Gray */
-      border: none;
-      padding: 14px;
-      border-radius: 30px;
-      width: 100%;
-      font-weight: 600;
-      cursor: pointer;
-    }
+    /* REMOVED: Upgrade Section - Completely deleted as requested */
 
     .company-line {
       display: flex;
@@ -915,7 +872,7 @@
       </div>
     </div>
 
-    <!-- MAIN DASHBOARD (Home Page) - NOW WITH GRAY-PURPLE THEME -->
+    <!-- MAIN DASHBOARD (Home Page) - UPGRADE SECTION REMOVED -->
     <div id="mainDashboard">
       <div class="scroll-content">
         <div class="welcome-title">WELCOME</div>
@@ -968,20 +925,7 @@
           </div>
         </div>
 
-        <!-- Upgrade Section -->
-        <div id="upgradeSection">
-          <div class="upgrade-section">
-            <div class="upgrade-title">⬆️ UPGRADE TO LEVEL 1-9</div>
-            <ul class="upgrade-list">
-              <li><i class="fas fa-check-circle"></i> Withdraw Monday-Saturday</li>
-              <li><i class="fas fa-check-circle"></i> Referral bonuses</li>
-              <li><i class="fas fa-check-circle"></i> More books per day</li>
-              <li><i class="fas fa-check-circle"></i> Higher rewards</li>
-              <li><i class="fas fa-check-circle"></i> 365 days access</li>
-            </ul>
-            <button class="upgrade-btn" onclick="openDepositModal()">DEPOSIT & UPGRADE NOW</button>
-          </div>
-        </div>
+        <!-- UPGRADE SECTION HAS BEEN REMOVED -->
 
         <!-- Company Profile -->
         <div class="company-line">
