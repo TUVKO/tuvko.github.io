@@ -176,6 +176,7 @@
       left: 15px;
       color: #00acc1;
       font-size: 1.1rem;
+      z-index: 1;
     }
 
     .input-icon input,
@@ -193,6 +194,49 @@
     .input-icon select:focus {
       border-color: #7d5ba6;
       box-shadow: 0 0 0 3px rgba(125, 91, 166, 0.1);
+    }
+
+    /* Phone input with country code prefix */
+    .phone-input-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border: 2px solid #e0f0f3;
+      border-radius: 30px;
+      background: white;
+      transition: all 0.2s;
+    }
+
+    .phone-input-container:focus-within {
+      border-color: #7d5ba6;
+      box-shadow: 0 0 0 3px rgba(125, 91, 166, 0.1);
+    }
+
+    .country-code-prefix {
+      padding: 15px 0 15px 45px;
+      background: transparent;
+      color: #003d4d;
+      font-weight: 600;
+      font-size: 1rem;
+      white-space: nowrap;
+      border-right: 1px solid #e0f0f3;
+      margin-right: 5px;
+      min-width: 70px;
+    }
+
+    .phone-input-container input {
+      flex: 1;
+      padding: 15px 15px 15px 5px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      outline: none;
+      background: transparent;
+    }
+
+    .phone-input-container input:focus {
+      border: none;
+      outline: none;
     }
 
     /* Password field with eye icon */
@@ -1013,9 +1057,10 @@
         </form>
       </div>
 
-      <!-- REGISTRATION FORM - REDESIGNED with Country FIRST, Phone SECOND, Password show/hide, Confirm password -->
+      <!-- REGISTRATION FORM - UPDATED with your requirements -->
       <div id="registerForm" class="auth-form">
         <form onsubmit="handleRegister(event)">
+          <!-- 1. Full Name -->
           <div class="form-group">
             <label>Full Names</label>
             <div class="input-icon">
@@ -1024,32 +1069,32 @@
             </div>
           </div>
           
-          <!-- Country FIRST (moved up) -->
+          <!-- 2. Country - Only Kenya and Uganda -->
           <div class="form-group">
             <label>Country</label>
             <div class="input-icon">
               <i class="fas fa-globe-africa"></i>
-              <select id="regCountry" required>
+              <select id="regCountry" onchange="updateCountryCode()" required>
                 <option value="">Select your country</option>
-                <option value="Uganda">Uganda 🇺🇬</option>
-                <option value="Kenya">Kenya 🇰🇪</option>
-                <option value="Tanzania">Tanzania 🇹🇿</option>
-                <option value="Burundi">Burundi 🇧🇮</option>
-                <option value="South Sudan">South Sudan 🇸🇸</option>
+                <option value="Kenya">Kenya 🇰🇪 (+254)</option>
+                <option value="Uganda">Uganda 🇺🇬 (+256)</option>
               </select>
             </div>
           </div>
           
-          <!-- Phone Number SECOND (with 0 validation) -->
+          <!-- 3. Phone Number with fixed country code prefix -->
           <div class="form-group">
-            <label>Phone Number (must start with 0)</label>
+            <label>Phone Number (10 digits starting with 0)</label>
             <div class="input-icon">
               <i class="fas fa-phone-alt"></i>
-              <input type="tel" id="regPhone" placeholder="Enter your phone number" required pattern="0[0-9]{8,}" title="Phone number must start with 0 and be at least 9 digits">
+              <div class="phone-input-container">
+                <span class="country-code-prefix" id="countryCodeDisplay">+254</span>
+                <input type="tel" id="regPhone" placeholder="0712345678" pattern="0[0-9]{9}" maxlength="10" title="Enter 10 digits starting with 0" required>
+              </div>
             </div>
           </div>
           
-          <!-- Password with show/hide toggle -->
+          <!-- 4. Password only (no confirm password) -->
           <div class="form-group">
             <label>Password (minimum 6 characters)</label>
             <div class="input-icon">
@@ -1061,26 +1106,14 @@
             </div>
           </div>
           
-          <!-- Confirm Password with show/hide toggle -->
+          <!-- 5. Referral Code - MANDATORY (removed Optional) -->
           <div class="form-group">
-            <label>Confirm Password</label>
-            <div class="input-icon">
-              <i class="fas fa-lock"></i>
-              <div class="password-wrapper">
-                <input type="password" id="regConfirmPassword" placeholder="Confirm your password" minlength="6" required>
-                <i class="fas fa-eye" id="toggleConfirmPassword" onclick="togglePasswordVisibility('regConfirmPassword', this)"></i>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Referral Code (auto-filled from URL) -->
-          <div class="form-group">
-            <label>Referral Code (Optional)</label>
+            <label>Referral Code <span style="color: #ff0000;">*</span></label>
             <div class="input-icon">
               <i class="fas fa-user-plus"></i>
-              <input type="text" id="regReferralCode" placeholder="Enter referral code">
+              <input type="text" id="regReferralCode" placeholder="Enter referral code" required>
             </div>
-            <div class="password-hint">If someone referred you, enter their code</div>
+            <div class="password-hint">You must enter a valid referral code to register</div>
           </div>
           
           <button type="submit" class="auth-btn">Register</button>
@@ -1663,6 +1696,20 @@
       }
     }
 
+    // Update country code prefix based on selection
+    function updateCountryCode() {
+      const country = document.getElementById('regCountry').value;
+      const codeDisplay = document.getElementById('countryCodeDisplay');
+      
+      if (country === 'Kenya') {
+        codeDisplay.textContent = '+254';
+      } else if (country === 'Uganda') {
+        codeDisplay.textContent = '+256';
+      } else {
+        codeDisplay.textContent = '+254'; // Default
+      }
+    }
+
     // Get URL parameters
     function getUrlParameter(name) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -1719,6 +1766,8 @@
         if (refCode) {
           document.getElementById('regReferralCode').value = refCode;
         }
+        // Set default country code
+        updateCountryCode();
       }
     }
 
@@ -1730,30 +1779,28 @@
       const country = document.getElementById('regCountry').value;
       const phone = document.getElementById('regPhone').value;
       const password = document.getElementById('regPassword').value;
-      const confirmPassword = document.getElementById('regConfirmPassword').value;
       const referralCode = document.getElementById('regReferralCode').value;
 
       // Validate all fields
-      if (!fullName || !country || !phone || !password || !confirmPassword) {
+      if (!fullName || !country || !phone || !password || !referralCode) {
         alert('Please fill all fields');
         return;
       }
 
-      // Validate phone starts with 0
+      // Validate phone starts with 0 and is exactly 10 digits
       if (!phone.startsWith('0')) {
         alert('Phone number must start with 0');
+        return;
+      }
+
+      if (phone.length !== 10) {
+        alert('Phone number must be exactly 10 digits');
         return;
       }
 
       // Validate password length
       if (password.length < 6) {
         alert('Password must be at least 6 characters');
-        return;
-      }
-
-      // Validate password match
-      if (password !== confirmPassword) {
-        alert('Passwords do not match');
         return;
       }
 
@@ -1764,16 +1811,19 @@
         return;
       }
 
-      // Find referrer by code if provided
+      // Find referrer by code (MANDATORY)
       let referredBy = null;
       if (referralCode) {
         const referrer = Object.values(users).find(u => u.referralCode === referralCode);
         if (referrer) {
           referredBy = referrer.phone;
         } else {
-          alert('Referral code not found. Please check or leave blank.');
+          alert('Referral code not found. Please enter a valid referral code.');
           return;
         }
+      } else {
+        alert('Referral code is required');
+        return;
       }
 
       const now = new Date();
