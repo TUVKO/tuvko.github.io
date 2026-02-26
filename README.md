@@ -45,14 +45,14 @@
       padding: 20px 20px 10px 20px;
     }
 
-    /* Bottom Navigation - Home Dashboard Active Colors Changed to Purple */
+    /* Bottom Navigation - All Purple */
     .bottom-nav {
       display: flex;
       align-items: center;
       justify-content: space-around;
       background: #ffffff;
       padding: 12px 0 8px 0;
-      border-top: 1px solid #f0f0f0;
+      border-top: 2px solid #7d5ba6;
       width: 100%;
       flex-shrink: 0;
       margin-top: auto;
@@ -97,7 +97,7 @@
     .logo-icon {
       width: 80px;
       height: 80px;
-      background: linear-gradient(135deg, #006a7a, #00bcd4);
+      background: linear-gradient(135deg, #7d5ba6, #b8a3d9);
       border-radius: 30px;
       display: flex;
       align-items: center;
@@ -105,24 +105,24 @@
       margin: 0 auto 15px;
       color: white;
       font-size: 2.5rem;
-      box-shadow: 0 10px 25px rgba(0,150,170,0.3);
+      box-shadow: 0 10px 25px rgba(125,91,166,0.3);
     }
 
     .logo-area h1 {
-      color: #003d4d;
+      color: #4a3b5e;
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 5px;
     }
 
     .logo-area p {
-      color: #597e89;
+      color: #8a7a9c;
       font-size: 0.9rem;
     }
 
     .auth-tabs {
       display: flex;
-      background: #ecf7f9;
+      background: #f5edff;
       border-radius: 60px;
       padding: 5px;
       margin-bottom: 25px;
@@ -134,15 +134,15 @@
       padding: 12px;
       border-radius: 60px;
       font-weight: 600;
-      color: #006a7a;
+      color: #7d5ba6;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .auth-tab.active {
       background: white;
-      color: #003d4d;
-      box-shadow: 0 4px 10px rgba(0,150,160,0.15);
+      color: #4a3b5e;
+      box-shadow: 0 4px 10px rgba(125,91,166,0.15);
     }
 
     .auth-form {
@@ -159,7 +159,7 @@
 
     .form-group label {
       display: block;
-      color: #003d4d;
+      color: #4a3b5e;
       font-weight: 600;
       margin-bottom: 8px;
       font-size: 0.9rem;
@@ -174,7 +174,7 @@
     .input-icon i {
       position: absolute;
       left: 15px;
-      color: #00acc1;
+      color: #b8a3d9;
       font-size: 1.1rem;
       z-index: 1;
     }
@@ -183,7 +183,7 @@
     .input-icon select {
       width: 100%;
       padding: 15px 15px 15px 45px;
-      border: 2px solid #e0f0f3;
+      border: 2px solid #e0d0eb;
       border-radius: 30px;
       font-size: 1rem;
       outline: none;
@@ -201,7 +201,7 @@
       display: flex;
       align-items: center;
       width: 100%;
-      border: 2px solid #e0f0f3;
+      border: 2px solid #e0d0eb;
       border-radius: 30px;
       background: white;
       transition: all 0.2s;
@@ -215,11 +215,11 @@
     .country-code-prefix {
       padding: 15px 0 15px 45px;
       background: transparent;
-      color: #003d4d;
+      color: #4a3b5e;
       font-weight: 600;
       font-size: 1rem;
       white-space: nowrap;
-      border-right: 1px solid #e0f0f3;
+      border-right: 1px solid #e0d0eb;
       margin-right: 5px;
       min-width: 70px;
     }
@@ -248,7 +248,7 @@
     .password-wrapper input {
       width: 100%;
       padding: 15px 45px 15px 45px;
-      border: 2px solid #e0f0f3;
+      border: 2px solid #e0d0eb;
       border-radius: 30px;
       font-size: 1rem;
       outline: none;
@@ -271,7 +271,7 @@
     }
 
     .auth-btn {
-      background: linear-gradient(135deg, #006a7a, #00bcd4);
+      background: linear-gradient(135deg, #7d5ba6, #b8a3d9);
       color: white;
       border: none;
       width: 100%;
@@ -285,17 +285,17 @@
 
     .auth-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,150,170,0.4);
+      box-shadow: 0 10px 25px rgba(125,91,166,0.4);
     }
 
     .auth-footer {
       text-align: center;
-      color: #597e89;
+      color: #8a7a9c;
       font-size: 0.9rem;
     }
 
     .auth-footer a {
-      color: #006a7a;
+      color: #7d5ba6;
       font-weight: 600;
       text-decoration: none;
     }
@@ -306,14 +306,8 @@
       margin-top: 5px;
     }
 
-    /* Success Message */
+    /* Success Message - Hidden by default */
     .success-message {
-      background: #d4edda;
-      color: #155724;
-      padding: 15px;
-      border-radius: 30px;
-      text-align: center;
-      margin-bottom: 20px;
       display: none;
     }
 
@@ -475,15 +469,13 @@
       color: #7d5ba6;
     }
 
-    /* WALLETS REMOVED FROM HOME DASHBOARD */
-
     /* Daily Counter - Home Dashboard */
-    div[style*="background:#f0f8ff"] {
+    div[style*="background:#f5edff"] {
       background: #f5edff !important;
       color: #4a3b5e;
     }
 
-    /* Profile Page - UNCHANGED */
+    /* Profile Page */
     .profile-header {
       display: flex;
       justify-content: space-between;
@@ -494,14 +486,15 @@
       font-size: 1.3rem;
       font-weight: 700;
       margin-bottom: 5px;
+      color: #4a3b5e;
     }
 
     .employee-role {
-      color: #666;
+      color: #8a7a9c;
       margin-bottom: 20px;
     }
 
-    /* Wallets Container - Only visible on Profile Page */
+    /* Wallets Container - Updated names */
     .wallets-container {
       display: flex;
       gap: 10px;
@@ -527,15 +520,15 @@
       font-weight: 700;
     }
 
-    .wallet-box.main {
-      border-left: 3px solid #006a7a;
+    .wallet-box.operating {
+      border-left: 3px solid #7d5ba6;
     }
 
-    .wallet-box.commission {
-      border-left: 3px solid #ff9800;
+    .wallet-box.incentive {
+      border-left: 3px solid #b8a3d9;
     }
 
-    /* Income Grid - UNCHANGED */
+    /* Income Grid */
     .income-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -559,8 +552,8 @@
       color: #000;
     }
 
-    /* Commission Row - UNCHANGED */
-    .commission-row {
+    /* Incentive Row */
+    .incentive-row {
       display: flex;
       justify-content: space-between;
       padding: 15px 0;
@@ -569,17 +562,17 @@
       margin-bottom: 20px;
     }
 
-    .commission-label {
+    .incentive-label {
       color: #000;
       font-size: 0.9rem;
     }
 
-    .commission-value {
+    .incentive-value {
       font-weight: 700;
       color: #000;
     }
 
-    /* Menu Grid - Golden Handshake added */
+    /* Menu Grid */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -596,7 +589,7 @@
     }
 
     .menu-item i {
-      color: #666;
+      color: #7d5ba6;
       width: 20px;
     }
 
@@ -609,7 +602,7 @@
       cursor: pointer;
     }
 
-    /* Level Page - ULTRA COMPACT WITH COLORS */
+    /* Level Page */
     .level-page-title {
       font-size: 1.6rem;
       font-weight: 700;
@@ -657,29 +650,29 @@
       margin: 3px 0 5px 0;
     }
 
-    /* Wallet Displays - UNCHANGED */
-    .main-wallet-display {
-      background: #e6f3ff;
+    /* Wallet Displays - Updated names */
+    .operating-wallet-display {
+      background: #f5edff;
       border-radius: 12px;
       padding: 10px;
       margin-bottom: 6px;
       text-align: center;
       font-size: 1rem;
       font-weight: 700;
-      color: #0066cc;
-      border: 2px solid #0099ff;
+      color: #7d5ba6;
+      border: 2px solid #7d5ba6;
     }
 
-    .commission-wallet-display {
-      background: #fff3cd;
+    .incentive-wallet-display {
+      background: #f5edff;
       border-radius: 12px;
       padding: 10px;
       margin-bottom: 12px;
       text-align: center;
       font-size: 1rem;
       font-weight: 700;
-      color: #856404;
-      border: 2px solid #ffc107;
+      color: #b8a3d9;
+      border: 2px solid #b8a3d9;
     }
 
     /* Task Record Page Styles */
@@ -701,7 +694,7 @@
     .stat-card .stat-value {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #006a7a;
+      color: #7d5ba6;
     }
 
     .stat-card .stat-label {
@@ -757,7 +750,7 @@
     .back-btn {
       background: none;
       border: none;
-      color: #006a7a;
+      color: #7d5ba6;
       font-size: 0.9rem;
       cursor: pointer;
       margin-bottom: 15px;
@@ -771,7 +764,7 @@
     .team-letter {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #006a7a;
+      color: #7d5ba6;
       margin-bottom: 10px;
     }
 
@@ -797,7 +790,7 @@
     }
 
     .member-tasks {
-      color: #006a7a;
+      color: #7d5ba6;
       margin-left: 5px;
     }
 
@@ -814,7 +807,7 @@
     }
 
     .total-tasks {
-      color: #006a7a;
+      color: #7d5ba6;
       margin-left: 10px;
     }
 
@@ -826,7 +819,7 @@
     }
 
     .team-stats {
-      background: #f0f8ff;
+      background: #f5edff;
       border-radius: 15px;
       padding: 15px;
       margin-top: 20px;
@@ -838,7 +831,7 @@
       margin-bottom: 8px;
     }
 
-    /* GOLDEN HANDSHAKE PAGE - EXACTLY LIKE YOUR IMAGE */
+    /* GOLDEN HANDSHAKE PAGE */
     .golden-header {
       display: flex;
       align-items: center;
@@ -851,7 +844,7 @@
       font-size: 1.8rem;
     }
     
-    /* Share Link Button - Like your image */
+    /* Share Link Button */
     .share-link-btn {
       background: #f5edff;
       border: 2px solid #7d5ba6;
@@ -872,7 +865,7 @@
       font-size: 1.3rem;
     }
     
-    /* QR Code Container - Like your image */
+    /* QR Code Container */
     .qr-container {
       background: white;
       border-radius: 20px;
@@ -899,7 +892,7 @@
       font-size: 1rem;
     }
     
-    /* Referral Link Box - CHANGED from code to link */
+    /* Referral Link Box */
     .referral-link-box {
       background: #f5edff;
       border-radius: 15px;
@@ -976,7 +969,7 @@
       cursor: pointer;
     }
     
-    /* Modals - UNCHANGED */
+    /* Modals */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -1024,10 +1017,6 @@
         <p>Coffee • Earn • Knowledge</p>
       </div>
 
-      <div id="messageBox" class="success-message">
-        <i class="fas fa-check-circle"></i> <span id="messageText"></span>
-      </div>
-
       <div class="auth-tabs">
         <div class="auth-tab active" onclick="switchAuthTab('login')" id="loginTab">Login</div>
         <div class="auth-tab" onclick="switchAuthTab('register')" id="registerTab">Register</div>
@@ -1057,7 +1046,7 @@
         </form>
       </div>
 
-      <!-- REGISTRATION FORM - UPDATED with your requirements -->
+      <!-- REGISTRATION FORM -->
       <div id="registerForm" class="auth-form">
         <form onsubmit="handleRegister(event)">
           <!-- 1. Full Name -->
@@ -1106,14 +1095,14 @@
             </div>
           </div>
           
-          <!-- 5. Referral Code - MANDATORY (removed Optional) -->
+          <!-- 5. Referral Code - MANDATORY (only D member codes accepted) -->
           <div class="form-group">
             <label>Referral Code <span style="color: #ff0000;">*</span></label>
             <div class="input-icon">
               <i class="fas fa-user-plus"></i>
               <input type="text" id="regReferralCode" placeholder="Enter referral code" required>
             </div>
-            <div class="password-hint">You must enter a valid referral code to register</div>
+            <div class="password-hint">You must enter a valid referral code from a D-level member</div>
           </div>
           
           <button type="submit" class="auth-btn">Register</button>
@@ -1139,8 +1128,6 @@
             <div class="progress-fill" id="memberProgress" style="width: 100%;"></div>
           </div>
         </div>
-
-        <!-- WALLETS REMOVED FROM HOME DASHBOARD -->
 
         <!-- Daily Counter -->
         <div style="background:#f5edff; padding:12px; border-radius:15px; margin-bottom:15px; display:flex; justify-content:space-between; color:#4a3b5e;">
@@ -1195,20 +1182,20 @@
         <div class="employee-name" id="profileFullName">User Name</div>
         <div class="employee-role" id="profileMemberType">INTERN MEMBER</div>
 
-        <!-- Wallets - Still visible on Profile Page -->
+        <!-- Wallets - Updated names -->
         <div class="wallets-container">
-          <div class="wallet-box main">
-            <div class="label">💰 MAIN WALLET</div>
-            <div class="amount" id="profileMainWallet">0 UGX</div>
+          <div class="wallet-box operating">
+            <div class="label">💰 OPERATING WALLET</div>
+            <div class="amount" id="profileOperatingWallet">0 UGX</div>
           </div>
-          <div class="wallet-box commission">
-            <div class="label">💰 COMMISSION</div>
-            <div class="amount" id="profileCommissionWallet">0 UGX</div>
+          <div class="wallet-box incentive">
+            <div class="label">💰 INCENTIVE WALLET</div>
+            <div class="amount" id="profileIncentiveWallet">0 UGX</div>
           </div>
         </div>
 
         <!-- Member Stats -->
-        <div style="background:#f0f8ff; border-radius:15px; padding:15px; margin-bottom:20px;">
+        <div style="background:#f5edff; border-radius:15px; padding:15px; margin-bottom:20px;">
           <div style="display:flex; justify-content:space-between;">
             <span>Days Left: <span id="profileDaysLeft">4</span></span>
             <span>Books Today: <span id="profileBooksToday">0/1</span></span>
@@ -1231,10 +1218,10 @@
           </div>
         </div>
 
-        <!-- Commission Row -->
-        <div class="commission-row">
-          <span class="commission-label">Commission from subordinate tasks</span>
-          <span class="commission-value" id="subordinateCommission">0.00 UGX</span>
+        <!-- Incentive Row -->
+        <div class="incentive-row">
+          <span class="incentive-label">Incentive from subordinate tasks</span>
+          <span class="incentive-value" id="subordinateIncentive">0.00 UGX</span>
         </div>
 
         <!-- Menu Grid -->
@@ -1261,7 +1248,7 @@
       </div>
     </div>
 
-    <!-- GOLDEN HANDSHAKE PAGE - EXACTLY LIKE YOUR IMAGE -->
+    <!-- GOLDEN HANDSHAKE PAGE -->
     <div id="goldenHandshakePage">
       <div class="scroll-content">
         <!-- Back Button -->
@@ -1362,8 +1349,8 @@
     <div id="levelPage">
       <div class="scroll-content">
         <div class="level-page-title">LEVELS PRICE AND SALARIES</div>
-        <div class="main-wallet-display" id="levelMainWallet">Main Wallet: 0 UGX</div>
-        <div class="commission-wallet-display" id="levelCommissionWallet">Commission Wallet: 0 UGX</div>
+        <div class="operating-wallet-display" id="levelOperatingWallet">Operating Wallet: 0 UGX</div>
+        <div class="incentive-wallet-display" id="levelIncentiveWallet">Incentive Wallet: 0 UGX</div>
         
         <!-- D1 -->
         <div class="level-card-ultra" style="background-color: #e6f7ff;">
@@ -1508,7 +1495,7 @@
       <div class="custom-amount">
         <input type="number" id="depositAmount" placeholder="Enter amount" style="width:100%; padding:15px; border:1px solid #ddd; border-radius:15px;">
       </div>
-      <button class="deposit-btn" onclick="submitDeposit()" style="background:#000; color:white; width:100%; padding:15px; border:none; border-radius:30px; margin-top:15px;">Send Money</button>
+      <button class="deposit-btn" onclick="submitDeposit()" style="background:#7d5ba6; color:white; width:100%; padding:15px; border:none; border-radius:30px; margin-top:15px;">Send Money</button>
     </div>
   </div>
 
@@ -1520,18 +1507,18 @@
         <button class="close-btn" onclick="closeWithdrawModal()" style="font-size:1.8rem; background:none; border:none;">&times;</button>
       </div>
       <div class="wallet-selector" style="display:flex; gap:10px; margin:15px 0;">
-        <div class="wallet-option" id="walletMainOption" onclick="selectWallet('main')" style="flex:1; background:#f9f9f9; border:2px solid #ddd; border-radius:15px; padding:15px; text-align:center; cursor:pointer;">
-          <div class="wallet-name" style="font-weight:600;">MAIN</div>
-          <div class="wallet-balance" id="withdrawMainBalance">0 UGX</div>
+        <div class="wallet-option" id="walletOperatingOption" onclick="selectWallet('operating')" style="flex:1; background:#f9f9f9; border:2px solid #ddd; border-radius:15px; padding:15px; text-align:center; cursor:pointer;">
+          <div class="wallet-name" style="font-weight:600;">OPERATING</div>
+          <div class="wallet-balance" id="withdrawOperatingBalance">0 UGX</div>
         </div>
-        <div class="wallet-option" id="walletCommissionOption" onclick="selectWallet('commission')" style="flex:1; background:#f9f9f9; border:2px solid #ddd; border-radius:15px; padding:15px; text-align:center; cursor:pointer;">
-          <div class="wallet-name" style="font-weight:600;">COMMISSION</div>
-          <div class="wallet-balance" id="withdrawCommissionBalance">0 UGX</div>
+        <div class="wallet-option" id="walletIncentiveOption" onclick="selectWallet('incentive')" style="flex:1; background:#f9f9f9; border:2px solid #ddd; border-radius:15px; padding:15px; text-align:center; cursor:pointer;">
+          <div class="wallet-name" style="font-weight:600;">INCENTIVE</div>
+          <div class="wallet-balance" id="withdrawIncentiveBalance">0 UGX</div>
         </div>
       </div>
       <input type="number" id="withdrawAmount" placeholder="Amount" style="width:100%; padding:15px; border:1px solid #ddd; border-radius:15px; margin-bottom:10px;">
       <input type="tel" id="withdrawPhone" placeholder="Mobile number" style="width:100%; padding:15px; border:1px solid #ddd; border-radius:15px; margin-bottom:10px;">
-      <button onclick="submitWithdraw()" style="background:#000; color:white; width:100%; padding:15px; border:none; border-radius:30px;">Withdraw</button>
+      <button onclick="submitWithdraw()" style="background:#7d5ba6; color:white; width:100%; padding:15px; border:none; border-radius:30px;">Withdraw</button>
     </div>
   </div>
 
@@ -1541,7 +1528,7 @@
     let currentUser = localStorage.getItem('currentUser');
     let pendingDeposits = JSON.parse(localStorage.getItem('pendingDeposits')) || [];
     let pendingWithdrawals = JSON.parse(localStorage.getItem('pendingWithdrawals')) || [];
-    let selectedWallet = 'main';
+    let selectedWallet = 'operating';
     let inactivityTimer;
     
     // ========== 60 COFFEE GROWING BOOKS ==========
@@ -1608,7 +1595,7 @@
       { id: 60, title: "Coffee Growing (Tropical Agriculturalist)", desc: "H. Cambrony, 119 pages - practical guide" }
     ];
 
-    // Level definitions
+    // Level definitions - Updated wallet names in comments only
     const levels = {
       0: { name: "Intern", dailyBooks: 1, reward: 1500, duration: 4, canWithdraw: false, hasReferral: false, bookLimit: 1 },
       1: { name: "D1", dailyBooks: 2, reward: 1125, deposit: 63000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 2 },
@@ -1633,11 +1620,11 @@
 
     // ========== UTILITY FUNCTIONS ==========
     
-    // Generate random referral code (12 characters)
+    // Generate random referral code (9 characters)
     function generateReferralCode() {
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       let code = '';
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 9; i++) {
         code += chars[Math.floor(Math.random() * chars.length)];
       }
       return code;
@@ -1656,7 +1643,7 @@
       const link = generateReferralLink(user.referralCode);
       
       navigator.clipboard.writeText(link).then(() => {
-        alert('✅ Referral link copied to clipboard!');
+        // Silent success - no alert
       }).catch(() => {
         prompt('Copy this link manually:', link);
       });
@@ -1716,15 +1703,14 @@
       return urlParams.get(name);
     }
 
-    // Reset inactivity timer
+    // Reset inactivity timer - 20 minutes
     function resetInactivityTimer() {
       if (inactivityTimer) clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
         if (currentUser) {
-          alert('You have been logged out due to inactivity (30 minutes).');
           logout();
         }
-      }, 30 * 60 * 1000); // 30 minutes
+      }, 20 * 60 * 1000); // 20 minutes
     }
 
     // Track user activity
@@ -1811,12 +1797,18 @@
         return;
       }
 
-      // Find referrer by code (MANDATORY)
+      // Find referrer by code - ONLY D MEMBERS (level 1-9)
       let referredBy = null;
       if (referralCode) {
         const referrer = Object.values(users).find(u => u.referralCode === referralCode);
         if (referrer) {
-          referredBy = referrer.phone;
+          // Check if referrer is a D member (level 1-9)
+          if (referrer.memberLevel >= 1 && referrer.memberLevel <= 9) {
+            referredBy = referrer.phone;
+          } else {
+            alert('Invalid referral code. Only D-level members can refer new users.');
+            return;
+          }
         } else {
           alert('Referral code not found. Please enter a valid referral code.');
           return;
@@ -1830,7 +1822,7 @@
       const expiry = new Date(now);
       expiry.setDate(expiry.getDate() + 4);
 
-      // Create new user with unique referral code (ONCE, never changes)
+      // Create new user with unique referral code (9 characters)
       const newReferralCode = generateReferralCode();
       
       users[phone] = {
@@ -1841,8 +1833,8 @@
         referralCode: newReferralCode, // PERMANENT - never changes
         memberLevel: 0,
         memberExpiry: expiry.toISOString(),
-        mainWallet: 0,
-        commissionWallet: 0,
+        operatingWallet: 0,
+        incentiveWallet: 0,
         booksReadToday: 0,
         lastReadDate: now.toDateString(),
         totalEarned: 0,
@@ -1865,7 +1857,7 @@
       localStorage.setItem('currentUser', phone);
       currentUser = phone;
       
-      alert('Registration successful!');
+      // NO ALERT - direct to home
       loadUserData();
       showPage('home');
       resetInactivityTimer();
@@ -1881,7 +1873,8 @@
       if (users[phone] && users[phone].password === password) {
         localStorage.setItem('currentUser', phone);
         currentUser = phone;
-        alert('Login successful!');
+        
+        // NO ALERT - direct to home
         loadUserData();
         showPage('home');
         resetInactivityTimer();
@@ -1944,7 +1937,6 @@
       if (!user.referralCode) {
         user.referralCode = generateReferralCode();
         localStorage.setItem('cueUsers', JSON.stringify(users));
-        console.log(`✅ Auto-generated code ${user.referralCode} for ${user.fullName}`);
       }
       
       const contentDiv = document.getElementById('goldenHandshakeContent');
@@ -2013,17 +2005,17 @@
 
       // Check balance based on member level
       if (user.memberLevel === 0) {
-        if (user.mainWallet < cost) {
-          alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX in Main Wallet`);
+        if (user.operatingWallet < cost) {
+          alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX in Operating Wallet`);
           return;
         }
         
         if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
-          user.mainWallet -= cost;
+          user.operatingWallet -= cost;
           upgradeUser(user, level, cost);
         }
       } else {
-        const totalBalance = (user.mainWallet || 0) + (user.commissionWallet || 0);
+        const totalBalance = (user.operatingWallet || 0) + (user.incentiveWallet || 0);
         
         if (totalBalance < cost) {
           alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX total in both wallets`);
@@ -2033,16 +2025,16 @@
         if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
           let remaining = cost;
           
-          if (user.mainWallet > 0) {
-            const fromMain = Math.min(user.mainWallet, remaining);
-            user.mainWallet -= fromMain;
-            remaining -= fromMain;
+          if (user.operatingWallet > 0) {
+            const fromOperating = Math.min(user.operatingWallet, remaining);
+            user.operatingWallet -= fromOperating;
+            remaining -= fromOperating;
           }
           
-          if (remaining > 0 && user.commissionWallet > 0) {
-            const fromCommission = Math.min(user.commissionWallet, remaining);
-            user.commissionWallet -= fromCommission;
-            remaining -= fromCommission;
+          if (remaining > 0 && user.incentiveWallet > 0) {
+            const fromIncentive = Math.min(user.incentiveWallet, remaining);
+            user.incentiveWallet -= fromIncentive;
+            remaining -= fromIncentive;
           }
           
           upgradeUser(user, level, cost);
@@ -2067,7 +2059,7 @@
 
       localStorage.setItem('cueUsers', JSON.stringify(users));
       
-      alert(`✅ Congratulations! You are now ${levels[level].name} member!`);
+      // Silent upgrade - no alert
       loadUserData();
       updateLevelWalletDisplay();
     }
@@ -2075,8 +2067,8 @@
     function updateLevelWalletDisplay() {
       const user = users[currentUser];
       if (user) {
-        document.getElementById('levelMainWallet').innerHTML = `Main Wallet: ${(user.mainWallet || 0).toLocaleString()} UGX`;
-        document.getElementById('levelCommissionWallet').innerHTML = `Commission Wallet: ${(user.commissionWallet || 0).toLocaleString()} UGX`;
+        document.getElementById('levelOperatingWallet').innerHTML = `Operating Wallet: ${(user.operatingWallet || 0).toLocaleString()} UGX`;
+        document.getElementById('levelIncentiveWallet').innerHTML = `Incentive Wallet: ${(user.incentiveWallet || 0).toLocaleString()} UGX`;
       }
     }
 
@@ -2104,25 +2096,25 @@
       document.getElementById('memberDaysDisplay').textContent = `${daysLeft} days remaining`;
       document.getElementById('booksReadToday').textContent = user.booksReadToday || 0;
       document.getElementById('dailyBookLimit').textContent = levelData.dailyBooks;
-      document.getElementById('dailyEarnings').textContent = user.commissionWallet || 0;
+      document.getElementById('dailyEarnings').textContent = user.incentiveWallet || 0;
 
-      // Update profile page
+      // Update profile page - Updated wallet names
       document.getElementById('profileFullName').textContent = user.fullName;
       document.getElementById('profileDisplayName').textContent = user.fullName.split(' ')[0];
       document.getElementById('profileMemberType').textContent = levelData.name;
-      document.getElementById('profileMainWallet').innerHTML = `${(user.mainWallet || 0).toLocaleString()} UGX`;
-      document.getElementById('profileCommissionWallet').innerHTML = `${(user.commissionWallet || 0).toLocaleString()} UGX`;
+      document.getElementById('profileOperatingWallet').innerHTML = `${(user.operatingWallet || 0).toLocaleString()} UGX`;
+      document.getElementById('profileIncentiveWallet').innerHTML = `${(user.incentiveWallet || 0).toLocaleString()} UGX`;
       document.getElementById('profileDaysLeft').textContent = daysLeft;
       document.getElementById('profileBooksToday').textContent = `${user.booksReadToday || 0}/${levelData.dailyBooks}`;
       
       // Update income values
-      document.getElementById('todayIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
-      document.getElementById('totalIncomeValue').innerHTML = `${(user.commissionWallet || 0).toFixed(2)} UGX`;
+      document.getElementById('todayIncomeValue').innerHTML = `${(user.incentiveWallet || 0).toFixed(2)} UGX`;
+      document.getElementById('totalIncomeValue').innerHTML = `${(user.incentiveWallet || 0).toFixed(2)} UGX`;
       document.getElementById('monthIncomeValue').innerHTML = `0.00 UGX`;
       
-      // Update withdraw modal balances
-      document.getElementById('withdrawMainBalance').innerHTML = (user.mainWallet || 0).toLocaleString() + ' UGX';
-      document.getElementById('withdrawCommissionBalance').innerHTML = (user.commissionWallet || 0).toLocaleString() + ' UGX';
+      // Update withdraw modal balances - Updated wallet names
+      document.getElementById('withdrawOperatingBalance').innerHTML = (user.operatingWallet || 0).toLocaleString() + ' UGX';
+      document.getElementById('withdrawIncentiveBalance').innerHTML = (user.incentiveWallet || 0).toLocaleString() + ' UGX';
 
       updateLevelWalletDisplay();
       updateTime();
@@ -2161,7 +2153,7 @@
         aMembers.forEach(member => {
           const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
           const maskedPhone = maskPhone(member.phone);
-          const deposit = member.mainWallet || 0;
+          const deposit = member.operatingWallet || 0;
           aTotalDeposit += deposit;
           
           if (member.memberLevel > 0) {
@@ -2189,7 +2181,7 @@
         bMembers.forEach(member => {
           const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
           const maskedPhone = maskPhone(member.phone);
-          const deposit = member.mainWallet || 0;
+          const deposit = member.operatingWallet || 0;
           bTotalDeposit += deposit;
           
           if (member.memberLevel > 0) {
@@ -2217,7 +2209,7 @@
         cMembers.forEach(member => {
           const levelText = member.memberLevel === 0 ? 'intern' : `D${member.memberLevel}`;
           const maskedPhone = maskPhone(member.phone);
-          const deposit = member.mainWallet || 0;
+          const deposit = member.operatingWallet || 0;
           cTotalDeposit += deposit;
           
           if (member.memberLevel > 0) {
@@ -2431,7 +2423,7 @@
       const reward = levelData.reward;
       const book = allBooks.find(b => b.id === bookId);
 
-      user.commissionWallet = (user.commissionWallet || 0) + reward;
+      user.incentiveWallet = (user.incentiveWallet || 0) + reward;
       user.booksReadToday = (user.booksReadToday || 0) + 1;
       user.lastReadDate = new Date().toDateString();
 
@@ -2462,7 +2454,7 @@
         taskBtn.disabled = true;
       }
 
-      alert(`+${reward} UGX added to Commission Wallet!`);
+      // Silent reward - no alert
       loadUserData();
       loadHomeBooks();
       loadTaskBooks();
@@ -2500,8 +2492,8 @@
     // ========== WITHDRAW ==========
     function selectWallet(wallet) {
       selectedWallet = wallet;
-      document.getElementById('walletMainOption').classList.toggle('selected', wallet === 'main');
-      document.getElementById('walletCommissionOption').classList.toggle('selected', wallet === 'commission');
+      document.getElementById('walletOperatingOption').classList.toggle('selected', wallet === 'operating');
+      document.getElementById('walletIncentiveOption').classList.toggle('selected', wallet === 'incentive');
     }
 
     function openWithdrawModal() {
@@ -2523,20 +2515,20 @@
         return;
       }
 
-      const balance = selectedWallet === 'main' ? user.mainWallet : user.commissionWallet;
+      const balance = selectedWallet === 'operating' ? user.operatingWallet : user.incentiveWallet;
       if (amount > balance) {
         alert('Insufficient balance');
         return;
       }
 
-      if (selectedWallet === 'main') {
-        user.mainWallet -= amount;
+      if (selectedWallet === 'operating') {
+        user.operatingWallet -= amount;
       } else {
         if (amount < 10000) {
-          alert('Commission wallet minimum withdrawal is 10,000 UGX');
+          alert('Incentive wallet minimum withdrawal is 10,000 UGX');
           return;
         }
-        user.commissionWallet -= amount;
+        user.incentiveWallet -= amount;
       }
 
       pendingWithdrawals.push({
@@ -2584,18 +2576,18 @@
 
     // ========== INIT ==========
     window.onload = function() {
-      // Create demo accounts if empty
+      // Create demo accounts if empty - Updated wallet names
       if (Object.keys(users).length === 0) {
         users['0756673144'] = {
           fullName: 'Admin User',
           phone: '0756673144',
           country: 'Uganda',
           password: 'admin123',
-          referralCode: 'ADMIN123456',
+          referralCode: 'ADMIN12345',
           memberLevel: 9,
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
-          mainWallet: 1000000,
-          commissionWallet: 500000,
+          operatingWallet: 1000000,
+          incentiveWallet: 500000,
           booksReadToday: 0,
           lastReadDate: new Date().toDateString(),
           totalEarned: 0,
@@ -2610,11 +2602,11 @@
           phone: '0777123456',
           country: 'Uganda',
           password: '123456',
-          referralCode: 'INTERN789012',
+          referralCode: 'INTERN789',
           memberLevel: 0,
           memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
-          mainWallet: 100000,
-          commissionWallet: 1500,
+          operatingWallet: 100000,
+          incentiveWallet: 1500,
           booksReadToday: 0,
           lastReadDate: new Date().toDateString(),
           totalEarned: 1500,
@@ -2629,11 +2621,11 @@
           phone: '0788123456',
           country: 'Uganda',
           password: '123456',
-          referralCode: 'D1CODE345678',
+          referralCode: 'D1CODE345',
           memberLevel: 1,
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
-          mainWallet: 150000,
-          commissionWallet: 30000,
+          operatingWallet: 150000,
+          incentiveWallet: 30000,
           booksReadToday: 0,
           lastReadDate: new Date().toDateString(),
           totalEarned: 3000,
