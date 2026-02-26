@@ -1640,25 +1640,14 @@
       return code;
     }
 
-    // Generate referral link from code - NEW FORMAT: URL + space + CODE
+    // Generate referral link from code - UPDATED to ?ref= format
     function generateReferralLink(code) {
       // Get base URL without any existing parameters
       const baseUrl = window.location.origin + window.location.pathname;
-      return `${baseUrl} ${code}`;
+      return `${baseUrl}?ref=${code}`;
     }
 
-    // Extract referral code from full URL - NEW FUNCTION
-    function extractReferralCodeFromUrl() {
-      const fullUrl = window.location.href;
-      // Look for space followed by code (9 chars alphanumeric)
-      const match = fullUrl.match(/\s([A-Z0-9]{9})$/);
-      if (match && match[1]) {
-        return match[1];
-      }
-      return null;
-    }
-
-    // Copy full referral link to clipboard - UPDATED
+    // Copy full referral link to clipboard
     function copyReferralLink() {
       const user = users[currentUser];
       if (!user || !user.referralCode) return;
@@ -1672,7 +1661,7 @@
       });
     }
 
-    // Share referral link using Web Share API - UPDATED
+    // Share referral link using Web Share API
     function shareReferralLink() {
       const user = users[currentUser];
       if (!user || !user.referralCode) return;
@@ -1718,6 +1707,12 @@
       } else {
         codeDisplay.textContent = '+254'; // Default
       }
+    }
+
+    // Get URL parameters - RE-ADDED for ?ref= format
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
     }
 
     // Reset inactivity timer - 20 minutes
@@ -2608,21 +2603,19 @@
 
     // ========== SMART REFERRAL HANDLER ==========
     function handleReferralLink() {
-      const refCode = extractReferralCodeFromUrl();
+      const refCode = getUrlParameter('ref');
       
       if (refCode) {
         // Check if user is already logged in
         if (currentUser && users[currentUser]) {
-          // Logged in user - ignore code, go to home
+          // Logged in user - ignore code, go to last page
           loadUserData();
-          showPage('home');
+          showPage(lastPage);
           return;
         }
         
-        // Check if this phone is already registered
-        const existingUser = Object.values(users).find(u => u.phone === currentUser);
-        
-        if (existingUser) {
+        // Check if this phone is already registered (checking currentUser variable)
+        if (currentUser && users[currentUser]) {
           // Returning user - go to login
           switchAuthTab('login');
         } else {
