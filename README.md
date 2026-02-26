@@ -306,6 +306,13 @@
       margin-top: 5px;
     }
 
+    /* Read-only referral field style */
+    .referral-readonly {
+      background-color: #f0f0f0 !important;
+      color: #4a3b5e;
+      cursor: not-allowed;
+    }
+
     /* Success Message - Hidden by default */
     .success-message {
       display: none;
@@ -1531,6 +1538,9 @@
     let selectedWallet = 'operating';
     let inactivityTimer;
     
+    // ========== PAGE STATE PERSISTENCE ==========
+    let lastPage = localStorage.getItem('lastPage') || 'home';
+    
     // ========== 60 COFFEE GROWING BOOKS ==========
     let allBooks = [
       { id: 1, title: "Regenerative Agriculture in Coffee", desc: "Handbook for practitioners in Uganda - Bioversity International, 2023" },
@@ -1630,12 +1640,25 @@
       return code;
     }
 
-    // Generate referral link from code
+    // Generate referral link from code - NEW FORMAT: URL + space + CODE
     function generateReferralLink(code) {
-      return `https://tuvko.github.io/register?ref=${code}`;
+      // Get base URL without any existing parameters
+      const baseUrl = window.location.origin + window.location.pathname;
+      return `${baseUrl} ${code}`;
     }
 
-    // Copy full referral link to clipboard
+    // Extract referral code from full URL - NEW FUNCTION
+    function extractReferralCodeFromUrl() {
+      const fullUrl = window.location.href;
+      // Look for space followed by code (9 chars alphanumeric)
+      const match = fullUrl.match(/\s([A-Z0-9]{9})$/);
+      if (match && match[1]) {
+        return match[1];
+      }
+      return null;
+    }
+
+    // Copy full referral link to clipboard - UPDATED
     function copyReferralLink() {
       const user = users[currentUser];
       if (!user || !user.referralCode) return;
@@ -1649,7 +1672,7 @@
       });
     }
 
-    // Share referral link using Web Share API
+    // Share referral link using Web Share API - UPDATED
     function shareReferralLink() {
       const user = users[currentUser];
       if (!user || !user.referralCode) return;
@@ -1697,12 +1720,6 @@
       }
     }
 
-    // Get URL parameters
-    function getUrlParameter(name) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(name);
-    }
-
     // Reset inactivity timer - 20 minutes
     function resetInactivityTimer() {
       if (inactivityTimer) clearTimeout(inactivityTimer);
@@ -1746,11 +1763,14 @@
       document.getElementById('loginTab').classList.toggle('active', tab === 'login');
       document.getElementById('registerTab').classList.toggle('active', tab === 'register');
       
-      // Check for referral code in URL when switching to register tab
+      // Check for stored referral code when switching to register tab
       if (tab === 'register') {
-        const refCode = getUrlParameter('ref');
-        if (refCode) {
-          document.getElementById('regReferralCode').value = refCode;
+        const storedRefCode = sessionStorage.getItem('pendingReferralCode');
+        if (storedRefCode) {
+          const refField = document.getElementById('regReferralCode');
+          refField.value = storedRefCode;
+          refField.readOnly = true;
+          refField.classList.add('referral-readonly');
         }
         // Set default country code
         updateCountryCode();
@@ -1857,6 +1877,9 @@
       localStorage.setItem('currentUser', phone);
       currentUser = phone;
       
+      // Clear pending referral code
+      sessionStorage.removeItem('pendingReferralCode');
+      
       // NO ALERT - direct to home
       loadUserData();
       showPage('home');
@@ -1874,9 +1897,12 @@
         localStorage.setItem('currentUser', phone);
         currentUser = phone;
         
-        // NO ALERT - direct to home
+        // Clear any pending referral code (can't refer yourself)
+        sessionStorage.removeItem('pendingReferralCode');
+        
+        // NO ALERT - direct to home or last visited page
         loadUserData();
-        showPage('home');
+        showPage(lastPage);
         resetInactivityTimer();
       } else {
         alert('Invalid phone or password');
@@ -1885,6 +1911,12 @@
 
     // ========== PAGE NAVIGATION ==========
     function showPage(page) {
+      // Save current page for persistence
+      if (page !== 'login' && page !== 'register') {
+        localStorage.setItem('lastPage', page);
+        lastPage = page;
+      }
+      
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('mainDashboard').style.display = page === 'home' ? 'flex' : 'none';
       document.getElementById('profilePage').style.display = page === 'profile' ? 'flex' : 'none';
@@ -2574,6 +2606,33 @@
       if (inactivityTimer) clearTimeout(inactivityTimer);
     }
 
+    // ========== SMART REFERRAL HANDLER ==========
+    function handleReferralLink() {
+      const refCode = extractReferralCodeFromUrl();
+      
+      if (refCode) {
+        // Check if user is already logged in
+        if (currentUser && users[currentUser]) {
+          // Logged in user - ignore code, go to home
+          loadUserData();
+          showPage('home');
+          return;
+        }
+        
+        // Check if this phone is already registered
+        const existingUser = Object.values(users).find(u => u.phone === currentUser);
+        
+        if (existingUser) {
+          // Returning user - go to login
+          switchAuthTab('login');
+        } else {
+          // New user - store code and go to registration
+          sessionStorage.setItem('pendingReferralCode', refCode);
+          switchAuthTab('register');
+        }
+      }
+    }
+
     // ========== INIT ==========
     window.onload = function() {
       // Create demo accounts if empty - Updated wallet names
@@ -2638,18 +2697,13 @@
         localStorage.setItem('cueUsers', JSON.stringify(users));
       }
 
-      // Check for referral code in URL
-      const refCode = getUrlParameter('ref');
-      if (refCode) {
-        // If on register page, auto-fill
-        if (document.getElementById('registerForm').classList.contains('active')) {
-          document.getElementById('regReferralCode').value = refCode;
-        }
-      }
+      // Handle referral link first
+      handleReferralLink();
 
+      // If user is already logged in, go to last visited page
       if (currentUser && users[currentUser]) {
         loadUserData();
-        showPage('home');
+        showPage(lastPage);
         resetInactivityTimer();
       }
 
