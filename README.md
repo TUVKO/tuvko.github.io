@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>CIUE · Coffee Earn Platform</title>
+  <title>CIUE · Coffee Earn Platform + Admin</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- QR Code Generator Library -->
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
+    /* ===== ORIGINAL STYLES - UNCHANGED ===== */
     * {
       margin: 0;
       padding: 0;
@@ -1010,9 +1011,378 @@
       font-size: 1.3rem;
       font-weight: 700;
     }
+
+    /* ===== NEW ADMIN STYLES (ADDED WITHOUT MODIFYING ORIGINAL) ===== */
+    .admin-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2000;
+    }
+
+    .admin-toggle button {
+      background: #7d5ba6;
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(125,91,166,0.3);
+      transition: all 0.2s;
+    }
+
+    .admin-toggle button:hover {
+      transform: scale(1.1);
+    }
+
+    .admin-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1999;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .admin-container {
+      max-width: 1200px;
+      margin: 60px auto 20px;
+      background: white;
+      border-radius: 30px;
+      padding: 30px;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .admin-header h2 {
+      color: #4a3b5e;
+      font-size: 2rem;
+    }
+
+    .admin-header h2 i {
+      color: #7d5ba6;
+      margin-right: 10px;
+    }
+
+    .close-admin {
+      background: #ff4444;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .admin-login {
+      max-width: 400px;
+      margin: 100px auto;
+      background: white;
+      border-radius: 30px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .admin-login h3 {
+      color: #4a3b5e;
+      margin-bottom: 20px;
+    }
+
+    .admin-login input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 2px solid #e0d0eb;
+      border-radius: 30px;
+      outline: none;
+    }
+
+    .admin-login input:focus {
+      border-color: #7d5ba6;
+    }
+
+    .admin-login button {
+      background: #7d5ba6;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      width: 100%;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .admin-stat-card {
+      background: #f5edff;
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .admin-stat-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #7d5ba6;
+    }
+
+    .admin-stat-card .label {
+      color: #4a3b5e;
+      margin-top: 5px;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .admin-tab {
+      padding: 12px 25px;
+      background: #f0f0f0;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .admin-tab.active {
+      background: #7d5ba6;
+      color: white;
+    }
+
+    .admin-tab i {
+      margin-right: 8px;
+    }
+
+    .admin-section {
+      display: none;
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .admin-table th {
+      background: #7d5ba6;
+      color: white;
+      padding: 15px;
+      text-align: left;
+    }
+
+    .admin-table td {
+      padding: 15px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .admin-table tr:hover {
+      background: #faf5ff;
+    }
+
+    .approve-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .reject-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background: #ffc107;
+      color: #333;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .wallet-edit {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .wallet-edit input {
+      width: 100px;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    .wallet-edit button {
+      padding: 5px 10px;
+      background: #7d5ba6;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .level-badge {
+      background: #7d5ba6;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
+  <!-- Admin Toggle Button (ADDED - does not modify original structure) -->
+  <div class="admin-toggle">
+    <button onclick="toggleAdminPanel()"><i class="fas fa-crown"></i></button>
+  </div>
+
+  <!-- Admin Panel (ADDED - separate from original content) -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-container">
+      <div class="admin-header">
+        <h2><i class="fas fa-crown"></i> CIUE Admin Dashboard</h2>
+        <button class="close-admin" onclick="toggleAdminPanel()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Admin Login Section -->
+      <div id="adminLoginSection" class="admin-login">
+        <h3>Admin Login</h3>
+        <input type="password" id="adminPassword" placeholder="Enter admin password" onkeypress="if(event.key==='Enter') adminLogin()">
+        <button onclick="adminLogin()">Login</button>
+      </div>
+
+      <!-- Admin Main Content (hidden until login) -->
+      <div id="adminContent" style="display: none;">
+        <!-- Stats Cards -->
+        <div class="admin-stats" id="adminStats"></div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+          <div class="admin-tab active" onclick="switchAdminTab('deposits')"><i class="fas fa-arrow-down"></i> Deposits</div>
+          <div class="admin-tab" onclick="switchAdminTab('withdrawals')"><i class="fas fa-arrow-up"></i> Withdrawals</div>
+          <div class="admin-tab" onclick="switchAdminTab('users')"><i class="fas fa-users"></i> Users</div>
+          <div class="admin-tab" onclick="switchAdminTab('system')"><i class="fas fa-chart-bar"></i> System</div>
+        </div>
+
+        <!-- Deposits Section -->
+        <div id="adminDepositsSection" class="admin-section active">
+          <h3 style="margin-bottom: 20px;">Pending Deposits</h3>
+          <table class="admin-table" id="depositsTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>User</th>
+                <th>Phone</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="depositsTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Withdrawals Section -->
+        <div id="adminWithdrawalsSection" class="admin-section">
+          <h3 style="margin-bottom: 20px;">Pending Withdrawals</h3>
+          <table class="admin-table" id="withdrawalsTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>User</th>
+                <th>Phone</th>
+                <th>Amount</th>
+                <th>Wallet</th>
+                <th>Mobile</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="withdrawalsTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Users Section -->
+        <div id="adminUsersSection" class="admin-section">
+          <h3 style="margin-bottom: 20px;">All Users</h3>
+          <table class="admin-table" id="usersTable">
+            <thead>
+              <tr>
+                <th>Phone</th>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Operating</th>
+                <th>Incentive</th>
+                <th>Referrals</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- System Section -->
+        <div id="adminSystemSection" class="admin-section">
+          <h3 style="margin-bottom: 20px;">System Settings</h3>
+          <div style="background: #f5edff; padding: 20px; border-radius: 20px;">
+            <p><strong>Total Users:</strong> <span id="systemTotalUsers">0</span></p>
+            <p><strong>Total Deposits Pending:</strong> <span id="systemTotalDeposits">0</span> UGX</p>
+            <p><strong>Total Withdrawals Pending:</strong> <span id="systemTotalWithdrawals">0</span> UGX</p>
+            <p><strong>Total in Operating Wallets:</strong> <span id="systemTotalOperating">0</span> UGX</p>
+            <p><strong>Total in Incentive Wallets:</strong> <span id="systemTotalIncentive">0</span> UGX</p>
+            <button onclick="clearAllData()" style="background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 30px; margin-top: 20px; cursor: pointer;">Reset All Data (Admin Only)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORIGINAL HTML - COMPLETELY UNCHANGED -->
   <div class="phone">
     <!-- AUTHENTICATION SECTION -->
     <div id="authContainer" class="auth-container">
@@ -1530,6 +1900,7 @@
   </div>
 
   <script>
+    // ========== ORIGINAL CODE - COMPLETELY UNCHANGED ==========
     // ========== GLOBAL VARIABLES ==========
     let users = JSON.parse(localStorage.getItem('cueUsers')) || {};
     let currentUser = localStorage.getItem('currentUser');
@@ -2788,6 +3159,293 @@
       setInterval(updateTime, 60000);
       updateTime();
     };
+
+    // ========== NEW ADMIN FUNCTIONS (ADDED WITHOUT MODIFYING ORIGINAL) ==========
+    let isAdminLoggedIn = false;
+
+    function toggleAdminPanel() {
+      const panel = document.getElementById('adminPanel');
+      if (panel.style.display === 'none' || panel.style.display === '') {
+        panel.style.display = 'block';
+        if (!isAdminLoggedIn) {
+          document.getElementById('adminLoginSection').style.display = 'block';
+          document.getElementById('adminContent').style.display = 'none';
+        } else {
+          document.getElementById('adminLoginSection').style.display = 'none';
+          document.getElementById('adminContent').style.display = 'block';
+          loadAdminData();
+        }
+      } else {
+        panel.style.display = 'none';
+      }
+    }
+
+    function adminLogin() {
+      const password = document.getElementById('adminPassword').value;
+      // Simple admin password - change this to whatever you want
+      if (password === 'admin123') {
+        isAdminLoggedIn = true;
+        document.getElementById('adminLoginSection').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        loadAdminData();
+      } else {
+        alert('Invalid password');
+      }
+    }
+
+    function switchAdminTab(tab) {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+      
+      if (tab === 'deposits') {
+        document.querySelectorAll('.admin-tab')[0].classList.add('active');
+        document.getElementById('adminDepositsSection').classList.add('active');
+        loadDepositsTable();
+      } else if (tab === 'withdrawals') {
+        document.querySelectorAll('.admin-tab')[1].classList.add('active');
+        document.getElementById('adminWithdrawalsSection').classList.add('active');
+        loadWithdrawalsTable();
+      } else if (tab === 'users') {
+        document.querySelectorAll('.admin-tab')[2].classList.add('active');
+        document.getElementById('adminUsersSection').classList.add('active');
+        loadUsersTable();
+      } else if (tab === 'system') {
+        document.querySelectorAll('.admin-tab')[3].classList.add('active');
+        document.getElementById('adminSystemSection').classList.add('active');
+        loadSystemStats();
+      }
+    }
+
+    function loadAdminData() {
+      // Update stats cards
+      const totalUsers = Object.keys(users).length;
+      const totalDeposits = pendingDeposits.reduce((sum, d) => sum + d.amount, 0);
+      const totalWithdrawals = pendingWithdrawals.reduce((sum, w) => sum + w.amount, 0);
+      const totalOperating = Object.values(users).reduce((sum, u) => sum + (u.operatingWallet || 0), 0);
+      const totalIncentive = Object.values(users).reduce((sum, u) => sum + (u.incentiveWallet || 0), 0);
+
+      document.getElementById('adminStats').innerHTML = `
+        <div class="admin-stat-card">
+          <div class="value">${totalUsers}</div>
+          <div class="label">Total Users</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="value">${pendingDeposits.length}</div>
+          <div class="label">Pending Deposits</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="value">${pendingWithdrawals.length}</div>
+          <div class="label">Pending Withdrawals</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="value">${(totalOperating + totalIncentive).toLocaleString()}</div>
+          <div class="label">Total Balance (UGX)</div>
+        </div>
+      `;
+
+      loadDepositsTable();
+      loadWithdrawalsTable();
+      loadUsersTable();
+      loadSystemStats();
+    }
+
+    function loadDepositsTable() {
+      const tbody = document.getElementById('depositsTableBody');
+      if (pendingDeposits.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No pending deposits</td></tr>';
+        return;
+      }
+
+      let html = '';
+      pendingDeposits.forEach(deposit => {
+        const date = new Date(deposit.timestamp).toLocaleString();
+        html += `
+          <tr>
+            <td>${date}</td>
+            <td>${deposit.userId || 'Unknown'}</td>
+            <td>${deposit.phone || 'N/A'}</td>
+            <td>${deposit.amount.toLocaleString()} UGX</td>
+            <td>
+              <button class="approve-btn" onclick="approveDeposit(${deposit.id})">Approve</button>
+              <button class="reject-btn" onclick="rejectDeposit(${deposit.id})">Reject</button>
+            </td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function approveDeposit(id) {
+      const deposit = pendingDeposits.find(d => d.id === id);
+      if (deposit && users[deposit.userId]) {
+        users[deposit.userId].operatingWallet = (users[deposit.userId].operatingWallet || 0) + deposit.amount;
+        localStorage.setItem('cueUsers', JSON.stringify(users));
+        
+        pendingDeposits = pendingDeposits.filter(d => d.id !== id);
+        localStorage.setItem('pendingDeposits', JSON.stringify(pendingDeposits));
+        
+        alert('Deposit approved!');
+        loadAdminData();
+      }
+    }
+
+    function rejectDeposit(id) {
+      pendingDeposits = pendingDeposits.filter(d => d.id !== id);
+      localStorage.setItem('pendingDeposits', JSON.stringify(pendingDeposits));
+      alert('Deposit rejected');
+      loadAdminData();
+    }
+
+    function loadWithdrawalsTable() {
+      const tbody = document.getElementById('withdrawalsTableBody');
+      if (pendingWithdrawals.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No pending withdrawals</td></tr>';
+        return;
+      }
+
+      let html = '';
+      pendingWithdrawals.forEach(withdrawal => {
+        const date = new Date(withdrawal.timestamp).toLocaleString();
+        html += `
+          <tr>
+            <td>${date}</td>
+            <td>${withdrawal.userId || 'Unknown'}</td>
+            <td>${users[withdrawal.userId]?.phone || 'N/A'}</td>
+            <td>${withdrawal.amount.toLocaleString()} UGX</td>
+            <td>${withdrawal.wallet}</td>
+            <td>${withdrawal.mobileNumber || 'N/A'}</td>
+            <td>
+              <button class="approve-btn" onclick="approveWithdrawal(${withdrawal.id})">Approve</button>
+              <button class="reject-btn" onclick="rejectWithdrawal(${withdrawal.id})">Reject</button>
+            </td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function approveWithdrawal(id) {
+      const withdrawal = pendingWithdrawals.find(w => w.id === id);
+      pendingWithdrawals = pendingWithdrawals.filter(w => w.id !== id);
+      localStorage.setItem('pendingWithdrawals', JSON.stringify(pendingWithdrawals));
+      alert('Withdrawal approved! (In real app, money would be sent to mobile number)');
+      loadAdminData();
+    }
+
+    function rejectWithdrawal(id) {
+      const withdrawal = pendingWithdrawals.find(w => w.id === id);
+      if (withdrawal && users[withdrawal.userId]) {
+        // Refund the money
+        if (withdrawal.wallet === 'operating') {
+          users[withdrawal.userId].operatingWallet += withdrawal.amount;
+        } else {
+          users[withdrawal.userId].incentiveWallet += withdrawal.amount;
+        }
+        localStorage.setItem('cueUsers', JSON.stringify(users));
+      }
+      
+      pendingWithdrawals = pendingWithdrawals.filter(w => w.id !== id);
+      localStorage.setItem('pendingWithdrawals', JSON.stringify(pendingWithdrawals));
+      alert('Withdrawal rejected and funds returned');
+      loadAdminData();
+    }
+
+    function loadUsersTable() {
+      const tbody = document.getElementById('usersTableBody');
+      let html = '';
+      
+      Object.values(users).forEach(user => {
+        const referrals = user.referrals ? user.referrals.length : 0;
+        html += `
+          <tr>
+            <td>${user.phone}</td>
+            <td>${user.fullName}</td>
+            <td><span class="level-badge">${levels[user.memberLevel]?.name || 'Intern'}</span></td>
+            <td>
+              <div class="wallet-edit">
+                <span id="op-${user.phone}">${(user.operatingWallet || 0).toLocaleString()}</span>
+                <input type="number" id="op-input-${user.phone}" style="display:none;" placeholder="Amount">
+                <button onclick="editWallet('${user.phone}', 'operating')" id="op-btn-${user.phone}">Edit</button>
+              </div>
+            </td>
+            <td>
+              <div class="wallet-edit">
+                <span id="inc-${user.phone}">${(user.incentiveWallet || 0).toLocaleString()}</span>
+                <input type="number" id="inc-input-${user.phone}" style="display:none;" placeholder="Amount">
+                <button onclick="editWallet('${user.phone}', 'incentive')" id="inc-btn-${user.phone}">Edit</button>
+              </div>
+            </td>
+            <td>${referrals}</td>
+            <td>
+              <button class="delete-btn" onclick="deleteUser('${user.phone}')">Delete</button>
+            </td>
+          </tr>
+        `;
+      });
+      
+      tbody.innerHTML = html;
+    }
+
+    function editWallet(phone, walletType) {
+      const span = document.getElementById(`${walletType === 'operating' ? 'op' : 'inc'}-${phone}`);
+      const input = document.getElementById(`${walletType === 'operating' ? 'op' : 'inc'}-input-${phone}`);
+      const btn = document.getElementById(`${walletType === 'operating' ? 'op' : 'inc'}-btn-${phone}`);
+      
+      if (input.style.display === 'none') {
+        span.style.display = 'none';
+        input.style.display = 'inline-block';
+        input.value = users[phone][walletType === 'operating' ? 'operatingWallet' : 'incentiveWallet'] || 0;
+        btn.textContent = 'Save';
+      } else {
+        const newAmount = parseInt(input.value);
+        if (!isNaN(newAmount) && newAmount >= 0) {
+          users[phone][walletType === 'operating' ? 'operatingWallet' : 'incentiveWallet'] = newAmount;
+          localStorage.setItem('cueUsers', JSON.stringify(users));
+          span.textContent = newAmount.toLocaleString();
+        }
+        span.style.display = 'inline';
+        input.style.display = 'none';
+        btn.textContent = 'Edit';
+      }
+    }
+
+    function deleteUser(phone) {
+      if (confirm(`Are you sure you want to delete user ${phone}?`)) {
+        // Remove from referrals arrays
+        Object.values(users).forEach(u => {
+          if (u.referrals) {
+            u.referrals = u.referrals.filter(ref => ref !== phone);
+          }
+        });
+        
+        delete users[phone];
+        localStorage.setItem('cueUsers', JSON.stringify(users));
+        alert('User deleted');
+        loadUsersTable();
+        loadAdminData();
+      }
+    }
+
+    function loadSystemStats() {
+      const totalUsers = Object.keys(users).length;
+      const totalDeposits = pendingDeposits.reduce((sum, d) => sum + d.amount, 0);
+      const totalWithdrawals = pendingWithdrawals.reduce((sum, w) => sum + w.amount, 0);
+      const totalOperating = Object.values(users).reduce((sum, u) => sum + (u.operatingWallet || 0), 0);
+      const totalIncentive = Object.values(users).reduce((sum, u) => sum + (u.incentiveWallet || 0), 0);
+
+      document.getElementById('systemTotalUsers').textContent = totalUsers;
+      document.getElementById('systemTotalDeposits').textContent = totalDeposits.toLocaleString();
+      document.getElementById('systemTotalWithdrawals').textContent = totalWithdrawals.toLocaleString();
+      document.getElementById('systemTotalOperating').textContent = totalOperating.toLocaleString();
+      document.getElementById('systemTotalIncentive').textContent = totalIncentive.toLocaleString();
+    }
+
+    function clearAllData() {
+      if (confirm('WARNING: This will delete ALL users and reset all data. Are you sure?')) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
   </script>
 </body>
 </html>
