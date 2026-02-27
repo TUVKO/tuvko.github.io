@@ -1605,7 +1605,7 @@
       { id: 60, title: "Coffee Growing (Tropical Agriculturalist)", desc: "H. Cambrony, 119 pages - practical guide" }
     ];
 
-    // Level definitions - Updated wallet names in comments only
+    // Level definitions
     const levels = {
       0: { name: "Intern", dailyBooks: 1, reward: 1500, duration: 4, canWithdraw: false, hasReferral: false, bookLimit: 1 },
       1: { name: "D1", dailyBooks: 2, reward: 1125, deposit: 63000, duration: 365, canWithdraw: true, hasReferral: true, bookLimit: 2 },
@@ -1630,19 +1630,18 @@
 
     // ========== UTILITY FUNCTIONS ==========
     
-    // Generate random referral code (9 characters)
+    // Generate random referral code (12 characters)
     function generateReferralCode() {
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       let code = '';
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < 12; i++) {
         code += chars[Math.floor(Math.random() * chars.length)];
       }
       return code;
     }
 
-    // Generate referral link from code - UPDATED to ?ref= format
+    // Generate referral link from code
     function generateReferralLink(code) {
-      // Get base URL without any existing parameters
       const baseUrl = window.location.origin + window.location.pathname;
       return `${baseUrl}?ref=${code}`;
     }
@@ -1655,7 +1654,7 @@
       const link = generateReferralLink(user.referralCode);
       
       navigator.clipboard.writeText(link).then(() => {
-        // Silent success - no alert
+        // Silent success
       }).catch(() => {
         prompt('Copy this link manually:', link);
       });
@@ -1705,11 +1704,11 @@
       } else if (country === 'Uganda') {
         codeDisplay.textContent = '+256';
       } else {
-        codeDisplay.textContent = '+254'; // Default
+        codeDisplay.textContent = '+254';
       }
     }
 
-    // Get URL parameters - RE-ADDED for ?ref= format
+    // Get URL parameters
     function getUrlParameter(name) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name);
@@ -1722,7 +1721,7 @@
         if (currentUser) {
           logout();
         }
-      }, 20 * 60 * 1000); // 20 minutes
+      }, 20 * 60 * 1000);
     }
 
     // Track user activity
@@ -1751,6 +1750,77 @@
       return todaysBookOrder;
     }
 
+    // ========== REFERRAL FUNCTIONS ==========
+    // Find A, B, C level referrers for a user
+    function findReferrers(userPhone) {
+      const referrers = { a: null, b: null, c: null };
+      
+      // Find A (direct referrer)
+      const user = users[userPhone];
+      if (user && user.referredBy) {
+        referrers.a = user.referredBy;
+        
+        // Find B (referrer of A)
+        const aUser = users[user.referredBy];
+        if (aUser && aUser.referredBy) {
+          referrers.b = aUser.referredBy;
+          
+          // Find C (referrer of B)
+          const bUser = users[aUser.referredBy];
+          if (bUser && bUser.referredBy) {
+            referrers.c = bUser.referredBy;
+          }
+        }
+      }
+      
+      return referrers;
+    }
+
+    // Pay referral commissions for upgrade
+    function payReferralCommissions(userPhone, upgradeCost) {
+      const referrers = findReferrers(userPhone);
+      
+      // Pay A-level (11%)
+      if (referrers.a && users[referrers.a]) {
+        const aCommission = Math.floor(upgradeCost * referralRates.a);
+        users[referrers.a].incentiveWallet = (users[referrers.a].incentiveWallet || 0) + aCommission;
+        
+        // Track commission
+        if (!users[referrers.a].referralCommissions) {
+          users[referrers.a].referralCommissions = { a: 0, b: 0, c: 0, total: 0 };
+        }
+        users[referrers.a].referralCommissions.a = (users[referrers.a].referralCommissions.a || 0) + aCommission;
+        users[referrers.a].referralCommissions.total = (users[referrers.a].referralCommissions.total || 0) + aCommission;
+      }
+      
+      // Pay B-level (4%)
+      if (referrers.b && users[referrers.b]) {
+        const bCommission = Math.floor(upgradeCost * referralRates.b);
+        users[referrers.b].incentiveWallet = (users[referrers.b].incentiveWallet || 0) + bCommission;
+        
+        if (!users[referrers.b].referralCommissions) {
+          users[referrers.b].referralCommissions = { a: 0, b: 0, c: 0, total: 0 };
+        }
+        users[referrers.b].referralCommissions.b = (users[referrers.b].referralCommissions.b || 0) + bCommission;
+        users[referrers.b].referralCommissions.total = (users[referrers.b].referralCommissions.total || 0) + bCommission;
+      }
+      
+      // Pay C-level (2%)
+      if (referrers.c && users[referrers.c]) {
+        const cCommission = Math.floor(upgradeCost * referralRates.c);
+        users[referrers.c].incentiveWallet = (users[referrers.c].incentiveWallet || 0) + cCommission;
+        
+        if (!users[referrers.c].referralCommissions) {
+          users[referrers.c].referralCommissions = { a: 0, b: 0, c: 0, total: 0 };
+        }
+        users[referrers.c].referralCommissions.c = (users[referrers.c].referralCommissions.c || 0) + cCommission;
+        users[referrers.c].referralCommissions.total = (users[referrers.c].referralCommissions.total || 0) + cCommission;
+      }
+      
+      // Save changes
+      localStorage.setItem('cueUsers', JSON.stringify(users));
+    }
+
     // ========== AUTH FUNCTIONS ==========
     function switchAuthTab(tab) {
       document.getElementById('loginForm').classList.toggle('active', tab === 'login');
@@ -1758,7 +1828,6 @@
       document.getElementById('loginTab').classList.toggle('active', tab === 'login');
       document.getElementById('registerTab').classList.toggle('active', tab === 'register');
       
-      // Check for stored referral code when switching to register tab
       if (tab === 'register') {
         const storedRefCode = sessionStorage.getItem('pendingReferralCode');
         if (storedRefCode) {
@@ -1767,7 +1836,6 @@
           refField.readOnly = true;
           refField.classList.add('referral-readonly');
         }
-        // Set default country code
         updateCountryCode();
       }
     }
@@ -1782,13 +1850,11 @@
       const password = document.getElementById('regPassword').value;
       const referralCode = document.getElementById('regReferralCode').value;
 
-      // Validate all fields
       if (!fullName || !country || !phone || !password || !referralCode) {
         alert('Please fill all fields');
         return;
       }
 
-      // Validate phone starts with 0 and is exactly 10 digits
       if (!phone.startsWith('0')) {
         alert('Phone number must start with 0');
         return;
@@ -1799,25 +1865,21 @@
         return;
       }
 
-      // Validate password length
       if (password.length < 6) {
         alert('Password must be at least 6 characters');
         return;
       }
 
-      // Check if user already exists
       if (users[phone]) {
         alert('Phone already registered');
         switchAuthTab('login');
         return;
       }
 
-      // Find referrer by code - ONLY D MEMBERS (level 1-9)
       let referredBy = null;
       if (referralCode) {
         const referrer = Object.values(users).find(u => u.referralCode === referralCode);
         if (referrer) {
-          // Check if referrer is a D member (level 1-9)
           if (referrer.memberLevel >= 1 && referrer.memberLevel <= 9) {
             referredBy = referrer.phone;
           } else {
@@ -1837,7 +1899,6 @@
       const expiry = new Date(now);
       expiry.setDate(expiry.getDate() + 4);
 
-      // Create new user with unique referral code (9 characters)
       const newReferralCode = generateReferralCode();
       
       users[phone] = {
@@ -1845,7 +1906,7 @@
         phone, 
         country, 
         password,
-        referralCode: newReferralCode, // PERMANENT - never changes
+        referralCode: newReferralCode,
         memberLevel: 0,
         memberExpiry: expiry.toISOString(),
         operatingWallet: 0,
@@ -1857,10 +1918,11 @@
         referredBy: referredBy,
         referrals: [],
         referralCommissions: { a: 0, b: 0, c: 0, total: 0 },
-        registeredDate: now.toISOString()
+        registeredDate: now.toISOString(),
+        // Track level purchases for refunds
+        levelPurchases: []
       };
 
-      // Add to referrer's referrals if exists
       if (referredBy && users[referredBy]) {
         if (!users[referredBy].referrals) {
           users[referredBy].referrals = [];
@@ -1872,10 +1934,8 @@
       localStorage.setItem('currentUser', phone);
       currentUser = phone;
       
-      // Clear pending referral code
       sessionStorage.removeItem('pendingReferralCode');
       
-      // NO ALERT - direct to home
       loadUserData();
       showPage('home');
       resetInactivityTimer();
@@ -1892,10 +1952,8 @@
         localStorage.setItem('currentUser', phone);
         currentUser = phone;
         
-        // Clear any pending referral code (can't refer yourself)
         sessionStorage.removeItem('pendingReferralCode');
         
-        // NO ALERT - direct to home or last visited page
         loadUserData();
         showPage(lastPage);
         resetInactivityTimer();
@@ -1906,7 +1964,6 @@
 
     // ========== PAGE NAVIGATION ==========
     function showPage(page) {
-      // Save current page for persistence
       if (page !== 'login' && page !== 'register') {
         localStorage.setItem('lastPage', page);
         lastPage = page;
@@ -1922,7 +1979,6 @@
       document.getElementById('teamReportPage').style.display = page === 'teamReport' ? 'flex' : 'none';
       document.getElementById('goldenHandshakePage').style.display = page === 'goldenHandshake' ? 'flex' : 'none';
 
-      // Update active nav
       document.querySelectorAll('.bottom-nav').forEach(nav => {
         const items = nav.querySelectorAll('.nav-item');
         items.forEach(item => item.classList.remove('active'));
@@ -1960,7 +2016,6 @@
       const user = users[currentUser];
       if (!user) return;
       
-      // AUTO-FIX: If user doesn't have a referral code, generate one now
       if (!user.referralCode) {
         user.referralCode = generateReferralCode();
         localStorage.setItem('cueUsers', JSON.stringify(users));
@@ -1968,9 +2023,7 @@
       
       const contentDiv = document.getElementById('goldenHandshakeContent');
       
-      // Check if user is Intern (Level 0)
       if (user.memberLevel === 0) {
-        // Show access denied message
         contentDiv.innerHTML = `
           <div class="access-denied">
             <i class="fas fa-lock"></i>
@@ -1980,23 +2033,17 @@
           </div>
         `;
       } else {
-        // Show referral content for D members
         const referralLink = generateReferralLink(user.referralCode);
         
         contentDiv.innerHTML = `
-          <!-- Share Link Button -->
           <div class="share-link-btn" onclick="shareReferralLink()">
             <i class="fas fa-share-alt"></i>
             <span>Share link</span>
           </div>
-
-          <!-- QR Code -->
           <div class="qr-container">
             <div id="qrCode" class="qr-code"></div>
             <div class="qr-label">Scan to get referral link</div>
           </div>
-
-          <!-- Referral Link Box with COPY LINK button -->
           <div class="referral-link-box">
             <div class="referral-link-label">Your Referral Link</div>
             <div class="referral-link-display" id="referralLinkDisplay">${referralLink}</div>
@@ -2006,7 +2053,6 @@
           </div>
         `;
         
-        // Generate QR Code
         const qrContainer = document.getElementById('qrCode');
         qrContainer.innerHTML = '';
         new QRCode(qrContainer, {
@@ -2030,7 +2076,11 @@
         return;
       }
 
-      // Check balance based on member level
+      // Store current level and payment before upgrading
+      const currentLevel = user.memberLevel;
+      const currentLevelCost = currentLevel > 0 ? levels[currentLevel].deposit : 0;
+
+      // Check balance
       if (user.memberLevel === 0) {
         if (user.operatingWallet < cost) {
           alert(`❌ Insufficient balance! Need ${cost.toLocaleString()} UGX in Operating Wallet`);
@@ -2039,7 +2089,7 @@
         
         if (confirm(`Upgrade to ${levels[level].name} for ${cost.toLocaleString()} UGX?`)) {
           user.operatingWallet -= cost;
-          upgradeUser(user, level, cost);
+          upgradeUser(user, level, cost, currentLevel, currentLevelCost);
         }
       } else {
         const totalBalance = (user.operatingWallet || 0) + (user.incentiveWallet || 0);
@@ -2064,13 +2114,39 @@
             remaining -= fromIncentive;
           }
           
-          upgradeUser(user, level, cost);
+          upgradeUser(user, level, cost, currentLevel, currentLevelCost);
         }
       }
     }
 
-    function upgradeUser(user, level, cost) {
-      user.memberLevel = level;
+    // Updated upgradeUser function with refund and commissions
+    function upgradeUser(user, newLevel, cost, oldLevel, oldLevelCost) {
+      // Store the purchase for refund tracking
+      if (!user.levelPurchases) {
+        user.levelPurchases = [];
+      }
+      
+      // Add this purchase to history
+      user.levelPurchases.push({
+        level: newLevel,
+        amount: cost,
+        date: new Date().toISOString(),
+        refunded: false
+      });
+      
+      // Process refund for previous level (only if upgrading from a D level, not Intern)
+      if (oldLevel > 0 && oldLevelCost > 0) {
+        user.operatingWallet += oldLevelCost;
+        
+        // Mark previous purchase as refunded
+        const prevPurchase = user.levelPurchases.find(p => p.level === oldLevel && !p.refunded);
+        if (prevPurchase) {
+          prevPurchase.refunded = true;
+        }
+      }
+      
+      // Update user level and expiry
+      user.memberLevel = newLevel;
       
       const expiry = new Date();
       expiry.setDate(expiry.getDate() + 365);
@@ -2079,14 +2155,18 @@
       if (!user.transactions) user.transactions = [];
       user.transactions.unshift({
         type: 'level_upgrade',
-        level: level,
+        level: newLevel,
         amount: cost,
         date: new Date().toLocaleString()
       });
 
+      // Save user first
       localStorage.setItem('cueUsers', JSON.stringify(users));
       
-      // Silent upgrade - no alert
+      // Pay referral commissions to A, B, C levels
+      payReferralCommissions(user.phone, cost);
+      
+      // Reload user data
       loadUserData();
       updateLevelWalletDisplay();
     }
@@ -2105,7 +2185,6 @@
       const user = users[currentUser];
       if (!user) return;
 
-      // Check daily reset
       const today = new Date().toDateString();
       if (user.lastReadDate !== today) {
         user.booksReadToday = 0;
@@ -2116,7 +2195,6 @@
       const level = user.memberLevel || 0;
       const levelData = levels[level];
 
-      // Update home page
       document.getElementById('memberTypeDisplay').textContent = levelData.name;
       
       const daysLeft = Math.ceil((new Date(user.memberExpiry) - new Date()) / (1000*60*60*24));
@@ -2125,7 +2203,6 @@
       document.getElementById('dailyBookLimit').textContent = levelData.dailyBooks;
       document.getElementById('dailyEarnings').textContent = user.incentiveWallet || 0;
 
-      // Update profile page - Updated wallet names
       document.getElementById('profileFullName').textContent = user.fullName;
       document.getElementById('profileDisplayName').textContent = user.fullName.split(' ')[0];
       document.getElementById('profileMemberType').textContent = levelData.name;
@@ -2134,12 +2211,15 @@
       document.getElementById('profileDaysLeft').textContent = daysLeft;
       document.getElementById('profileBooksToday').textContent = `${user.booksReadToday || 0}/${levelData.dailyBooks}`;
       
-      // Update income values
       document.getElementById('todayIncomeValue').innerHTML = `${(user.incentiveWallet || 0).toFixed(2)} UGX`;
       document.getElementById('totalIncomeValue').innerHTML = `${(user.incentiveWallet || 0).toFixed(2)} UGX`;
       document.getElementById('monthIncomeValue').innerHTML = `0.00 UGX`;
       
-      // Update withdraw modal balances - Updated wallet names
+      // Update subordinate incentives from referral commissions
+      if (user.referralCommissions) {
+        document.getElementById('subordinateIncentive').innerHTML = `${(user.referralCommissions.total || 0).toFixed(2)} UGX`;
+      }
+      
       document.getElementById('withdrawOperatingBalance').innerHTML = (user.operatingWallet || 0).toLocaleString() + ' UGX';
       document.getElementById('withdrawIncentiveBalance').innerHTML = (user.incentiveWallet || 0).toLocaleString() + ' UGX';
 
@@ -2252,7 +2332,6 @@
         cSection.innerHTML = html;
       }
 
-      // Update stats
       const total = aMembers.length + bMembers.length + cMembers.length;
       document.getElementById('totalTeamMembers').textContent = total;
 
@@ -2481,7 +2560,6 @@
         taskBtn.disabled = true;
       }
 
-      // Silent reward - no alert
       loadUserData();
       loadHomeBooks();
       loadTaskBooks();
@@ -2606,20 +2684,15 @@
       const refCode = getUrlParameter('ref');
       
       if (refCode) {
-        // Check if user is already logged in
         if (currentUser && users[currentUser]) {
-          // Logged in user - ignore code, go to last page
           loadUserData();
           showPage(lastPage);
           return;
         }
         
-        // Check if this phone is already registered (checking currentUser variable)
         if (currentUser && users[currentUser]) {
-          // Returning user - go to login
           switchAuthTab('login');
         } else {
-          // New user - store code and go to registration
           sessionStorage.setItem('pendingReferralCode', refCode);
           switchAuthTab('register');
         }
@@ -2628,14 +2701,18 @@
 
     // ========== INIT ==========
     window.onload = function() {
-      // Create demo accounts if empty - Updated wallet names
       if (Object.keys(users).length === 0) {
+        // Generate random 12-digit codes for demo accounts
+        const adminCode = generateReferralCode();
+        const internCode = generateReferralCode();
+        const d1Code = generateReferralCode();
+        
         users['0756673144'] = {
           fullName: 'Admin User',
           phone: '0756673144',
           country: 'Uganda',
           password: 'admin123',
-          referralCode: 'ADMIN12345',
+          referralCode: adminCode,
           memberLevel: 9,
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
           operatingWallet: 1000000,
@@ -2646,7 +2723,8 @@
           taskHistory: [],
           referredBy: null,
           referrals: [],
-          referralCommissions: { a: 25000, b: 8000, c: 3000, total: 36000 }
+          referralCommissions: { a: 25000, b: 8000, c: 3000, total: 36000 },
+          levelPurchases: []
         };
         
         users['0777123456'] = {
@@ -2654,7 +2732,7 @@
           phone: '0777123456',
           country: 'Uganda',
           password: '123456',
-          referralCode: 'INTERN789',
+          referralCode: internCode,
           memberLevel: 0,
           memberExpiry: new Date(Date.now() + 4*24*60*60*1000).toISOString(),
           operatingWallet: 100000,
@@ -2665,7 +2743,8 @@
           taskHistory: [],
           referredBy: '0756673144',
           referrals: [],
-          referralCommissions: { a: 0, b: 0, c: 0, total: 0 }
+          referralCommissions: { a: 0, b: 0, c: 0, total: 0 },
+          levelPurchases: []
         };
 
         users['0788123456'] = {
@@ -2673,7 +2752,7 @@
           phone: '0788123456',
           country: 'Uganda',
           password: '123456',
-          referralCode: 'D1CODE345',
+          referralCode: d1Code,
           memberLevel: 1,
           memberExpiry: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
           operatingWallet: 150000,
@@ -2684,16 +2763,22 @@
           taskHistory: [],
           referredBy: '0777123456',
           referrals: [],
-          referralCommissions: { a: 5000, b: 0, c: 0, total: 5000 }
+          referralCommissions: { a: 5000, b: 0, c: 0, total: 5000 },
+          levelPurchases: [
+            { level: 1, amount: 63000, date: new Date().toISOString(), refunded: false }
+          ]
         };
 
         localStorage.setItem('cueUsers', JSON.stringify(users));
+        
+        // Log the codes so you know them (remove in production)
+        console.log('Admin Code:', adminCode);
+        console.log('Intern Code:', internCode);
+        console.log('D1 Code:', d1Code);
       }
 
-      // Handle referral link first
       handleReferralLink();
 
-      // If user is already logged in, go to last visited page
       if (currentUser && users[currentUser]) {
         loadUserData();
         showPage(lastPage);
